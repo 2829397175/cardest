@@ -10,6 +10,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from settings import MASK_SCHEME
+from flash_attn.flash_attention import FlashMHA
+
 ## Notes on masking schemes
 #
 # Supported values of MASK_SCHEME: 0 (only works for natural ordering), 1 (for
@@ -41,8 +44,6 @@ import torch.nn.functional as F
 #
 #  How they interact: potentially dropout first, then potentially add pos emb.
 
-MASK_SCHEME = 0
-MASK_SCHEME = 1
 
 
 def mask(n):
@@ -232,7 +233,10 @@ class Block(nn.Module):
                  d_ff,
                  num_heads,
                  activation='relu',
-                 do_residual=False):
+                 do_residual=False,
+                 use_flash_attn=False,
+                 device='cpu',
+                 dtype=torch.float16): #flash_attn only support
         super(Block, self).__init__()
 
         self.mlp = nn.Sequential(
@@ -242,16 +246,32 @@ class Block(nn.Module):
         )
         self.norm1 = LayerNorm(features=d_model)
         self.norm2 = LayerNorm(features=d_model)
-        self.attn = MultiHeadSelfAttention(d_model, num_heads)
+        self.use_flash_attn=use_flash_attn
+        if use_flash_attn:
+            self.attn = FlashMHA(embed_dim= d_model,num_heads=num_heads,device=device,dtype=torch.float16)
+        else:
+            self.attn = MultiHeadSelfAttention(d_model, num_heads)
         self.do_residual = do_residual
 
     def set_attn_mask(self, mask):
-        self.attn.attn_mask = mask
+        if self.use_flash_attn:
+            return # not support yet
+        else:
+            self.attn.attn_mask = mask
 
     def forward(self, x, query_input=None):
         residual = x
         x = self.norm1(x)
-        x = self.attn(x, query_input=query_input)
+        if self.use_flash_attn:
+            # transfer float32->float16(flash attn only support this form)->float32
+            # for some reason?, the tensor must be copied to work, else the weight will be lost (Nan)
+            # temp_x = x.half()
+            # x = self.attn(temp_x)[0].float() # return attn_res, attn_weights
+            temp_x = x.clone().detach().requires_grad_(True).half()
+            x = self.attn(temp_x)[0].clone().detach().requires_grad_(True).float()
+            
+        else:
+            x = self.attn(x, query_input=query_input)
         if self.do_residual:
             x += residual
 
@@ -280,6 +300,8 @@ class Transformer(nn.Module):
             column_masking=False,
             fixed_ordering=None,
             seed=None,
+            use_flash_attn=False,
+            device='cpu',
     ):
         """An autoregressive Transformer.
 
@@ -320,12 +342,13 @@ class Transformer(nn.Module):
         self.d_model = d_model
         self.d_ff = d_ff
         self.num_heads = num_heads
-        self.embed_size = d_model
+        self.embed_dim = d_model
         self.emb_dim = d_model
         self.use_positional_embs = use_positional_embs
         assert activation in ['relu', 'gelu']
         self.activation = activation
         self.fixed_ordering = fixed_ordering
+        self.use_flash_attn = use_flash_attn
         if fixed_ordering is None:
             natural = np.arange(nin)
             if seed is None or seed == 0:
@@ -341,7 +364,10 @@ class Transformer(nn.Module):
                   d_ff,
                   num_heads,
                   activation,
-                  do_residual=(MASK_SCHEME == 0 or i > 0))
+                  do_residual=(MASK_SCHEME == 0 or i > 0),
+                  use_flash_attn=use_flash_attn,
+                  device=device)
+            
             for i in range(num_blocks)
         ])
         # Set masks.
@@ -398,6 +424,7 @@ class Transformer(nn.Module):
         n += '-model' + str(self.d_model)
         n += '-ff' + str(self.d_ff)
         n += '-heads' + str(self.num_heads)
+        n += '-use_flash_attn'+str(self.use_flash_attn)
         if self.use_positional_embs:
             n += '-posEmb'
         n += '-' + self.activation
@@ -439,11 +466,11 @@ class Transformer(nn.Module):
 
         if MASK_SCHEME == 0:
             # SOS = start of sequence symbol, just zeros.
-            y_embed = [torch.zeros(bs, self.embed_size, device=x.device)]
+            y_embed = [torch.zeros(bs, self.embed_dim, device=x.device)]
             for nat_idx in range(self.nin - 1):
                 y_embed.append(self.embeddings[nat_idx](x[:, nat_idx]))
         elif MASK_SCHEME == 1:
-            y_embed = [torch.zeros(bs, self.embed_size, device=x.device)]
+            y_embed = [torch.zeros(bs, self.embed_dim, device=x.device)]
             for nat_idx in range(self.nin):
                 y_embed.append(self.embeddings[nat_idx](x[:, nat_idx]))
         else:

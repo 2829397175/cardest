@@ -16,6 +16,8 @@ import torch
 import common
 import made
 import transformer
+import flash
+from settings import MASK_SCHEME
 
 OPS = {
     '>': np.greater,
@@ -216,7 +218,7 @@ class ProgressiveSampling(CardEst):
             inp = self.inp[:num_samples]
         masked_probs = []
 
-        # Use the query to filter each column's domain.
+        # Use the qu`ery to filter each colum`n's domain.
         valid_i_list = [None] * ncols  # None means all valid.
         for i in range(ncols):
             natural_idx = ordering[i]
@@ -292,11 +294,12 @@ class ProgressiveSampling(CardEst):
                     samples_i = torch.multinomial(
                         probs_i, num_samples=num_i,
                         replacement=True)  # [bs, num_i]
-                    data_to_encode = samples_i.view(-1, 1)
+                    data_to_encode = samples_i.view(-1, 1)  
+                    # 通过这里影响后续的选择域
 
                 # Encode input: i.e., put sampled vars into input buffer.
                 if data_to_encode is not None:  # Wildcards are encoded already.
-                    if not isinstance(self.model, transformer.Transformer):
+                    if isinstance(self.model, made.MADE):
                         if natural_idx == 0:
                             self.model.EncodeInput(
                                 data_to_encode,
@@ -311,20 +314,23 @@ class ProgressiveSampling(CardEst):
                             self.model.EncodeInput(data_to_encode,
                                                    natural_col=natural_idx,
                                                    out=inp[:, l:r])
-                    else:
+                    elif isinstance(self.model, (transformer.Transformer,
+                                                 flash.FLASHTransformer)):
                         # Transformer.  Need special treatment due to
                         # right-shift.
-                        l = (natural_idx + 1) * self.model.d_model
-                        r = l + self.model.d_model
+                        embed_dim = self.model.d_model if isinstance(self.model, (transformer.Transformer)) \
+                            else self.model.embed_dim
+                        l = (natural_idx + 1) * embed_dim
+                        r = l + embed_dim
                         if i == 0:
                             # Let's also add E_pos=0 to SOS (if enabled).
                             # This is a no-op if disabled pos embs.
                             self.model.EncodeInput(
                                 data_to_encode,  # Will ignore.
                                 natural_col=-1,  # Signals SOS.
-                                out=inp[:, :self.model.d_model])
+                                out=inp[:, :embed_dim])
 
-                        if transformer.MASK_SCHEME == 1:
+                        if MASK_SCHEME == 1:
                             # Should encode natural_col \in [0, ncols).
                             self.model.EncodeInput(data_to_encode,
                                                    natural_col=natural_idx,
@@ -999,7 +1005,6 @@ class BayesianNetwork(CardEst):
 
 class MaxDiffHistogram(CardEst):
     """MaxDiff n-dimensional histogram."""
-
     def __init__(self, table, limit):
         super(MaxDiffHistogram, self).__init__()
         self.table = table

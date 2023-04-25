@@ -10,11 +10,14 @@ import torch.nn.functional as F
 
 import common
 import datasets
-import made
-import transformer
 
-DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
-print('Device', DEVICE)
+import transformer
+import flash
+import made
+from construct_model import MakeFlash,MakeMade,MakeTransformer
+from settings import DEVICE
+import pandas as pd
+
 
 parser = argparse.ArgumentParser()
 
@@ -46,6 +49,7 @@ parser.add_argument('--fc-hiddens',
                     type=int,
                     default=128,
                     help='Hidden units in FC.')
+
 parser.add_argument('--layers', type=int, default=4, help='# layers in FC.')
 parser.add_argument('--residual', action='store_true', help='ResMade?')
 parser.add_argument('--direct-io', action='store_true', help='Do direct IO?')
@@ -77,6 +81,9 @@ parser.add_argument(
     help='Transformer: num heads.  A non-zero value turns on Transformer'\
     ' (otherwise MADE/ResMADE).'
 )
+parser.add_argument('--use_flash_attn',
+                    action='store_true',
+                    help='use use_flash_attn in Transform?')
 parser.add_argument('--blocks',
                     type=int,
                     default=2,
@@ -90,6 +97,24 @@ parser.add_argument('--transformer-act',
                     type=str,
                     default='gelu',
                     help='Transformer activation.')
+
+# MFlow
+parser.add_argument('--hidden_features',
+                    type=int,
+                    default=128,
+                    help='Hidden features in Mflow.')
+parser.add_argument('--mflow',
+                    action='store_true',
+                    help='use Mflow?')
+
+# flash
+parser.add_argument('--FLASH',
+                    action='store_true',
+                    help='use FLASH?')
+parser.add_argument('--flash_dim',
+                    type=int,
+                    default=128,
+                    help='the dim of flash.')
 
 # Ordering.
 parser.add_argument('--num-orderings',
@@ -122,7 +147,20 @@ def Entropy(name, data, bases=None):
     print(s)
     return ret
 
-
+import math
+import torch.optim as optim
+ 
+class WarmupLR(optim.lr_scheduler._LRScheduler):
+    def __init__(self, optimizer, warmup_steps, last_epoch=-1):
+        self.warmup_steps = warmup_steps
+        super().__init__(optimizer, last_epoch)
+ 
+    def get_lr(self):
+        if self.last_epoch < self.warmup_steps:
+            return [base_lr * (self.last_epoch + 1) / self.warmup_steps for base_lr in self.base_lrs]
+        else:
+            return [base_lr * math.exp(-(self.last_epoch - self.warmup_steps + 1) * self.gamma) for base_lr in self.base_lrs]
+        
 def RunEpoch(split,
              model,
              opt,
@@ -148,19 +186,22 @@ def RunEpoch(split,
     nsamples = 1
     if hasattr(model, 'orderings'):
         nsamples = len(model.orderings)
-
+    if args.warmups and split == 'train':
+        lr_scheduler = WarmupLR(opt, args.warmups)
     for step, xb in enumerate(loader):
         if split == 'train':
             base_lr = 8e-4
             for param_group in opt.param_groups:
                 if args.constant_lr:
                     lr = args.constant_lr
-                elif args.warmups:
+                elif args.warmups: # Transformer, FLASH
                     t = args.warmups
-                    d_model = model.embed_size
+                    d_model = model.embed_dim 
                     global_steps = len(loader) * epoch_num + step + 1
                     lr = (d_model**-0.5) * min(
                         (global_steps**-.5), global_steps * (t**-1.5))
+                    
+                    lr_scheduler = WarmupLR(opt, args.warmups)
                 else:
                     lr = 1e-2
 
@@ -232,10 +273,10 @@ def RunEpoch(split,
         if step % log_every == 0:
             if split == 'train':
                 print(
-                    'Epoch {} Iter {}, {} entropy gap {:.4f} bits (loss {:.3f}, data {:.3f}) {:.5f} lr'
+                    'Epoch {} Iter {}, {} entropy gap {:.4f} bits (loss {:.3f}, data {:.3f}) '
                     .format(epoch_num, step, split,
                             loss.item() / np.log(2) - table_bits,
-                            loss.item() / np.log(2), table_bits, lr))
+                            loss.item() / np.log(2), table_bits))
             else:
                 print('Epoch {} Iter {}, {} loss {:.4f} nats / {:.4f} bits'.
                       format(epoch_num, step, split, loss.item(),
@@ -245,6 +286,8 @@ def RunEpoch(split,
             opt.zero_grad()
             loss.backward()
             opt.step()
+            if args.warmups:
+                lr_scheduler.step()
 
         if verbose:
             print('%s epoch average loss: %f' % (split, np.mean(losses)))
@@ -264,59 +307,6 @@ def ReportModel(model, blacklist=None):
     print(model)
     return mb
 
-
-def InvertOrder(order):
-    if order is None:
-        return None
-    # 'order'[i] maps nat_i -> position of nat_i
-    # Inverse: position -> natural idx.  This it the 'true' ordering -- it's how
-    # heuristic orders are generated + (less crucially) how Transformer works.
-    nin = len(order)
-    inv_ordering = [None] * nin
-    for natural_idx in range(nin):
-        inv_ordering[order[natural_idx]] = natural_idx
-    return inv_ordering
-
-
-def MakeMade(scale, cols_to_train, seed, fixed_ordering=None):
-    if args.inv_order:
-        print('Inverting order!')
-        fixed_ordering = InvertOrder(fixed_ordering)
-
-    model = made.MADE(
-        nin=len(cols_to_train),
-        hidden_sizes=[scale] *
-        args.layers if args.layers > 0 else [512, 256, 512, 128, 1024],
-        nout=sum([c.DistributionSize() for c in cols_to_train]),
-        input_bins=[c.DistributionSize() for c in cols_to_train],
-        input_encoding=args.input_encoding,
-        output_encoding=args.output_encoding,
-        embed_size=32,
-        seed=seed,
-        do_direct_io_connections=args.direct_io,
-        natural_ordering=False if seed is not None and seed != 0 else True,
-        residual_connections=args.residual,
-        fixed_ordering=fixed_ordering,
-        column_masking=args.column_masking,
-    ).to(DEVICE)
-
-    return model
-
-
-def MakeTransformer(cols_to_train, fixed_ordering, seed=None):
-    return transformer.Transformer(
-        num_blocks=args.blocks,
-        d_model=args.dmodel,
-        d_ff=args.dff,
-        num_heads=args.heads,
-        nin=len(cols_to_train),
-        input_bins=[c.DistributionSize() for c in cols_to_train],
-        use_positional_embs=True,
-        activation=args.transformer_act,
-        fixed_ordering=fixed_ordering,
-        column_masking=args.column_masking,
-        seed=seed,
-    ).to(DEVICE)
 
 
 def InitWeight(m):
@@ -354,7 +344,13 @@ def TrainTask(seed=0):
     if args.heads > 0:
         model = MakeTransformer(cols_to_train=table.columns,
                                 fixed_ordering=fixed_ordering,
-                                seed=seed)
+                                use_flash_attn=args.use_flash_attn,
+                                seed=seed,args=args)
+    elif args.FLASH:
+        model = MakeFlash(cols_to_train=table.columns,
+                                fixed_ordering=fixed_ordering,
+                                seed=seed,args=args)
+    
     else:
         if args.dataset in ['dmv-tiny', 'dmv']:
             model = MakeMade(
@@ -362,33 +358,47 @@ def TrainTask(seed=0):
                 cols_to_train=table.columns,
                 seed=seed,
                 fixed_ordering=fixed_ordering,
+                args=args
             )
         else:
             assert False, args.dataset
 
     mb = ReportModel(model)
 
-    if not isinstance(model, transformer.Transformer):
+    if isinstance(model, (made.MADE)):
         print('Applying InitWeight()')
         model.apply(InitWeight)
+        opt = torch.optim.Adam(list(model.parameters()), 2e-4)
 
-    if isinstance(model, transformer.Transformer):
+    if isinstance(model, (transformer.Transformer)):
         opt = torch.optim.Adam(
             list(model.parameters()),
             2e-4,
             betas=(0.9, 0.98),
             eps=1e-9,
         )
-    else:
-        opt = torch.optim.Adam(list(model.parameters()), 2e-4)
-
+        
+    if isinstance(model, (flash.FLASHTransformer)):
+        model.apply(InitWeight)
+        opt = torch.optim.AdamW(list(model.parameters()),
+                                lr=2e-4,
+                                # betas=(0.9, 0.98),
+                                # eps=1e-9,
+                                # weight_decay=0.01
+                                )
+    
     bs = args.bs
     log_every = 200
 
     train_data = common.TableDataset(table_train)
 
     train_losses = []
+    
+    train_logs=pd.DataFrame()
+    
     train_start = time.time()
+    
+    df_train=pd.DataFrame()
     for epoch in range(args.epochs):
 
         mean_epoch_train_loss = RunEpoch('train',
@@ -407,9 +417,9 @@ def TrainTask(seed=0):
                 mean_epoch_train_loss / np.log(2)))
             since_start = time.time() - train_start
             print('time since start: {:.1f} secs'.format(since_start))
-
+        
         train_losses.append(mean_epoch_train_loss)
-
+    df_train['loss']=train_losses
     print('Training done; evaluating likelihood on full data:')
     all_losses = RunEpoch('test',
                           model,
@@ -445,6 +455,7 @@ def TrainTask(seed=0):
     torch.save(model.state_dict(), PATH)
     print('Saved to:')
     print(PATH)
+    df_train.to_csv("train_log/"+PATH[7:-3]+".csv")
 
 
 TrainTask()

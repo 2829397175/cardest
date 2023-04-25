@@ -219,8 +219,9 @@ class MADE(nn.Module):
                 dist_size = self._get_input_encoded_dist_size(
                     self.input_bins[i])
                 # Input i connects to groups > i.
-                mask[self.logit_indices[i]:, curr:dist_size] = 1
+                mask[self.logit_indices[i]:, curr:curr+dist_size] = 1 # 为什么dist_size不往后移
                 curr += dist_size
+                
         else:
             # Inverse: ord_idx -> natural idx.
             inv_ordering = [None] * self.nin
@@ -291,7 +292,7 @@ class MADE(nn.Module):
         # natural_ordering
         #
         # from high precedence to low.
-
+        # 赋予embedding序号
         if invoke_order is not None:
             found = False
             for i in range(len(self.orderings)):
@@ -317,14 +318,15 @@ class MADE(nn.Module):
                 self.nin) if self.natural_ordering else rng.permutation(
                     self.nin)
             if self.fixed_ordering is not None:
-                self.m[-1] = np.asarray(self.fixed_ordering)
+                self.m[-1] = np.asarray(self.fixed_ordering)  
 
         if self.nin > 1:
             for l in range(L):
                 if self.residual_connections:
                     # Sequential assignment for ResMade: https://arxiv.org/pdf/1904.05626.pdf
                     self.m[l] = np.array([(k - 1) % (self.nin - 1)
-                                          for k in range(self.hidden_sizes[l])])
+                                          for k in range(self.hidden_sizes[l])]) 
+                    # 通过赋予degree的方式，对应各个layer赋予各自的mask
                 else:
                     # Samples from [0, ncols - 1).
                     self.m[l] = rng.randint(self.m[l - 1].min(),
@@ -335,7 +337,9 @@ class MADE(nn.Module):
             # So output units are disconnected to any inputs.
             for l in range(L):
                 self.m[l] = np.asarray([-1] * self.hidden_sizes[l])
-
+        
+        # 通过赋予degree的方式，对应各个layer赋予各自的mask
+        # dlk = (k − 1) (mod (D − 1)) + 1.
         masks = [self.m[l - 1][:, None] <= self.m[l][None, :] for l in range(L)]
         masks.append(self.m[L - 1][:, None] < self.m[-1][None, :])
 

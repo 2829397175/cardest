@@ -55,6 +55,9 @@ class Column(object):
         Used to dictionary-encode values to this discretized range.
         """
         return self.distribution_size
+    
+    def DistinctValue(self):
+        return self.all_distinct_values
 
     def ValToBin(self, val):
         if isinstance(self.all_distinct_values, list):
@@ -182,6 +185,30 @@ class CsvTable(Table):
         self.columns = self._build_columns(self.data, cols, type_casts, pg_cols)
 
         super(CsvTable, self).__init__(name, self.columns, pg_name)
+    
+    def _concat(self,
+                new_data, 
+                name, 
+                cols,
+                type_casts={},
+                pg_name=None,
+                pg_cols=None):
+        # inplace concat
+        
+        new_data_df=new_data.data
+        self.data = pd.concat([self.data,new_data_df])
+        self.columns = self._build_columns(self.data, cols, type_casts, pg_cols)
+        self.name = name
+        self.cardinality = self._validate_cardinality(self.columns)
+
+
+        self.val_to_bin_funcs = [c.ValToBin for c in self.columns]
+        self.name_to_index = {c.Name(): i for i, c in enumerate(self.columns)}
+
+        if pg_name:
+            self.pg_name = pg_name
+        else:
+            self.pg_name = name
 
     def _load(self, filename, cols, **kwargs):
         print('Loading csv...', end=' ')
@@ -260,6 +287,14 @@ class TableDataset(data.Dataset):
         """
         return Discretize(col)
 
+    def update(self,new_data):
+        print('Updating table...', end=' ')
+        s = time.time()
+        self.tuples_np=np.concatenate(self.tuples_np,new_data.tuples_np)
+        self.tuples = torch.as_tensor(self.tuples_np.astype(np.float32, copy=False))
+        print('done, took {:.1f}s'.format(time.time() - s))
+        
+    
     def size(self):
         return len(self.tuples)
 

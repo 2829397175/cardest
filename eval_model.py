@@ -16,6 +16,7 @@ import datasets
 import estimators as estimators_lib
 import made
 import transformer
+from construct_model import MakeFlash,MakeMade,MakeTransformer,DEVICE
 
 # For inference speed.
 torch.backends.cudnn.deterministic = False
@@ -34,7 +35,7 @@ parser.add_argument('--num-queries', type=int, default=20, help='# queries.')
 parser.add_argument('--dataset', type=str, default='dmv-tiny', help='Dataset.')
 parser.add_argument('--err-csv',
                     type=str,
-                    default='results.csv',
+                    default='results/results.csv',
                     help='Save result csv to what path?')
 parser.add_argument('--glob',
                     type=str,
@@ -92,6 +93,9 @@ parser.add_argument(
     help='Transformer: num heads.  A non-zero value turns on Transformer'\
     ' (otherwise MADE/ResMADE).'
 )
+parser.add_argument('--use_flash_attn',
+                    action='store_true',
+                    help='use use_flash_attn in Transform?')
 parser.add_argument('--blocks',
                     type=int,
                     default=2,
@@ -105,6 +109,16 @@ parser.add_argument('--transformer-act',
                     type=str,
                     default='gelu',
                     help='Transformer activation.')
+
+
+# flash
+parser.add_argument('--FLASH',
+                    action='store_true',
+                    help='use FLASH?')
+parser.add_argument('--flash_dim',
+                    type=int,
+                    default=256,
+                    help='the dim of flash.')
 
 # Estimators to enable.
 parser.add_argument('--run-sampling',
@@ -394,45 +408,7 @@ def MakeBnEstimators():
     return estimators, table, oracle_est
 
 
-def MakeMade(scale, cols_to_train, seed, fixed_ordering=None):
-    if args.inv_order:
-        print('Inverting order!')
-        fixed_ordering = InvertOrder(fixed_ordering)
 
-    model = made.MADE(
-        nin=len(cols_to_train),
-        hidden_sizes=[scale] *
-        args.layers if args.layers > 0 else [512, 256, 512, 128, 1024],
-        nout=sum([c.DistributionSize() for c in cols_to_train]),
-        input_bins=[c.DistributionSize() for c in cols_to_train],
-        input_encoding=args.input_encoding,
-        output_encoding=args.output_encoding,
-        embed_size=32,
-        seed=seed,
-        do_direct_io_connections=args.direct_io,
-        natural_ordering=False if seed is not None and seed != 0 else True,
-        residual_connections=args.residual,
-        fixed_ordering=fixed_ordering,
-        column_masking=args.column_masking,
-    ).to(DEVICE)
-
-    return model
-
-
-def MakeTransformer(cols_to_train, fixed_ordering, seed=None):
-    return transformer.Transformer(
-        num_blocks=args.blocks,
-        d_model=args.dmodel,
-        d_ff=args.dff,
-        num_heads=args.heads,
-        nin=len(cols_to_train),
-        input_bins=[c.DistributionSize() for c in cols_to_train],
-        use_positional_embs=True,
-        activation=args.transformer_act,
-        fixed_ordering=fixed_ordering,
-        column_masking=args.column_masking,
-        seed=seed,
-    ).to(DEVICE)
 
 
 def ReportModel(model, blacklist=None):
@@ -514,7 +490,15 @@ def Main():
         if args.heads > 0:
             model = MakeTransformer(cols_to_train=table.columns,
                                     fixed_ordering=order,
-                                    seed=seed)
+                                    use_flash_attn=args.use_flash_attn,
+                                    seed=seed,args=args)
+            
+        elif args.FLASH:
+            model = MakeFlash(cols_to_train=table.columns,
+                            fixed_ordering=order,
+                            seed=seed,args=args)
+        
+        
         else:
             if args.dataset in ['dmv-tiny', 'dmv']:
                 model = MakeMade(
@@ -596,9 +580,11 @@ def Main():
                  num_filters=None,
                  oracle_cards=oracle_cards,
                  oracle_est=oracle_est)
-
-    SaveEstimators(args.err_csv, estimators)
-    print('...Done, result:', args.err_csv)
+     
+    err_path="results/results_{}.csv".format(args.glob) 
+    # SaveEstimators(args.err_csv, estimators)
+    SaveEstimators(err_path, estimators)
+    print('...Done, result:', err_path)
 
 
 if __name__ == '__main__':
