@@ -7,7 +7,7 @@ import pandas as pd
 
 import torch
 from torch.utils import data
-
+from scipy import stats
 # Na/NaN/NaT Semantics
 #
 # Some input columns may naturally contain missing values.  These are handled
@@ -181,7 +181,6 @@ class CsvTable(Table):
         else:
             assert (isinstance(filename_or_df, pd.DataFrame))
             self.data = filename_or_df
-
         self.columns = self._build_columns(self.data, cols, type_casts, pg_cols)
 
         super(CsvTable, self).__init__(name, self.columns, pg_name)
@@ -264,20 +263,53 @@ class CsvTable(Table):
 class TableDataset(data.Dataset):
     """Wraps a Table and yields each row as a PyTorch Dataset element."""
 
-    def __init__(self, table):
+        
+    def __init__(self, table, old_table:CsvTable=None, mixup=False, train=False,rate=None):
         super(TableDataset, self).__init__()
+        self.train=train
+        self.mixup= mixup
         self.table = copy.deepcopy(table)
-
+        self.name = table.name
+        if (old_table):
+            self.name +="_{}".format(old_table.name)
         print('Discretizing table...', end=' ')
         s = time.time()
         # [cardianlity, num cols].
-        self.tuples_np = np.stack(
+        if (old_table is None):
+            self.tuples_np = np.stack(
             [self.Discretize(c) for c in self.table.Columns()], axis=1)
+        else:
+            Discretize_list=[]
+            for idx,c in  enumerate(self.table.Columns()):
+                old_col = old_table.columns[idx]
+                isnan = pd.isnull(old_col.all_distinct_values)
+                if isnan.any():
+                        # We always add nan or nat to the beginning.
+                    assert isnan.sum() == 1, isnan
+                    assert isnan[0], isnan
+
+                    reference_categories = old_col.all_distinct_values[1:]
+                else:
+                    reference_categories=old_col.all_distinct_values               
+                code_ids=self.Discretize(c,reference_categories)                
+                if isnan.any():
+                    code_ids =code_ids +1
+                assert len(code_ids) == len(c.data)
+                Discretize_list.append(code_ids)
+            self.tuples_np = np.stack(Discretize_list, axis=1)
+              
+        if  rate is not None:
+            assert isinstance(rate,float) and  rate<=1 and rate >=0
+            len_t=self.tuples_np.shape[0]
+            self.tuples_np=self.tuples_np[:int(rate*len_t)]
+            self.name+=f"_tr{rate}"
+            
         self.tuples = torch.as_tensor(
             self.tuples_np.astype(np.float32, copy=False))
+        
         print('done, took {:.1f}s'.format(time.time() - s))
 
-    def Discretize(self, col):
+    def Discretize(self, col, reference_categories=None):
         """Discretize values into its Column's bins.
 
         Args:
@@ -285,12 +317,17 @@ class TableDataset(data.Dataset):
         Returns:
           col_data: discretized version; an np.ndarray of type np.int32.
         """
+        if (reference_categories is not None):
+            return Discretize_ref(col,reference_categories=reference_categories)
         return Discretize(col)
 
     def update(self,new_data):
         print('Updating table...', end=' ')
         s = time.time()
-        self.tuples_np=np.concatenate(self.tuples_np,new_data.tuples_np)
+        if isinstance(new_data,np.array):
+            self.tuples_np=np.concatenate(self.tuples_np,new_data)
+        else:
+            self.tuples_np=np.concatenate(self.tuples_np,new_data.tuples_np)
         self.tuples = torch.as_tensor(self.tuples_np.astype(np.float32, copy=False))
         print('done, took {:.1f}s'.format(time.time() - s))
         
@@ -302,7 +339,18 @@ class TableDataset(data.Dataset):
         return len(self.tuples)
 
     def __getitem__(self, idx):
+        
+        alpha=0.2
+        # perform mixup roughly on data idx%5.
+        if (self.train and self.mixup and idx>0 and idx%5==0):
+            mixup_idx =  np.random.randint(0,len(self.tuples))  
+            lam=np.random.beta(alpha,alpha)
+            data=self.tuples[idx]*lam+(1-lam)*self.tuples[mixup_idx]
+            return data
+        
         return self.tuples[idx]
+    
+    
 
 
 def Discretize(col, data=None):
@@ -345,3 +393,32 @@ def Discretize(col, data=None):
     bin_ids = bin_ids.astype(np.int32, copy=False)
     assert (bin_ids >= 0).all(), (col, data, bin_ids)
     return bin_ids
+
+
+def Discretize_ref(col, data=None,reference_categories=None):
+    if data is None:
+        data = col.data
+    bin_ids =pd.Categorical(data,categories=reference_categories).codes
+    bin_ids = bin_ids.astype(np.int32, copy=False)
+    return bin_ids
+
+
+class Distill_Dataset(data.Dataset):
+    def __init__(self,
+                 train_data:TableDataset,
+                 transfer_data:TableDataset) -> None:
+        super().__init__()
+        self.train_data=train_data
+        self.transfer_data=transfer_data
+        assert self.train_data.size()==self.train_data.size(),"incomparable size of datasets"
+
+    def __len__(self):
+        return self.train_data.size()
+        
+    def __getitem__(self, index):
+        
+        id_train=index
+        id_transfer=(index)%self.transfer_data.size()
+        
+        return self.train_data[id_train],self.transfer_data[id_transfer]
+    

@@ -69,6 +69,7 @@ def MakeFlash(cols_to_train, fixed_ordering, seed=None,args=None):
     input_bins=[c.DistributionSize() for c in cols_to_train]
     nin = len(cols_to_train)
         
+
     
     return flash.FLASHTransformer(
         nin=nin,
@@ -77,7 +78,7 @@ def MakeFlash(cols_to_train, fixed_ordering, seed=None,args=None):
         # group_size = 2,
         input_bins=input_bins,
         causal=True,
-        group_size = 2,
+        group_size = args.group_size,
         query_key_dim = args.flash_dim,
         use_positional_embs=True,
         fixed_ordering=fixed_ordering,

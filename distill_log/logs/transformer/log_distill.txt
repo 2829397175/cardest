@@ -1,0 +1,2281 @@
+Device cuda
+Loading csv... done, took 5.8s
+Parsing... done, took 4.9s
+Loading csv... done, took 0.2s
+Parsing... done, took 0.1s
+MASK_SCHEME 0
+ordering [ 0  1  2  3  4  5  6  7  8  9 10]
+using orig mask
+ tensor([[ True, False, False, False, False, False, False, False, False, False,
+         False],
+        [ True,  True, False, False, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True, False, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True]])
+Number of model parameters: 414464 (~= 1.6MB)
+Transformer(
+  (blocks): Sequential(
+    (0): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (1): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (2): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (3): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+  )
+  (norm): LayerNorm()
+  (embeddings): ModuleList(
+    (0): Embedding(2, 64)
+    (1): Embedding(69, 64)
+    (2): Embedding(77, 64)
+    (3): Embedding(63, 64)
+    (4): Embedding(57, 64)
+    (5): Embedding(8, 64)
+    (6): Embedding(2828, 64)
+    (7): Embedding(218, 64)
+    (8): Embedding(2, 64)
+    (9): Embedding(2, 64)
+    (10): Embedding(2, 64)
+  )
+  (pos_embeddings): Embedding(11, 64)
+  (unk_embeddings): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (6): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (7): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (8): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (9): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (10): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+  )
+)
+Loading ckpt: /home/jixy/naru/models/pretrained/DMV/DMV_ofnan_p100/dmv-ofnan-1.6MB-model20.172-data19.343-transformer-blocks4-model64-ff256-heads4-use_flash_attnFalse-posEmb-gelu-colmask-20epochs-seed0.pt
+Parsing... done, took 3.9s
+Discretizing table... done, took 3.8s
+Discretizing table... done, took 0.1s
+Discretizing table... done, took 3.7s
+Epoch None Iter 0, test loss 14.2105 nats / 20.5015 bits
+Epoch None Iter 0, test loss 14.9314 nats / 21.5415 bits
+Epoch None Iter 0, test loss 13.9374 nats / 20.1074 bits
+Epoch None Iter 0, test loss 14.2561 nats / 20.5672 bits
+Epoch None Iter 0, test loss 15.2353 nats / 21.9798 bits
+Epoch None Iter 0, test loss 13.6854 nats / 19.7439 bits
+Epoch None Iter 0, test loss 13.9695 nats / 20.1538 bits
+Epoch None Iter 0, test loss 13.9247 nats / 20.0891 bits
+Epoch None Iter 0, test loss 14.0644 nats / 20.2906 bits
+Epoch None Iter 0, test loss 13.3014 nats / 19.1898 bits
+Epoch None Iter 0, test loss 14.4957 nats / 20.9129 bits
+Epoch None Iter 0, test loss 13.7666 nats / 19.8611 bits
+Epoch None Iter 0, test loss 15.4915 nats / 22.3496 bits
+Epoch None Iter 0, test loss 12.9067 nats / 18.6204 bits
+Epoch None Iter 0, test loss 13.1667 nats / 18.9956 bits
+Epoch None Iter 0, test loss 14.0040 nats / 20.2035 bits
+Epoch None Iter 0, test loss 14.4329 nats / 20.8222 bits
+Epoch None Iter 0, test loss 14.0290 nats / 20.2396 bits
+Epoch None Iter 0, test loss 12.4286 nats / 17.9306 bits
+Epoch None Iter 0, test loss 12.8578 nats / 18.5499 bits
+Epoch None Iter 0, test loss 13.5566 nats / 19.5580 bits
+Epoch None Iter 0, test loss 14.0592 nats / 20.2832 bits
+Epoch None Iter 0, test loss 13.8664 nats / 20.0049 bits
+Epoch None Iter 0, test loss 13.3781 nats / 19.3006 bits
+Epoch None Iter 0, test loss 13.3225 nats / 19.2203 bits
+Epoch None Iter 0, test loss 13.4172 nats / 19.3570 bits
+Epoch None Iter 0, test loss 12.5766 nats / 18.1442 bits
+Epoch None Iter 0, test loss 13.3828 nats / 19.3073 bits
+Epoch None Iter 0, test loss 15.3643 nats / 22.1660 bits
+Epoch None Iter 0, test loss 13.3771 nats / 19.2990 bits
+Epoch None Iter 0, test loss 15.5063 nats / 22.3709 bits
+Epoch None Iter 0, test loss 14.1974 nats / 20.4825 bits
+Epoch None Iter 0, test loss 12.4023 nats / 17.8927 bits
+Epoch None Iter 0, test loss 13.7767 nats / 19.8755 bits
+Epoch None Iter 0, test loss 13.0728 nats / 18.8601 bits
+Epoch None Iter 0, test loss 14.7633 nats / 21.2990 bits
+Epoch None Iter 0, test loss 15.3294 nats / 22.1157 bits
+Epoch None Iter 0, test loss 14.3472 nats / 20.6986 bits
+Epoch None Iter 0, test loss 14.4479 nats / 20.8439 bits
+Epoch None Iter 0, test loss 14.8646 nats / 21.4450 bits
+Epoch None Iter 0, test loss 13.2001 nats / 19.0437 bits
+Epoch None Iter 0, test loss 13.4765 nats / 19.4425 bits
+Epoch None Iter 0, test loss 14.3592 nats / 20.7159 bits
+Epoch None Iter 0, test loss 14.6180 nats / 21.0894 bits
+Epoch None Iter 0, test loss 13.8993 nats / 20.0525 bits
+Epoch None Iter 0, test loss 13.2261 nats / 19.0812 bits
+Epoch None Iter 0, test loss 12.3284 nats / 17.7862 bits
+Epoch None Iter 0, test loss 13.4207 nats / 19.3620 bits
+Epoch None Iter 0, test loss 13.7042 nats / 19.7710 bits
+Epoch None Iter 0, test loss 14.0049 nats / 20.2048 bits
+Epoch None Iter 0, test loss 13.8844 nats / 20.0309 bits
+Epoch None Iter 0, test loss 14.0601 nats / 20.2844 bits
+Epoch None Iter 0, test loss 12.9346 nats / 18.6606 bits
+Epoch None Iter 0, test loss 13.4734 nats / 19.4380 bits
+Epoch None Iter 0, test loss 14.5639 nats / 21.0113 bits
+Epoch None Iter 0, test loss 14.1085 nats / 20.3542 bits
+Epoch None Iter 0, test loss 13.3231 nats / 19.2211 bits
+Epoch None Iter 0, test loss 14.3964 nats / 20.7696 bits
+Epoch None Iter 0, test loss 13.2651 nats / 19.1375 bits
+Epoch None Iter 0, test loss 13.4691 nats / 19.4318 bits
+Epoch None Iter 0, test loss 12.7765 nats / 18.4325 bits
+Epoch None Iter 0, test loss 13.1361 nats / 18.9514 bits
+Epoch None Iter 0, test loss 13.2896 nats / 19.1729 bits
+Epoch None Iter 0, test loss 13.8806 nats / 20.0255 bits
+Epoch None Iter 0, test loss 13.6072 nats / 19.6311 bits
+Epoch None Iter 0, test loss 15.9762 nats / 23.0488 bits
+Epoch None Iter 0, test loss 13.1469 nats / 18.9669 bits
+Epoch None Iter 0, test loss 14.3653 nats / 20.7247 bits
+Epoch None Iter 0, test loss 14.5172 nats / 20.9440 bits
+Epoch None Iter 0, test loss 12.7546 nats / 18.4010 bits
+Epoch None Iter 0, test loss 14.5976 nats / 21.0599 bits
+Epoch None Iter 0, test loss 12.9873 nats / 18.7367 bits
+Epoch None Iter 0, test loss 12.2646 nats / 17.6941 bits
+Epoch None Iter 0, test loss 13.3072 nats / 19.1983 bits
+Epoch None Iter 0, test loss 14.9257 nats / 21.5332 bits
+Epoch None Iter 0, test loss 14.2629 nats / 20.5771 bits
+Epoch None Iter 0, test loss 13.7427 nats / 19.8265 bits
+Epoch None Iter 0, test loss 13.6729 nats / 19.7258 bits
+Epoch None Iter 0, test loss 15.1286 nats / 21.8260 bits
+Epoch None Iter 0, test loss 15.2209 nats / 21.9591 bits
+Epoch None Iter 0, test loss 13.4360 nats / 19.3840 bits
+Epoch None Iter 0, test loss 13.8322 nats / 19.9556 bits
+Epoch None Iter 0, test loss 13.9240 nats / 20.0880 bits
+Epoch None Iter 0, test loss 13.2095 nats / 19.0573 bits
+Epoch None Iter 0, test loss 13.6103 nats / 19.6355 bits
+Epoch None Iter 0, test loss 13.0807 nats / 18.8715 bits
+Epoch None Iter 0, test loss 13.1360 nats / 18.9512 bits
+Epoch None Iter 0, test loss 14.4761 nats / 20.8846 bits
+Epoch None Iter 0, test loss 13.5511 nats / 19.5501 bits
+Epoch None Iter 0, test loss 13.4943 nats / 19.4682 bits
+Epoch None Iter 0, test loss 13.5205 nats / 19.5059 bits
+Epoch None Iter 0, test loss 14.5687 nats / 21.0182 bits
+Epoch None Iter 0, test loss 13.6287 nats / 19.6621 bits
+Epoch None Iter 0, test loss 13.9386 nats / 20.1092 bits
+Epoch None Iter 0, test loss 14.5756 nats / 21.0282 bits
+Epoch None Iter 0, test loss 14.2073 nats / 20.4967 bits
+Epoch None Iter 0, test loss 14.0281 nats / 20.2382 bits
+Epoch None Iter 0, test loss 13.4550 nats / 19.4114 bits
+Epoch None Iter 0, test loss 14.5482 nats / 20.9885 bits
+Epoch None Iter 0, test loss 14.9707 nats / 21.5981 bits
+Epoch None Iter 0, test loss 14.2594 nats / 20.5720 bits
+Epoch None Iter 0, test loss 14.6419 nats / 21.1237 bits
+Epoch None Iter 0, test loss 14.4651 nats / 20.8688 bits
+Epoch None Iter 0, test loss 14.5419 nats / 20.9795 bits
+Epoch None Iter 0, test loss 13.4930 nats / 19.4663 bits
+Epoch None Iter 0, test loss 13.0608 nats / 18.8428 bits
+Epoch None Iter 0, test loss 14.5000 nats / 20.9191 bits
+Epoch None Iter 0, test loss 13.6151 nats / 19.6424 bits
+Epoch None Iter 0, test loss 13.8352 nats / 19.9600 bits
+Epoch None Iter 0, test loss 14.0788 nats / 20.3115 bits
+Epoch None Iter 0, test loss 12.8948 nats / 18.6033 bits
+Epoch None Iter 0, test loss 13.9997 nats / 20.1973 bits
+Epoch None Iter 0, test loss 13.7968 nats / 19.9046 bits
+Epoch None Iter 0, test loss 14.3858 nats / 20.7543 bits
+Epoch None Iter 0, test loss 13.0295 nats / 18.7977 bits
+Epoch None Iter 0, test loss 14.1269 nats / 20.3808 bits
+Epoch None Iter 0, test loss 14.3874 nats / 20.7567 bits
+Epoch None Iter 0, test loss 13.3543 nats / 19.2662 bits
+Epoch None Iter 0, test loss 14.4272 nats / 20.8141 bits
+Epoch None Iter 0, test loss 12.7114 nats / 18.3387 bits
+Epoch None Iter 0, test loss 14.7176 nats / 21.2330 bits
+Epoch None Iter 0, test loss 14.9536 nats / 21.5735 bits
+Epoch None Iter 0, test loss 12.8881 nats / 18.5936 bits
+Epoch None Iter 0, test loss 13.4291 nats / 19.3741 bits
+Epoch None Iter 0, test loss 14.0138 nats / 20.2176 bits
+Epoch None Iter 0, test loss 14.2560 nats / 20.5670 bits
+Epoch None Iter 0, test loss 13.6904 nats / 19.7511 bits
+Epoch None Iter 0, test loss 14.2696 nats / 20.5867 bits
+Epoch None Iter 0, test loss 13.4531 nats / 19.4088 bits
+Epoch None Iter 0, test loss 14.5737 nats / 21.0254 bits
+Epoch None Iter 0, test loss 13.5008 nats / 19.4776 bits
+Epoch None Iter 0, test loss 16.1411 nats / 23.2866 bits
+Epoch None Iter 0, test loss 13.8256 nats / 19.9461 bits
+Epoch None Iter 0, test loss 13.7221 nats / 19.7968 bits
+Epoch None Iter 0, test loss 15.6918 nats / 22.6385 bits
+Epoch None Iter 0, test loss 13.4149 nats / 19.3536 bits
+Epoch None Iter 0, test loss 14.0945 nats / 20.3340 bits
+Epoch None Iter 0, test loss 13.2438 nats / 19.1067 bits
+Epoch None Iter 0, test loss 13.9466 nats / 20.1207 bits
+Epoch None Iter 0, test loss 14.5209 nats / 20.9493 bits
+Epoch None Iter 0, test loss 15.3318 nats / 22.1191 bits
+Epoch None Iter 0, test loss 13.4463 nats / 19.3989 bits
+Epoch None Iter 0, test loss 13.5076 nats / 19.4873 bits
+Epoch None Iter 0, test loss 14.3594 nats / 20.7163 bits
+Epoch None Iter 0, test loss 13.3611 nats / 19.2761 bits
+Epoch None Iter 0, test loss 13.6163 nats / 19.6441 bits
+Epoch None Iter 0, test loss 13.7485 nats / 19.8349 bits
+Epoch None Iter 0, test loss 13.9625 nats / 20.1436 bits
+Epoch None Iter 0, test loss 12.9054 nats / 18.6186 bits
+Epoch None Iter 0, test loss 14.3469 nats / 20.6982 bits
+Epoch None Iter 0, test loss 14.4259 nats / 20.8121 bits
+Epoch None Iter 0, test loss 15.0888 nats / 21.7685 bits
+Epoch None Iter 0, test loss 13.8615 nats / 19.9980 bits
+Epoch None Iter 0, test loss 13.9423 nats / 20.1145 bits
+Epoch None Iter 0, test loss 13.1922 nats / 19.0323 bits
+Epoch None Iter 0, test loss 12.4675 nats / 17.9868 bits
+Epoch None Iter 0, test loss 13.9935 nats / 20.1884 bits
+Epoch None Iter 0, test loss 12.3860 nats / 17.8692 bits
+Epoch None Iter 0, test loss 13.7603 nats / 19.8519 bits
+Epoch None Iter 0, test loss 14.4392 nats / 20.8314 bits
+Epoch None Iter 0, test loss 14.5387 nats / 20.9749 bits
+Epoch None Iter 0, test loss 13.2012 nats / 19.0453 bits
+Epoch None Iter 0, test loss 13.8431 nats / 19.9714 bits
+Epoch None Iter 0, test loss 13.3478 nats / 19.2568 bits
+Epoch None Iter 0, test loss 14.1895 nats / 20.4712 bits
+Epoch None Iter 0, test loss 14.3782 nats / 20.7433 bits
+Epoch None Iter 0, test loss 15.0329 nats / 21.6880 bits
+Epoch None Iter 0, test loss 14.5789 nats / 21.0329 bits
+Epoch None Iter 0, test loss 13.8630 nats / 20.0001 bits
+Epoch None Iter 0, test loss 13.8286 nats / 19.9504 bits
+Epoch None Iter 0, test loss 13.6997 nats / 19.7644 bits
+Epoch None Iter 0, test loss 14.6708 nats / 21.1655 bits
+Epoch None Iter 0, test loss 12.9945 nats / 18.7471 bits
+Epoch None Iter 0, test loss 14.3170 nats / 20.6550 bits
+Epoch None Iter 0, test loss 13.2764 nats / 19.1538 bits
+Epoch None Iter 0, test loss 12.2750 nats / 17.7091 bits
+Epoch None Iter 0, test loss 13.4667 nats / 19.4283 bits
+Epoch None Iter 0, test loss 13.4160 nats / 19.3552 bits
+Epoch None Iter 0, test loss 13.6629 nats / 19.7115 bits
+Epoch None Iter 0, test loss 14.1076 nats / 20.3530 bits
+Epoch None Iter 0, test loss 12.9454 nats / 18.6763 bits
+Epoch None Iter 0, test loss 13.0887 nats / 18.8830 bits
+Epoch None Iter 0, test loss 12.9717 nats / 18.7142 bits
+Epoch None Iter 0, test loss 12.9745 nats / 18.7182 bits
+Epoch None Iter 0, test loss 12.9131 nats / 18.6296 bits
+Epoch None Iter 0, test loss 13.5160 nats / 19.4994 bits
+Epoch None Iter 0, test loss 13.6352 nats / 19.6714 bits
+Epoch None Iter 0, test loss 13.1539 nats / 18.9771 bits
+Epoch None Iter 0, test loss 14.0278 nats / 20.2378 bits
+Epoch None Iter 0, test loss 13.7452 nats / 19.8302 bits
+Epoch None Iter 0, test loss 13.5967 nats / 19.6159 bits
+Epoch None Iter 0, test loss 14.3290 nats / 20.6723 bits
+Epoch None Iter 0, test loss 15.0120 nats / 21.6577 bits
+Epoch None Iter 0, test loss 13.6578 nats / 19.7040 bits
+Epoch None Iter 0, test loss 13.3155 nats / 19.2102 bits
+Epoch None Iter 0, test loss 14.1911 nats / 20.4734 bits
+Epoch None Iter 0, test loss 14.6996 nats / 21.2071 bits
+Epoch None Iter 0, test loss 14.4199 nats / 20.8035 bits
+Epoch None Iter 0, test loss 14.4137 nats / 20.7945 bits
+Epoch None Iter 0, test loss 13.9533 nats / 20.1304 bits
+Epoch None Iter 0, test loss 13.4419 nats / 19.3926 bits
+Epoch None Iter 0, test loss 14.8158 nats / 21.3747 bits
+Epoch None Iter 0, test loss 15.0176 nats / 21.6658 bits
+Epoch None Iter 0, test loss 14.1067 nats / 20.3517 bits
+Epoch None Iter 0, test loss 15.1656 nats / 21.8793 bits
+Epoch None Iter 0, test loss 14.0053 nats / 20.2053 bits
+Epoch None Iter 0, test loss 14.6548 nats / 21.1423 bits
+Epoch None Iter 0, test loss 14.0427 nats / 20.2593 bits
+Epoch None Iter 0, test loss 14.4881 nats / 20.9019 bits
+Epoch None Iter 0, test loss 14.8128 nats / 21.3703 bits
+Epoch None Iter 0, test loss 14.4701 nats / 20.8759 bits
+Epoch None Iter 0, test loss 13.6700 nats / 19.7217 bits
+Epoch None Iter 0, test loss 15.2598 nats / 22.0153 bits
+Epoch None Iter 0, test loss 15.1985 nats / 21.9267 bits
+Epoch None Iter 0, test loss 14.6173 nats / 21.0883 bits
+Epoch None Iter 0, test loss 13.1713 nats / 19.0022 bits
+Epoch None Iter 0, test loss 13.3663 nats / 19.2835 bits
+Epoch None Iter 0, test loss 13.8866 nats / 20.0341 bits
+Epoch None Iter 0, test loss 13.4372 nats / 19.3858 bits
+Epoch None Iter 0, test loss 14.3912 nats / 20.7622 bits
+Epoch None Iter 0, test loss 12.5387 nats / 18.0895 bits
+Epoch None Iter 0, test loss 12.8222 nats / 18.4985 bits
+Epoch None Iter 0, test loss 13.9859 nats / 20.1774 bits
+Epoch None Iter 0, test loss 13.2321 nats / 19.0898 bits
+Epoch None Iter 0, test loss 14.6625 nats / 21.1535 bits
+Epoch None Iter 0, test loss 13.2544 nats / 19.1220 bits
+Epoch None Iter 0, test loss 13.8560 nats / 19.9899 bits
+Epoch None Iter 0, test loss 12.8437 nats / 18.5295 bits
+Epoch None Iter 0, test loss 12.8502 nats / 18.5389 bits
+Epoch None Iter 0, test loss 14.0104 nats / 20.2127 bits
+Epoch None Iter 0, test loss 14.7254 nats / 21.2443 bits
+Epoch None Iter 0, test loss 13.1581 nats / 18.9831 bits
+Epoch None Iter 0, test loss 13.2322 nats / 19.0900 bits
+Epoch None Iter 0, test loss 13.2396 nats / 19.1006 bits
+Epoch None Iter 0, test loss 15.2459 nats / 21.9952 bits
+Epoch None Iter 0, test loss 13.1891 nats / 19.0279 bits
+Epoch None Iter 0, test loss 14.3814 nats / 20.7480 bits
+Epoch None Iter 0, test loss 13.7001 nats / 19.7651 bits
+Epoch None Iter 0, test loss 13.8499 nats / 19.9812 bits
+Epoch None Iter 0, test loss 16.9511 nats / 24.4552 bits
+Epoch None Iter 0, test loss 13.4512 nats / 19.4059 bits
+Epoch None Iter 0, test loss 13.4236 nats / 19.3662 bits
+Epoch None Iter 0, test loss 15.1355 nats / 21.8359 bits
+Epoch None Iter 0, test loss 13.0798 nats / 18.8701 bits
+Epoch None Iter 0, test loss 12.6860 nats / 18.3020 bits
+Epoch None Iter 0, test loss 12.4991 nats / 18.0324 bits
+Epoch None Iter 0, test loss 14.0439 nats / 20.2610 bits
+Epoch None Iter 0, test loss 12.4372 nats / 17.9431 bits
+Epoch None Iter 0, test loss 14.6552 nats / 21.1429 bits
+Epoch None Iter 0, test loss 12.5518 nats / 18.1084 bits
+Epoch None Iter 0, test loss 12.9510 nats / 18.6843 bits
+Epoch None Iter 0, test loss 13.3191 nats / 19.2154 bits
+Epoch None Iter 0, test loss 14.7691 nats / 21.3073 bits
+Epoch None Iter 0, test loss 14.4016 nats / 20.7772 bits
+Epoch None Iter 0, test loss 13.8827 nats / 20.0285 bits
+Epoch None Iter 0, test loss 13.7958 nats / 19.9031 bits
+Epoch None Iter 0, test loss 14.3305 nats / 20.6745 bits
+Epoch None Iter 0, test loss 13.4202 nats / 19.3612 bits
+Epoch None Iter 0, test loss 14.0019 nats / 20.2005 bits
+Epoch None Iter 0, test loss 15.2060 nats / 21.9376 bits
+Epoch None Iter 0, test loss 15.7775 nats / 22.7621 bits
+Epoch None Iter 0, test loss 14.3484 nats / 20.7004 bits
+Epoch None Iter 0, test loss 13.2689 nats / 19.1429 bits
+Epoch None Iter 0, test loss 14.8381 nats / 21.4069 bits
+Epoch None Iter 0, test loss 13.6259 nats / 19.6580 bits
+Epoch None Iter 0, test loss 14.7784 nats / 21.3207 bits
+Epoch None Iter 0, test loss 13.7140 nats / 19.7851 bits
+Epoch None Iter 0, test loss 13.2095 nats / 19.0573 bits
+Epoch None Iter 0, test loss 14.8701 nats / 21.4531 bits
+Epoch None Iter 0, test loss 14.7676 nats / 21.3051 bits
+Epoch None Iter 0, test loss 13.2136 nats / 19.0632 bits
+Epoch None Iter 0, test loss 14.8148 nats / 21.3732 bits
+Epoch None Iter 0, test loss 14.4634 nats / 20.8662 bits
+Epoch None Iter 0, test loss 14.2226 nats / 20.5188 bits
+Epoch None Iter 0, test loss 14.1058 nats / 20.3504 bits
+Epoch None Iter 0, test loss 13.3683 nats / 19.2864 bits
+Epoch None Iter 0, test loss 13.1167 nats / 18.9233 bits
+Epoch None Iter 0, test loss 13.9457 nats / 20.1195 bits
+Epoch None Iter 0, test loss 14.8650 nats / 21.4457 bits
+Epoch None Iter 0, test loss 13.4765 nats / 19.4424 bits
+Epoch None Iter 0, test loss 15.1198 nats / 21.8133 bits
+Epoch None Iter 0, test loss 13.6013 nats / 19.6225 bits
+Epoch None Iter 0, test loss 14.4805 nats / 20.8910 bits
+Epoch None Iter 0, test loss 13.8709 nats / 20.0115 bits
+Epoch None Iter 0, test loss 14.1066 nats / 20.3515 bits
+Epoch None Iter 0, test loss 13.1959 nats / 19.0376 bits
+Epoch None Iter 0, test loss 15.4713 nats / 22.3204 bits
+Epoch None Iter 0, test loss 13.7970 nats / 19.9049 bits
+Epoch None Iter 0, test loss 14.7569 nats / 21.2897 bits
+Epoch None Iter 0, test loss 14.9001 nats / 21.4964 bits
+Epoch None Iter 0, test loss 14.0035 nats / 20.2027 bits
+Epoch None Iter 0, test loss 13.8342 nats / 19.9586 bits
+Epoch None Iter 0, test loss 14.4900 nats / 20.9047 bits
+Epoch None Iter 0, test loss 14.4290 nats / 20.8167 bits
+Epoch None Iter 0, test loss 14.7596 nats / 21.2935 bits
+Epoch None Iter 0, test loss 13.9052 nats / 20.0610 bits
+Epoch None Iter 0, test loss 16.2666 nats / 23.4678 bits
+Epoch None Iter 0, test loss 13.6114 nats / 19.6371 bits
+Epoch None Iter 0, test loss 13.7941 nats / 19.9007 bits
+Epoch None Iter 0, test loss 13.4197 nats / 19.3606 bits
+Epoch None Iter 0, test loss 14.5315 nats / 20.9645 bits
+Epoch None Iter 0, test loss 14.2379 nats / 20.5409 bits
+Epoch None Iter 0, test loss 13.9156 nats / 20.0759 bits
+Epoch None Iter 0, test loss 12.2794 nats / 17.7154 bits
+Epoch None Iter 0, test loss 14.3952 nats / 20.7679 bits
+Epoch None Iter 0, test loss 13.9853 nats / 20.1766 bits
+Epoch None Iter 0, test loss 14.7333 nats / 21.2556 bits
+Epoch None Iter 0, test loss 14.4129 nats / 20.7934 bits
+Epoch None Iter 0, test loss 13.7365 nats / 19.8176 bits
+Epoch None Iter 0, test loss 14.2905 nats / 20.6168 bits
+Epoch None Iter 0, test loss 12.7423 nats / 18.3833 bits
+Epoch None Iter 0, test loss 13.2497 nats / 19.1153 bits
+Epoch None Iter 0, test loss 13.3448 nats / 19.2525 bits
+Epoch None Iter 0, test loss 13.2984 nats / 19.1855 bits
+Epoch None Iter 0, test loss 14.2858 nats / 20.6101 bits
+Epoch None Iter 0, test loss 14.9680 nats / 21.5942 bits
+Epoch None Iter 0, test loss 13.1905 nats / 19.0298 bits
+Epoch None Iter 0, test loss 14.0838 nats / 20.3186 bits
+Epoch None Iter 0, test loss 13.1712 nats / 19.0021 bits
+Epoch None Iter 0, test loss 14.4102 nats / 20.7895 bits
+Epoch None Iter 0, test loss 13.3903 nats / 19.3182 bits
+Epoch None Iter 0, test loss 15.5397 nats / 22.4190 bits
+Epoch None Iter 0, test loss 12.4347 nats / 17.9395 bits
+Epoch None Iter 0, test loss 13.6181 nats / 19.6468 bits
+Epoch None Iter 0, test loss 13.7056 nats / 19.7729 bits
+Epoch None Iter 0, test loss 13.2818 nats / 19.1615 bits
+Epoch None Iter 0, test loss 14.1452 nats / 20.4072 bits
+Epoch None Iter 0, test loss 14.0527 nats / 20.2737 bits
+Epoch None Iter 0, test loss 13.9554 nats / 20.1334 bits
+Epoch None Iter 0, test loss 13.3736 nats / 19.2940 bits
+Epoch None Iter 0, test loss 13.9511 nats / 20.1273 bits
+Epoch None Iter 0, test loss 13.4330 nats / 19.3798 bits
+Epoch None Iter 0, test loss 12.8269 nats / 18.5053 bits
+Epoch None Iter 0, test loss 12.5716 nats / 18.1370 bits
+Epoch None Iter 0, test loss 13.9100 nats / 20.0679 bits
+Epoch None Iter 0, test loss 14.5008 nats / 20.9202 bits
+Epoch None Iter 0, test loss 13.3994 nats / 19.3312 bits
+Epoch None Iter 0, test loss 14.1889 nats / 20.4702 bits
+Epoch None Iter 0, test loss 14.4998 nats / 20.9188 bits
+Epoch None Iter 0, test loss 14.6593 nats / 21.1490 bits
+Epoch None Iter 0, test loss 14.3864 nats / 20.7551 bits
+Epoch None Iter 0, test loss 14.0111 nats / 20.2137 bits
+Epoch None Iter 0, test loss 13.3223 nats / 19.2201 bits
+Epoch None Iter 0, test loss 14.1193 nats / 20.3699 bits
+Epoch None Iter 0, test loss 13.5046 nats / 19.4830 bits
+Epoch None Iter 0, test loss 14.4494 nats / 20.8461 bits
+Epoch None Iter 0, test loss 13.1374 nats / 18.9532 bits
+Epoch None Iter 0, test loss 14.3505 nats / 20.7034 bits
+Epoch None Iter 0, test loss 13.0650 nats / 18.8488 bits
+Epoch None Iter 0, test loss 13.3554 nats / 19.2678 bits
+Epoch None Iter 0, test loss 15.2537 nats / 22.0065 bits
+Epoch None Iter 0, test loss 15.7873 nats / 22.7762 bits
+Epoch None Iter 0, test loss 14.2376 nats / 20.5406 bits
+Epoch None Iter 0, test loss 14.0200 nats / 20.2266 bits
+Epoch None Iter 0, test loss 12.9221 nats / 18.6427 bits
+Epoch None Iter 0, test loss 13.8864 nats / 20.0339 bits
+Epoch None Iter 0, test loss 15.3053 nats / 22.0809 bits
+Epoch None Iter 0, test loss 14.3884 nats / 20.7580 bits
+Epoch None Iter 0, test loss 12.5240 nats / 18.0683 bits
+Epoch None Iter 0, test loss 14.5777 nats / 21.0312 bits
+Epoch None Iter 0, test loss 15.2998 nats / 22.0729 bits
+Epoch None Iter 0, test loss 13.2954 nats / 19.1812 bits
+Epoch None Iter 0, test loss 15.7594 nats / 22.7361 bits
+Epoch None Iter 0, test loss 13.4087 nats / 19.3447 bits
+Epoch None Iter 0, test loss 13.8183 nats / 19.9355 bits
+Epoch None Iter 0, test loss 13.3154 nats / 19.2100 bits
+Epoch None Iter 0, test loss 13.3274 nats / 19.2274 bits
+Epoch None Iter 0, test loss 13.8538 nats / 19.9868 bits
+Epoch None Iter 0, test loss 12.7920 nats / 18.4550 bits
+Epoch None Iter 0, test loss 13.5197 nats / 19.5048 bits
+Epoch None Iter 0, test loss 13.7123 nats / 19.7827 bits
+Epoch None Iter 0, test loss 14.6246 nats / 21.0988 bits
+Epoch None Iter 0, test loss 13.7481 nats / 19.8343 bits
+Epoch None Iter 0, test loss 12.0141 nats / 17.3327 bits
+Epoch None Iter 0, test loss 14.3050 nats / 20.6378 bits
+Epoch None Iter 0, test loss 15.6184 nats / 22.5325 bits
+Epoch None Iter 0, test loss 13.8263 nats / 19.9472 bits
+Epoch None Iter 0, test loss 14.0651 nats / 20.2917 bits
+Epoch None Iter 0, test loss 14.0320 nats / 20.2440 bits
+Epoch None Iter 0, test loss 14.0979 nats / 20.3390 bits
+Epoch None Iter 0, test loss 15.3109 nats / 22.0890 bits
+Epoch None Iter 0, test loss 13.4732 nats / 19.4377 bits
+Epoch None Iter 0, test loss 13.5271 nats / 19.5154 bits
+Epoch None Iter 0, test loss 14.3702 nats / 20.7318 bits
+Epoch None Iter 0, test loss 14.9476 nats / 21.5648 bits
+Epoch None Iter 0, test loss 13.7628 nats / 19.8555 bits
+Epoch None Iter 0, test loss 13.8877 nats / 20.0357 bits
+Epoch None Iter 0, test loss 13.2043 nats / 19.0498 bits
+Epoch None Iter 0, test loss 12.9964 nats / 18.7498 bits
+Epoch None Iter 0, test loss 14.0325 nats / 20.2446 bits
+Epoch None Iter 0, test loss 13.3822 nats / 19.3064 bits
+Epoch None Iter 0, test loss 13.6201 nats / 19.6497 bits
+Epoch None Iter 0, test loss 13.6648 nats / 19.7141 bits
+Epoch None Iter 0, test loss 13.1208 nats / 18.9293 bits
+Epoch None Iter 0, test loss 14.1912 nats / 20.4735 bits
+Epoch None Iter 0, test loss 14.2867 nats / 20.6113 bits
+Epoch None Iter 0, test loss 14.6120 nats / 21.0807 bits
+Epoch None Iter 0, test loss 14.9228 nats / 21.5290 bits
+Epoch None Iter 0, test loss 14.3049 nats / 20.6376 bits
+Epoch None Iter 0, test loss 14.1549 nats / 20.4212 bits
+Epoch None Iter 0, test loss 32.9737 nats / 47.5710 bits
+Entropy of DMV_ofnan_200000dmv([Column(Record Type, distribution_size=2), Column(Registration Class, distribution_size=69), Column(State, distribution_size=77), Column(County, distribution_size=63), Column(Body Type, distribution_size=57), Column(Fuel Type, distribution_size=8), Column(Reg Valid Date, distribution_size=2828), Column(Color, distribution_size=218), Column(Scofflaw Indicator, distribution_size=2), Column(Suspension Indicator, distribution_size=2), Column(Revocation Indicator, distribution_size=2)]): 19.3972 bits
+Device cuda
+Loading csv... done, took 5.8s
+Parsing... Device cuda
+Loading csv... done, took 5.7s
+Parsing... done, took 5.1s
+Loading csv... done, took 0.2s
+Parsing... done, took 0.1s
+MASK_SCHEME 0
+ordering [ 0  1  2  3  4  5  6  7  8  9 10]
+using orig mask
+ tensor([[ True, False, False, False, False, False, False, False, False, False,
+         False],
+        [ True,  True, False, False, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True, False, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True]])
+Number of model parameters: 414464 (~= 1.6MB)
+Transformer(
+  (blocks): Sequential(
+    (0): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (1): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (2): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (3): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+  )
+  (norm): LayerNorm()
+  (embeddings): ModuleList(
+    (0): Embedding(2, 64)
+    (1): Embedding(69, 64)
+    (2): Embedding(77, 64)
+    (3): Embedding(63, 64)
+    (4): Embedding(57, 64)
+    (5): Embedding(8, 64)
+    (6): Embedding(2828, 64)
+    (7): Embedding(218, 64)
+    (8): Embedding(2, 64)
+    (9): Embedding(2, 64)
+    (10): Embedding(2, 64)
+  )
+  (pos_embeddings): Embedding(11, 64)
+  (unk_embeddings): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (6): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (7): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (8): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (9): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (10): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+  )
+)
+Loading ckpt: /home/jixy/naru/models/pretrained/DMV/DMV_ofnan_p100/dmv-ofnan-1.6MB-model20.172-data19.343-transformer-blocks4-model64-ff256-heads4-use_flash_attnFalse-posEmb-gelu-colmask-20epochs-seed0.pt
+Parsing... done, took 3.9s
+Discretizing table... done, took 3.9s
+Discretizing table... done, took 0.1s
+Discretizing table... done, took 3.9s
+Epoch None Iter 0, test loss 12.8137 nats / 18.4863 bits
+Epoch None Iter 0, test loss 13.2982 nats / 19.1852 bits
+Epoch None Iter 0, test loss 14.2919 nats / 20.6189 bits
+Epoch None Iter 0, test loss 13.5278 nats / 19.5164 bits
+Epoch None Iter 0, test loss 14.7279 nats / 21.2479 bits
+Epoch None Iter 0, test loss 12.5938 nats / 18.1690 bits
+Epoch None Iter 0, test loss 14.0481 nats / 20.2672 bits
+Epoch None Iter 0, test loss 14.1249 nats / 20.3779 bits
+Epoch None Iter 0, test loss 11.9811 nats / 17.2850 bits
+Epoch None Iter 0, test loss 14.3613 nats / 20.7190 bits
+Epoch None Iter 0, test loss 15.9225 nats / 22.9713 bits
+Epoch None Iter 0, test loss 13.9154 nats / 20.0757 bits
+Epoch None Iter 0, test loss 13.0331 nats / 18.8028 bits
+Epoch None Iter 0, test loss 13.9344 nats / 20.1031 bits
+Epoch None Iter 0, test loss 13.2974 nats / 19.1840 bits
+Epoch None Iter 0, test loss 14.6224 nats / 21.0956 bits
+Epoch None Iter 0, test loss 14.1971 nats / 20.4820 bits
+Epoch None Iter 0, test loss 14.9299 nats / 21.5392 bits
+Epoch None Iter 0, test loss 14.1839 nats / 20.4630 bits
+Epoch None Iter 0, test loss 14.0962 nats / 20.3366 bits
+Epoch None Iter 0, test loss 14.7466 nats / 21.2749 bits
+Epoch None Iter 0, test loss 14.4395 nats / 20.8318 bits
+Epoch None Iter 0, test loss 13.6002 nats / 19.6210 bits
+Epoch None Iter 0, test loss 14.0131 nats / 20.2166 bits
+Epoch None Iter 0, test loss 13.0555 nats / 18.8351 bits
+Epoch None Iter 0, test loss 13.1094 nats / 18.9128 bits
+Epoch None Iter 0, test loss 14.1792 nats / 20.4562 bits
+Epoch None Iter 0, test loss 14.1088 nats / 20.3547 bits
+Epoch None Iter 0, test loss 14.1310 nats / 20.3868 bits
+Epoch None Iter 0, test loss 13.2494 nats / 19.1149 bits
+Epoch None Iter 0, test loss 12.8145 nats / 18.4874 bits
+Epoch None Iter 0, test loss 14.5236 nats / 20.9531 bits
+Epoch None Iter 0, test loss 15.2834 nats / 22.0493 bits
+Epoch None Iter 0, test loss 13.2657 nats / 19.1384 bits
+Epoch None Iter 0, test loss 14.4578 nats / 20.8582 bits
+Epoch None Iter 0, test loss 14.8286 nats / 21.3932 bits
+Epoch None Iter 0, test loss 13.2504 nats / 19.1163 bits
+Epoch None Iter 0, test loss 15.0813 nats / 21.7578 bits
+Epoch None Iter 0, test loss 13.8843 nats / 20.0308 bits
+Epoch None Iter 0, test loss 13.5506 nats / 19.5494 bits
+Epoch None Iter 0, test loss 13.2515 nats / 19.1178 bits
+Epoch None Iter 0, test loss 13.2531 nats / 19.1202 bits
+Epoch None Iter 0, test loss 15.5684 nats / 22.4605 bits
+Epoch None Iter 0, test loss 14.8706 nats / 21.4537 bits
+Epoch None Iter 0, test loss 12.9347 nats / 18.6608 bits
+Epoch None Iter 0, test loss 12.8279 nats / 18.5067 bits
+Epoch None Iter 0, test loss 14.9262 nats / 21.5340 bits
+Epoch None Iter 0, test loss 13.1884 nats / 19.0269 bits
+Epoch None Iter 0, test loss 14.5429 nats / 20.9810 bits
+Epoch None Iter 0, test loss 13.1568 nats / 18.9813 bits
+Epoch None Iter 0, test loss 14.0869 nats / 20.3231 bits
+Epoch None Iter 0, test loss 13.6460 nats / 19.6870 bits
+Epoch None Iter 0, test loss 13.2353 nats / 19.0944 bits
+Epoch None Iter 0, test loss 13.5180 nats / 19.5023 bits
+Epoch None Iter 0, test loss 15.2970 nats / 22.0689 bits
+Epoch None Iter 0, test loss 13.0711 nats / 18.8576 bits
+Epoch None Iter 0, test loss 14.5479 nats / 20.9882 bits
+Epoch None Iter 0, test loss 14.3626 nats / 20.7208 bits
+Epoch None Iter 0, test loss 14.4004 nats / 20.7754 bits
+Epoch None Iter 0, test loss 13.2323 nats / 19.0901 bits
+Epoch None Iter 0, test loss 13.9116 nats / 20.0702 bits
+Epoch None Iter 0, test loss 14.8665 nats / 21.4478 bits
+Epoch None Iter 0, test loss 15.4233 nats / 22.2512 bits
+Epoch None Iter 0, test loss 14.0037 nats / 20.2030 bits
+Epoch None Iter 0, test loss 13.8939 nats / 20.0446 bits
+Epoch None Iter 0, test loss 13.6605 nats / 19.7079 bits
+Epoch None Iter 0, test loss 14.1225 nats / 20.3744 bits
+Epoch None Iter 0, test loss 14.3807 nats / 20.7470 bits
+Epoch None Iter 0, test loss 13.9490 nats / 20.1242 bits
+Epoch None Iter 0, test loss 14.8144 nats / 21.3727 bits
+Epoch None Iter 0, test loss 15.2232 nats / 21.9624 bits
+Epoch None Iter 0, test loss 16.5803 nats / 23.9204 bits
+Epoch None Iter 0, test loss 14.4586 nats / 20.8593 bits
+Epoch None Iter 0, test loss 13.7406 nats / 19.8235 bits
+Epoch None Iter 0, test loss 12.2604 nats / 17.6880 bits
+Epoch None Iter 0, test loss 15.0675 nats / 21.7379 bits
+Epoch None Iter 0, test loss 12.9963 nats / 18.7498 bits
+Epoch None Iter 0, test loss 13.1520 nats / 18.9743 bits
+Epoch None Iter 0, test loss 13.4229 nats / 19.3651 bits
+Epoch None Iter 0, test loss 14.0620 nats / 20.2871 bits
+Epoch None Iter 0, test loss 13.8547 nats / 19.9881 bits
+Epoch None Iter 0, test loss 13.3169 nats / 19.2122 bits
+Epoch None Iter 0, test loss 14.5590 nats / 21.0042 bits
+Epoch None Iter 0, test loss 13.1428 nats / 18.9610 bits
+Epoch None Iter 0, test loss 14.5857 nats / 21.0427 bits
+Epoch None Iter 0, test loss 13.5110 nats / 19.4922 bits
+Epoch None Iter 0, test loss 14.8622 nats / 21.4416 bits
+Epoch None Iter 0, test loss 13.5724 nats / 19.5809 bits
+Epoch None Iter 0, test loss 16.1331 nats / 23.2751 bits
+Epoch None Iter 0, test loss 13.1822 nats / 19.0178 bits
+Epoch None Iter 0, test loss 14.0515 nats / 20.2720 bits
+Epoch None Iter 0, test loss 13.9324 nats / 20.1002 bits
+Epoch None Iter 0, test loss 13.9935 nats / 20.1883 bits
+Epoch None Iter 0, test loss 14.0982 nats / 20.3393 bits
+Epoch None Iter 0, test loss 13.3373 nats / 19.2416 bits
+Epoch None Iter 0, test loss 13.5296 nats / 19.5192 bits
+Epoch None Iter 0, test loss 14.4498 nats / 20.8466 bits
+Epoch None Iter 0, test loss 14.4245 nats / 20.8101 bits
+Epoch None Iter 0, test loss 13.6084 nats / 19.6327 bits
+Epoch None Iter 0, test loss 13.3129 nats / 19.2064 bits
+Epoch None Iter 0, test loss 15.0021 nats / 21.6434 bits
+Epoch None Iter 0, test loss 13.9870 nats / 20.1789 bits
+Epoch None Iter 0, test loss 14.4066 nats / 20.7843 bits
+Epoch None Iter 0, test loss 15.1447 nats / 21.8492 bits
+Epoch None Iter 0, test loss 14.6748 nats / 21.1713 bits
+Epoch None Iter 0, test loss 14.1593 nats / 20.4276 bits
+Epoch None Iter 0, test loss 13.4545 nats / 19.4107 bits
+Epoch None Iter 0, test loss 14.1279 nats / 20.3823 bits
+Epoch None Iter 0, test loss 14.6471 nats / 21.1312 bits
+Epoch None Iter 0, test loss 14.4387 nats / 20.8306 bits
+Epoch None Iter 0, test loss 16.0612 nats / 23.1714 bits
+Epoch None Iter 0, test loss 15.2111 nats / 21.9450 bits
+Epoch None Iter 0, test loss 14.5414 nats / 20.9788 bits
+Epoch None Iter 0, test loss 15.1180 nats / 21.8106 bits
+Epoch None Iter 0, test loss 13.1283 nats / 18.9401 bits
+Epoch None Iter 0, test loss 13.2407 nats / 19.1023 bits
+Epoch None Iter 0, test loss 12.7844 nats / 18.4440 bits
+Epoch None Iter 0, test loss 12.9091 nats / 18.6239 bits
+Epoch None Iter 0, test loss 13.5909 nats / 19.6075 bits
+Epoch None Iter 0, test loss 13.3801 nats / 19.3034 bits
+Epoch None Iter 0, test loss 14.3425 nats / 20.6918 bits
+Epoch None Iter 0, test loss 14.0238 nats / 20.2321 bits
+Epoch None Iter 0, test loss 13.7076 nats / 19.7759 bits
+Epoch None Iter 0, test loss 13.7527 nats / 19.8410 bits
+Epoch None Iter 0, test loss 14.4351 nats / 20.8254 bits
+Epoch None Iter 0, test loss 13.2393 nats / 19.1002 bits
+Epoch None Iter 0, test loss 15.3747 nats / 22.1809 bits
+Epoch None Iter 0, test loss 13.3528 nats / 19.2640 bits
+Epoch None Iter 0, test loss 12.9938 nats / 18.7461 bits
+Epoch None Iter 0, test loss 12.6978 nats / 18.3191 bits
+Epoch None Iter 0, test loss 14.0654 nats / 20.2920 bits
+Epoch None Iter 0, test loss 13.2193 nats / 19.0714 bits
+Epoch None Iter 0, test loss 14.1975 nats / 20.4826 bits
+Epoch None Iter 0, test loss 14.1464 nats / 20.4089 bits
+Epoch None Iter 0, test loss 14.4546 nats / 20.8536 bits
+Epoch None Iter 0, test loss 13.8929 nats / 20.0433 bits
+Epoch None Iter 0, test loss 13.8906 nats / 20.0399 bits
+Epoch None Iter 0, test loss 14.1073 nats / 20.3525 bits
+Epoch None Iter 0, test loss 13.8398 nats / 19.9667 bits
+Epoch None Iter 0, test loss 12.2712 nats / 17.7036 bits
+Epoch None Iter 0, test loss 13.2090 nats / 19.0565 bits
+Epoch None Iter 0, test loss 13.4796 nats / 19.4470 bits
+Epoch None Iter 0, test loss 14.9251 nats / 21.5324 bits
+Epoch None Iter 0, test loss 14.5920 nats / 21.0517 bits
+Epoch None Iter 0, test loss 14.0070 nats / 20.2078 bits
+Epoch None Iter 0, test loss 14.8803 nats / 21.4677 bits
+Epoch None Iter 0, test loss 15.4597 nats / 22.3036 bits
+Epoch None Iter 0, test loss 13.5778 nats / 19.5886 bits
+Epoch None Iter 0, test loss 14.0462 nats / 20.2644 bits
+Epoch None Iter 0, test loss 13.9971 nats / 20.1935 bits
+Epoch None Iter 0, test loss 14.7406 nats / 21.2662 bits
+Epoch None Iter 0, test loss 14.3083 nats / 20.6425 bits
+Epoch None Iter 0, test loss 16.0724 nats / 23.1876 bits
+Epoch None Iter 0, test loss 14.7534 nats / 21.2846 bits
+Epoch None Iter 0, test loss 14.7836 nats / 21.3282 bits
+Epoch None Iter 0, test loss 14.2451 nats / 20.5513 bits
+Epoch None Iter 0, test loss 13.5590 nats / 19.5616 bits
+Epoch None Iter 0, test loss 14.1301 nats / 20.3854 bits
+Epoch None Iter 0, test loss 15.1837 nats / 21.9054 bits
+Epoch None Iter 0, test loss 13.4584 nats / 19.4164 bits
+Epoch None Iter 0, test loss 14.3555 nats / 20.7107 bits
+Epoch None Iter 0, test loss 15.3163 nats / 22.0968 bits
+Epoch None Iter 0, test loss 11.5869 nats / 16.7164 bits
+Epoch None Iter 0, test loss 14.4626 nats / 20.8651 bits
+Epoch None Iter 0, test loss 13.6047 nats / 19.6274 bits
+Epoch None Iter 0, test loss 13.9687 nats / 20.1526 bits
+Epoch None Iter 0, test loss 13.7737 nats / 19.8713 bits
+Epoch None Iter 0, test loss 12.5703 nats / 18.1351 bits
+Epoch None Iter 0, test loss 13.9100 nats / 20.0678 bits
+Epoch None Iter 0, test loss 14.2660 nats / 20.5814 bits
+Epoch None Iter 0, test loss 13.1696 nats / 18.9997 bits
+Epoch None Iter 0, test loss 13.2942 nats / 19.1795 bits
+Epoch None Iter 0, test loss 16.0869 nats / 23.2085 bits
+Epoch None Iter 0, test loss 13.4195 nats / 19.3603 bits
+Epoch None Iter 0, test loss 13.9791 nats / 20.1676 bits
+Epoch None Iter 0, test loss 16.6711 nats / 24.0513 bits
+Epoch None Iter 0, test loss 12.8312 nats / 18.5115 bits
+Epoch None Iter 0, test loss 13.1886 nats / 19.0271 bits
+Epoch None Iter 0, test loss 15.2029 nats / 21.9331 bits
+Epoch None Iter 0, test loss 13.6864 nats / 19.7453 bits
+Epoch None Iter 0, test loss 14.0487 nats / 20.2679 bits
+Epoch None Iter 0, test loss 13.3109 nats / 19.2036 bits
+Epoch None Iter 0, test loss 14.6760 nats / 21.1730 bits
+Epoch None Iter 0, test loss 13.5049 nats / 19.4835 bits
+Epoch None Iter 0, test loss 13.0414 nats / 18.8147 bits
+Epoch None Iter 0, test loss 13.4238 nats / 19.3665 bits
+Epoch None Iter 0, test loss 14.4898 nats / 20.9044 bits
+Epoch None Iter 0, test loss 13.9894 nats / 20.1824 bits
+Epoch None Iter 0, test loss 13.9701 nats / 20.1545 bits
+Epoch None Iter 0, test loss 14.4293 nats / 20.8170 bits
+Epoch None Iter 0, test loss 13.7936 nats / 19.9000 bits
+Epoch None Iter 0, test loss 15.1795 nats / 21.8993 bits
+Epoch None Iter 0, test loss 13.8350 nats / 19.9597 bits
+Epoch None Iter 0, test loss 13.5436 nats / 19.5393 bits
+Epoch None Iter 0, test loss 13.6779 nats / 19.7330 bits
+Epoch None Iter 0, test loss 13.1688 nats / 18.9985 bits
+Epoch None Iter 0, test loss 16.2859 nats / 23.4957 bits
+Epoch None Iter 0, test loss 15.0524 nats / 21.7161 bits
+Epoch None Iter 0, test loss 12.7568 nats / 18.4041 bits
+Epoch None Iter 0, test loss 13.3822 nats / 19.3064 bits
+Epoch None Iter 0, test loss 12.5183 nats / 18.0601 bits
+Epoch None Iter 0, test loss 13.9380 nats / 20.1083 bits
+Epoch None Iter 0, test loss 15.3837 nats / 22.1939 bits
+Epoch None Iter 0, test loss 13.6474 nats / 19.6891 bits
+Epoch None Iter 0, test loss 13.4438 nats / 19.3954 bits
+Epoch None Iter 0, test loss 13.8122 nats / 19.9267 bits
+Epoch None Iter 0, test loss 14.6450 nats / 21.1283 bits
+Epoch None Iter 0, test loss 13.7682 nats / 19.8633 bits
+Epoch None Iter 0, test loss 14.2045 nats / 20.4927 bits
+Epoch None Iter 0, test loss 12.7303 nats / 18.3659 bits
+Epoch None Iter 0, test loss 12.7450 nats / 18.3871 bits
+Epoch None Iter 0, test loss 14.6918 nats / 21.1958 bits
+Epoch None Iter 0, test loss 13.4939 nats / 19.4676 bits
+Epoch None Iter 0, test loss 13.0975 nats / 18.8957 bits
+Epoch None Iter 0, test loss 12.7629 nats / 18.4130 bits
+Epoch None Iter 0, test loss 14.6387 nats / 21.1192 bits
+Epoch None Iter 0, test loss 14.1379 nats / 20.3967 bits
+Epoch None Iter 0, test loss 15.2473 nats / 21.9972 bits
+Epoch None Iter 0, test loss 14.1652 nats / 20.4361 bits
+Epoch None Iter 0, test loss 13.1878 nats / 19.0260 bits
+Epoch None Iter 0, test loss 15.6201 nats / 22.5350 bits
+Epoch None Iter 0, test loss 15.5937 nats / 22.4970 bits
+Epoch None Iter 0, test loss 14.7908 nats / 21.3386 bits
+Epoch None Iter 0, test loss 13.8935 nats / 20.0440 bits
+Epoch None Iter 0, test loss 14.5711 nats / 21.0216 bits
+Epoch None Iter 0, test loss 13.5774 nats / 19.5880 bits
+Epoch None Iter 0, test loss 13.3157 nats / 19.2104 bits
+Epoch None Iter 0, test loss 14.6615 nats / 21.1521 bits
+Epoch None Iter 0, test loss 15.2747 nats / 22.0367 bits
+Epoch None Iter 0, test loss 15.5871 nats / 22.4875 bits
+Epoch None Iter 0, test loss 14.2408 nats / 20.5451 bits
+Epoch None Iter 0, test loss 13.0757 nats / 18.8642 bits
+Epoch None Iter 0, test loss 14.4772 nats / 20.8861 bits
+Epoch None Iter 0, test loss 13.5586 nats / 19.5610 bits
+Epoch None Iter 0, test loss 12.9366 nats / 18.6635 bits
+Epoch None Iter 0, test loss 13.8826 nats / 20.0283 bits
+Epoch None Iter 0, test loss 13.7399 nats / 19.8225 bits
+Epoch None Iter 0, test loss 14.5226 nats / 20.9517 bits
+Epoch None Iter 0, test loss 13.6091 nats / 19.6338 bits
+Epoch None Iter 0, test loss 14.1554 nats / 20.4220 bits
+Epoch None Iter 0, test loss 15.1285 nats / 21.8258 bits
+Epoch None Iter 0, test loss 15.1775 nats / 21.8965 bits
+Epoch None Iter 0, test loss 13.8068 nats / 19.9189 bits
+Epoch None Iter 0, test loss 13.3621 nats / 19.2774 bits
+Epoch None Iter 0, test loss 13.7958 nats / 19.9031 bits
+Epoch None Iter 0, test loss 14.5398 nats / 20.9766 bits
+Epoch None Iter 0, test loss 12.2701 nats / 17.7020 bits
+Epoch None Iter 0, test loss 13.6644 nats / 19.7135 bits
+Epoch None Iter 0, test loss 13.5018 nats / 19.4790 bits
+Epoch None Iter 0, test loss 13.2404 nats / 19.1018 bits
+Epoch None Iter 0, test loss 14.2836 nats / 20.6068 bits
+Epoch None Iter 0, test loss 12.9477 nats / 18.6795 bits
+Epoch None Iter 0, test loss 13.9478 nats / 20.1225 bits
+Epoch None Iter 0, test loss 12.8766 nats / 18.5769 bits
+Epoch None Iter 0, test loss 13.4687 nats / 19.4312 bits
+Epoch None Iter 0, test loss 13.0361 nats / 18.8071 bits
+Epoch None Iter 0, test loss 14.4796 nats / 20.8896 bits
+Epoch None Iter 0, test loss 14.7618 nats / 21.2968 bits
+Epoch None Iter 0, test loss 13.1158 nats / 18.9221 bits
+Epoch None Iter 0, test loss 13.2846 nats / 19.1656 bits
+Epoch None Iter 0, test loss 12.5273 nats / 18.0731 bits
+Epoch None Iter 0, test loss 12.6684 nats / 18.2766 bits
+Epoch None Iter 0, test loss 13.4119 nats / 19.3493 bits
+Epoch None Iter 0, test loss 14.6685 nats / 21.1622 bits
+Epoch None Iter 0, test loss 14.3646 nats / 20.7237 bits
+Epoch None Iter 0, test loss 14.4726 nats / 20.8796 bits
+Epoch None Iter 0, test loss 13.7053 nats / 19.7726 bits
+Epoch None Iter 0, test loss 13.7847 nats / 19.8871 bits
+Epoch None Iter 0, test loss 14.3950 nats / 20.7676 bits
+Epoch None Iter 0, test loss 14.7861 nats / 21.3319 bits
+Epoch None Iter 0, test loss 13.2644 nats / 19.1364 bits
+Epoch None Iter 0, test loss 13.8314 nats / 19.9544 bits
+Epoch None Iter 0, test loss 14.9961 nats / 21.6348 bits
+Epoch None Iter 0, test loss 13.5539 nats / 19.5541 bits
+Epoch None Iter 0, test loss 14.2827 nats / 20.6055 bits
+Epoch None Iter 0, test loss 16.1533 nats / 23.3042 bits
+Epoch None Iter 0, test loss 13.8781 nats / 20.0218 bits
+Epoch None Iter 0, test loss 12.6950 nats / 18.3151 bits
+Epoch None Iter 0, test loss 13.2259 nats / 19.0809 bits
+Epoch None Iter 0, test loss 13.1327 nats / 18.9465 bits
+Epoch None Iter 0, test loss 13.2696 nats / 19.1439 bits
+Epoch None Iter 0, test loss 14.4278 nats / 20.8149 bits
+Epoch None Iter 0, test loss 13.3961 nats / 19.3265 bits
+Epoch None Iter 0, test loss 15.5596 nats / 22.4478 bits
+Epoch None Iter 0, test loss 13.8684 nats / 20.0079 bits
+Epoch None Iter 0, test loss 14.5069 nats / 20.9291 bits
+Epoch None Iter 0, test loss 13.7201 nats / 19.7940 bits
+Epoch None Iter 0, test loss 14.2000 nats / 20.4862 bits
+Epoch None Iter 0, test loss 14.3429 nats / 20.6924 bits
+Epoch None Iter 0, test loss 13.9746 nats / 20.1611 bits
+Epoch None Iter 0, test loss 15.1844 nats / 21.9065 bits
+Epoch None Iter 0, test loss 13.2910 nats / 19.1748 bits
+Epoch None Iter 0, test loss 15.2421 nats / 21.9897 bits
+Epoch None Iter 0, test loss 14.9510 nats / 21.5698 bits
+Epoch None Iter 0, test loss 13.6079 nats / 19.6321 bits
+Epoch None Iter 0, test loss 14.0953 nats / 20.3353 bits
+Epoch None Iter 0, test loss 14.0174 nats / 20.2228 bits
+Epoch None Iter 0, test loss 14.6806 nats / 21.1796 bits
+Epoch None Iter 0, test loss 13.9163 nats / 20.0770 bits
+Epoch None Iter 0, test loss 14.1561 nats / 20.4230 bits
+Epoch None Iter 0, test loss 15.5792 nats / 22.4760 bits
+Epoch None Iter 0, test loss 13.9083 nats / 20.0654 bits
+Epoch None Iter 0, test loss 14.7684 nats / 21.3062 bits
+Epoch None Iter 0, test loss 13.9763 nats / 20.1636 bits
+Epoch None Iter 0, test loss 13.6303 nats / 19.6644 bits
+Epoch None Iter 0, test loss 13.2939 nats / 19.1790 bits
+Epoch None Iter 0, test loss 12.9488 nats / 18.6812 bits
+Epoch None Iter 0, test loss 13.3298 nats / 19.2308 bits
+Epoch None Iter 0, test loss 13.5628 nats / 19.5670 bits
+Epoch None Iter 0, test loss 13.3553 nats / 19.2676 bits
+Epoch None Iter 0, test loss 14.7073 nats / 21.2181 bits
+Epoch None Iter 0, test loss 13.0050 nats / 18.7622 bits
+Epoch None Iter 0, test loss 14.1114 nats / 20.3585 bits
+Epoch None Iter 0, test loss 12.7493 nats / 18.3934 bits
+Epoch None Iter 0, test loss 13.1903 nats / 19.0296 bits
+Epoch None Iter 0, test loss 13.9722 nats / 20.1577 bits
+Epoch None Iter 0, test loss 12.6188 nats / 18.2051 bits
+Epoch None Iter 0, test loss 12.4968 nats / 18.0291 bits
+Epoch None Iter 0, test loss 14.9120 nats / 21.5135 bits
+Epoch None Iter 0, test loss 14.0416 nats / 20.2578 bits
+Epoch None Iter 0, test loss 14.1746 nats / 20.4496 bits
+Epoch None Iter 0, test loss 13.8666 nats / 20.0053 bits
+Epoch None Iter 0, test loss 13.8334 nats / 19.9574 bits
+Epoch None Iter 0, test loss 14.6638 nats / 21.1554 bits
+Epoch None Iter 0, test loss 14.4837 nats / 20.8956 bits
+Epoch None Iter 0, test loss 12.9320 nats / 18.6569 bits
+Epoch None Iter 0, test loss 14.0367 nats / 20.2506 bits
+Epoch None Iter 0, test loss 14.2599 nats / 20.5727 bits
+Epoch None Iter 0, test loss 12.8728 nats / 18.5716 bits
+Epoch None Iter 0, test loss 13.8858 nats / 20.0330 bits
+Epoch None Iter 0, test loss 14.7627 nats / 21.2981 bits
+Epoch None Iter 0, test loss 13.8797 nats / 20.0242 bits
+Epoch None Iter 0, test loss 13.7585 nats / 19.8493 bits
+Epoch None Iter 0, test loss 14.8954 nats / 21.4896 bits
+Epoch None Iter 0, test loss 12.7212 nats / 18.3528 bits
+Epoch None Iter 0, test loss 14.1507 nats / 20.4151 bits
+Epoch None Iter 0, test loss 13.8450 nats / 19.9741 bits
+Epoch None Iter 0, test loss 12.9482 nats / 18.6802 bits
+Epoch None Iter 0, test loss 14.0137 nats / 20.2174 bits
+Epoch None Iter 0, test loss 13.0083 nats / 18.7670 bits
+Epoch None Iter 0, test loss 14.7227 nats / 21.2404 bits
+Epoch None Iter 0, test loss 14.0697 nats / 20.2982 bits
+Epoch None Iter 0, test loss 15.7985 nats / 22.7925 bits
+Epoch None Iter 0, test loss 14.3564 nats / 20.7120 bits
+Epoch None Iter 0, test loss 15.0339 nats / 21.6894 bits
+Epoch None Iter 0, test loss 13.2424 nats / 19.1048 bits
+Epoch None Iter 0, test loss 13.9846 nats / 20.1755 bits
+Epoch None Iter 0, test loss 12.3146 nats / 17.7662 bits
+Epoch None Iter 0, test loss 13.6424 nats / 19.6819 bits
+Epoch None Iter 0, test loss 13.6156 nats / 19.6432 bits
+Epoch None Iter 0, test loss 12.8530 nats / 18.5429 bits
+Epoch None Iter 0, test loss 14.4802 nats / 20.8905 bits
+Epoch None Iter 0, test loss 15.0168 nats / 21.6647 bits
+Epoch None Iter 0, test loss 13.2601 nats / 19.1303 bits
+Epoch None Iter 0, test loss 14.5753 nats / 21.0277 bits
+Epoch None Iter 0, test loss 13.9078 nats / 20.0647 bits
+Epoch None Iter 0, test loss 12.6453 nats / 18.2434 bits
+Epoch None Iter 0, test loss 13.5522 nats / 19.5517 bits
+Epoch None Iter 0, test loss 13.9403 nats / 20.1116 bits
+Epoch None Iter 0, test loss 14.4346 nats / 20.8248 bits
+Epoch None Iter 0, test loss 13.6619 nats / 19.7099 bits
+Epoch None Iter 0, test loss 12.9510 nats / 18.6844 bits
+Epoch None Iter 0, test loss 14.0480 nats / 20.2670 bits
+Epoch None Iter 0, test loss 13.5586 nats / 19.5609 bits
+Epoch None Iter 0, test loss 12.7250 nats / 18.3583 bits
+Epoch None Iter 0, test loss 14.0460 nats / 20.2640 bits
+Epoch None Iter 0, test loss 14.1808 nats / 20.4586 bits
+Epoch None Iter 0, test loss 12.7785 nats / 18.4355 bits
+Epoch None Iter 0, test loss 13.4016 nats / 19.3345 bits
+Epoch None Iter 0, test loss 13.1694 nats / 18.9994 bits
+Epoch None Iter 0, test loss 14.9075 nats / 21.5069 bits
+Epoch None Iter 0, test loss 13.6433 nats / 19.6831 bits
+Epoch None Iter 0, test loss 13.8096 nats / 19.9230 bits
+Epoch None Iter 0, test loss 14.1482 nats / 20.4116 bits
+Epoch None Iter 0, test loss 13.6899 nats / 19.7504 bits
+Epoch None Iter 0, test loss 13.4809 nats / 19.4488 bits
+Epoch None Iter 0, test loss 12.8190 nats / 18.4939 bits
+Epoch None Iter 0, test loss 13.2172 nats / 19.0683 bits
+Epoch None Iter 0, test loss 13.7044 nats / 19.7713 bits
+Epoch None Iter 0, test loss 14.0133 nats / 20.2169 bits
+Epoch None Iter 0, test loss 13.1941 nats / 19.0350 bits
+Epoch None Iter 0, test loss 13.2461 nats / 19.1101 bits
+Epoch None Iter 0, test loss 13.6779 nats / 19.7331 bits
+Epoch None Iter 0, test loss 13.4869 nats / 19.4575 bits
+Epoch None Iter 0, test loss 13.6381 nats / 19.6757 bits
+Epoch None Iter 0, test loss 14.9541 nats / 21.5743 bits
+Epoch None Iter 0, test loss 13.9972 nats / 20.1937 bits
+Epoch None Iter 0, test loss 15.1969 nats / 21.9245 bits
+Epoch None Iter 0, test loss 13.5465 nats / 19.5434 bits
+Epoch None Iter 0, test loss 14.6822 nats / 21.1819 bits
+Epoch None Iter 0, test loss 12.8533 nats / 18.5434 bits
+Epoch None Iter 0, test loss 14.9679 nats / 21.5942 bits
+Epoch None Iter 0, test loss 12.5485 nats / 18.1036 bits
+Epoch None Iter 0, test loss 13.7251 nats / 19.8011 bits
+Epoch None Iter 0, test loss 13.5150 nats / 19.4980 bits
+Epoch None Iter 0, test loss 13.2286 nats / 19.0848 bits
+Epoch None Iter 0, test loss 16.7300 nats / 24.1363 bits
+Epoch None Iter 0, test loss 14.4532 nats / 20.8516 bits
+Epoch None Iter 0, test loss 14.6680 nats / 21.1614 bits
+Epoch None Iter 0, test loss 14.6244 nats / 21.0986 bits
+Epoch None Iter 0, test loss 32.0269 nats / 46.2051 bits
+Entropy of DMV_ofnan_200000dmv([Column(Record Type, distribution_size=2), Column(Registration Class, distribution_size=69), Column(State, distribution_size=77), Column(County, distribution_size=63), Column(Body Type, distribution_size=57), Column(Fuel Type, distribution_size=8), Column(Reg Valid Date, distribution_size=2828), Column(Color, distribution_size=218), Column(Scofflaw Indicator, distribution_size=2), Column(Suspension Indicator, distribution_size=2), Column(Revocation Indicator, distribution_size=2)]): 19.3972 bits
+Device cuda
+Loading csv... done, took 5.8s
+Parsing... done, took 5.0s
+Loading csv... done, took 0.2s
+Parsing... done, took 0.1s
+MASK_SCHEME 0
+ordering [ 0  1  2  3  4  5  6  7  8  9 10]
+using orig mask
+ tensor([[ True, False, False, False, False, False, False, False, False, False,
+         False],
+        [ True,  True, False, False, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True, False, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True]])
+Number of model parameters: 414464 (~= 1.6MB)
+Transformer(
+  (blocks): Sequential(
+    (0): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (1): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (2): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (3): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+  )
+  (norm): LayerNorm()
+  (embeddings): ModuleList(
+    (0): Embedding(2, 64)
+    (1): Embedding(69, 64)
+    (2): Embedding(77, 64)
+    (3): Embedding(63, 64)
+    (4): Embedding(57, 64)
+    (5): Embedding(8, 64)
+    (6): Embedding(2828, 64)
+    (7): Embedding(218, 64)
+    (8): Embedding(2, 64)
+    (9): Embedding(2, 64)
+    (10): Embedding(2, 64)
+  )
+  (pos_embeddings): Embedding(11, 64)
+  (unk_embeddings): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (6): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (7): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (8): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (9): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (10): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+  )
+)
+Loading ckpt: /home/jixy/naru/models/pretrained/DMV/DMV_ofnan_p100/dmv-ofnan-1.6MB-model20.172-data19.343-transformer-blocks4-model64-ff256-heads4-use_flash_attnFalse-posEmb-gelu-colmask-20epochs-seed0.pt
+Parsing... done, took 3.9s
+Discretizing table... done, took 3.6s
+Discretizing table... done, took 0.1s
+Discretizing table... done, took 3.5s
+Epoch None Iter 0, test loss 14.1291 nats / 20.3840 bits
+Epoch None Iter 0, test loss 13.2099 nats / 19.0579 bits
+Epoch None Iter 0, test loss 14.4623 nats / 20.8647 bits
+Epoch None Iter 0, test loss 13.4259 nats / 19.3695 bits
+Epoch None Iter 0, test loss 13.8720 nats / 20.0131 bits
+Epoch None Iter 0, test loss 13.8495 nats / 19.9806 bits
+Epoch None Iter 0, test loss 17.0088 nats / 24.5385 bits
+Epoch None Iter 0, test loss 12.8471 nats / 18.5345 bits
+Epoch None Iter 0, test loss 14.2445 nats / 20.5505 bits
+Epoch None Iter 0, test loss 13.9828 nats / 20.1729 bits
+Epoch None Iter 0, test loss 13.7154 nats / 19.7871 bits
+Epoch None Iter 0, test loss 13.8904 nats / 20.0396 bits
+Epoch None Iter 0, test loss 16.3104 nats / 23.5309 bits
+Epoch None Iter 0, test loss 14.5848 nats / 21.0415 bits
+Epoch None Iter 0, test loss 12.9051 nats / 18.6181 bits
+Epoch None Iter 0, test loss 14.2989 nats / 20.6290 bits
+Epoch None Iter 0, test loss 15.5551 nats / 22.4413 bits
+Epoch None Iter 0, test loss 14.3947 nats / 20.7672 bits
+Epoch None Iter 0, test loss 15.4204 nats / 22.2469 bits
+Epoch None Iter 0, test loss 13.8145 nats / 19.9302 bits
+Epoch None Iter 0, test loss 12.8830 nats / 18.5863 bits
+Epoch None Iter 0, test loss 13.7339 nats / 19.8138 bits
+Epoch None Iter 0, test loss 12.9024 nats / 18.6142 bits
+Epoch None Iter 0, test loss 15.3340 nats / 22.1222 bits
+Epoch None Iter 0, test loss 15.2771 nats / 22.0402 bits
+Epoch None Iter 0, test loss 15.2958 nats / 22.0672 bits
+Epoch None Iter 0, test loss 14.5100 nats / 20.9335 bits
+Epoch None Iter 0, test loss 14.5886 nats / 21.0469 bits
+Epoch None Iter 0, test loss 13.6832 nats / 19.7407 bits
+Epoch None Iter 0, test loss 13.8669 nats / 20.0057 bits
+Epoch None Iter 0, test loss 14.5529 nats / 20.9954 bits
+Epoch None Iter 0, test loss 13.7199 nats / 19.7937 bits
+Epoch None Iter 0, test loss 15.6451 nats / 22.5711 bits
+Epoch None Iter 0, test loss 13.9429 nats / 20.1154 bits
+Epoch None Iter 0, test loss 15.7585 nats / 22.7346 bits
+Epoch None Iter 0, test loss 13.9848 nats / 20.1758 bits
+Epoch None Iter 0, test loss 13.4542 nats / 19.4102 bits
+Epoch None Iter 0, test loss 14.6816 nats / 21.1811 bits
+Epoch None Iter 0, test loss 13.4581 nats / 19.4159 bits
+Epoch None Iter 0, test loss 14.3634 nats / 20.7220 bits
+Epoch None Iter 0, test loss 13.9946 nats / 20.1899 bits
+Epoch None Iter 0, test loss 14.3891 nats / 20.7591 bits
+Epoch None Iter 0, test loss 12.8242 nats / 18.5014 bits
+Epoch None Iter 0, test loss 14.9918 nats / 21.6286 bits
+Epoch None Iter 0, test loss 13.5299 nats / 19.5195 bits
+Epoch None Iter 0, test loss 12.8547 nats / 18.5454 bits
+Epoch None Iter 0, test loss 14.9273 nats / 21.5356 bits
+Epoch None Iter 0, test loss 14.3729 nats / 20.7358 bits
+Epoch None Iter 0, test loss 13.9197 nats / 20.0819 bits
+Epoch None Iter 0, test loss 14.0535 nats / 20.2750 bits
+Epoch None Iter 0, test loss 13.6018 nats / 19.6232 bits
+Epoch None Iter 0, test loss 13.8994 nats / 20.0527 bits
+Epoch None Iter 0, test loss 14.4839 nats / 20.8959 bits
+Epoch None Iter 0, test loss 12.5816 nats / 18.1513 bits
+Epoch None Iter 0, test loss 13.9470 nats / 20.1213 bits
+Epoch None Iter 0, test loss 13.9859 nats / 20.1774 bits
+Epoch None Iter 0, test loss 15.0884 nats / 21.7680 bits
+Epoch None Iter 0, test loss 15.4903 nats / 22.3478 bits
+Epoch None Iter 0, test loss 13.8338 nats / 19.9579 bits
+Epoch None Iter 0, test loss 14.5982 nats / 21.0607 bits
+Epoch None Iter 0, test loss 13.3154 nats / 19.2100 bits
+Epoch None Iter 0, test loss 13.3208 nats / 19.2178 bits
+Epoch None Iter 0, test loss 13.7994 nats / 19.9084 bits
+Epoch None Iter 0, test loss 14.1483 nats / 20.4117 bits
+Epoch None Iter 0, test loss 14.1821 nats / 20.4605 bits
+Epoch None Iter 0, test loss 14.7501 nats / 21.2800 bits
+Epoch None Iter 0, test loss 13.0430 nats / 18.8171 bits
+Epoch None Iter 0, test loss 14.3403 nats / 20.6887 bits
+Epoch None Iter 0, test loss 13.7521 nats / 19.8400 bits
+Epoch None Iter 0, test loss 14.3232 nats / 20.6641 bits
+Epoch None Iter 0, test loss 13.4821 nats / 19.4506 bits
+Epoch None Iter 0, test loss 14.2891 nats / 20.6148 bits
+Epoch None Iter 0, test loss 13.0107 nats / 18.7705 bits
+Epoch None Iter 0, test loss 13.7526 nats / 19.8408 bits
+Epoch None Iter 0, test loss 13.2731 nats / 19.1491 bits
+Epoch None Iter 0, test loss 13.1337 nats / 18.9479 bits
+Epoch None Iter 0, test loss 13.6142 nats / 19.6411 bits
+Epoch None Iter 0, test loss 15.3929 nats / 22.2073 bits
+Epoch None Iter 0, test loss 12.7136 nats / 18.3419 bits
+Epoch None Iter 0, test loss 16.3744 nats / 23.6232 bits
+Epoch None Iter 0, test loss 13.9401 nats / 20.1114 bits
+Epoch None Iter 0, test loss 13.6080 nats / 19.6322 bits
+Epoch None Iter 0, test loss 15.2447 nats / 21.9935 bits
+Epoch None Iter 0, test loss 13.5588 nats / 19.5612 bits
+Epoch None Iter 0, test loss 14.7366 nats / 21.2604 bits
+Epoch None Iter 0, test loss 12.5278 nats / 18.0738 bits
+Epoch None Iter 0, test loss 14.0172 nats / 20.2225 bits
+Epoch None Iter 0, test loss 14.5832 nats / 21.0391 bits
+Epoch None Iter 0, test loss 14.4488 nats / 20.8453 bits
+Epoch None Iter 0, test loss 13.6679 nats / 19.7186 bits
+Epoch None Iter 0, test loss 13.5578 nats / 19.5598 bits
+Epoch None Iter 0, test loss 13.4755 nats / 19.4410 bits
+Epoch None Iter 0, test loss 14.5120 nats / 20.9363 bits
+Epoch None Iter 0, test loss 14.3377 nats / 20.6849 bits
+Epoch None Iter 0, test loss 12.3155 nats / 17.7676 bits
+Epoch None Iter 0, test loss 14.7876 nats / 21.3339 bits
+Epoch None Iter 0, test loss 13.5171 nats / 19.5010 bits
+Epoch None Iter 0, test loss 14.2353 nats / 20.5373 bits
+Epoch None Iter 0, test loss 13.1092 nats / 18.9126 bits
+Epoch None Iter 0, test loss 15.6062 nats / 22.5149 bits
+Epoch None Iter 0, test loss 16.8247 nats / 24.2729 bits
+Epoch None Iter 0, test loss 13.0302 nats / 18.7986 bits
+Epoch None Iter 0, test loss 14.7647 nats / 21.3010 bits
+Epoch None Iter 0, test loss 13.9908 nats / 20.1844 bits
+Epoch None Iter 0, test loss 13.3912 nats / 19.3195 bits
+Epoch None Iter 0, test loss 13.1303 nats / 18.9430 bits
+Epoch None Iter 0, test loss 15.1547 nats / 21.8636 bits
+Epoch None Iter 0, test loss 14.8086 nats / 21.3642 bits
+Epoch None Iter 0, test loss 14.4204 nats / 20.8042 bits
+Epoch None Iter 0, test loss 13.7461 nats / 19.8315 bits
+Epoch None Iter 0, test loss 14.1172 nats / 20.3669 bits
+Epoch None Iter 0, test loss 13.8960 nats / 20.0476 bits
+Epoch None Iter 0, test loss 13.4847 nats / 19.4543 bits
+Epoch None Iter 0, test loss 14.6372 nats / 21.1171 bits
+Epoch None Iter 0, test loss 14.9871 nats / 21.6219 bits
+Epoch None Iter 0, test loss 14.1817 nats / 20.4598 bits
+Epoch None Iter 0, test loss 13.1062 nats / 18.9083 bits
+Epoch None Iter 0, test loss 12.4550 nats / 17.9688 bits
+Epoch None Iter 0, test loss 13.2060 nats / 19.0522 bits
+Epoch None Iter 0, test loss 14.8146 nats / 21.3729 bits
+Epoch None Iter 0, test loss 13.9703 nats / 20.1549 bits
+Epoch None Iter 0, test loss 13.7469 nats / 19.8325 bits
+Epoch None Iter 0, test loss 14.9597 nats / 21.5823 bits
+Epoch None Iter 0, test loss 14.1524 nats / 20.4175 bits
+Epoch None Iter 0, test loss 14.6169 nats / 21.0878 bits
+Epoch None Iter 0, test loss 12.9323 nats / 18.6573 bits
+Epoch None Iter 0, test loss 13.8922 nats / 20.0422 bits
+Epoch None Iter 0, test loss 14.7949 nats / 21.3445 bits
+Epoch None Iter 0, test loss 15.7460 nats / 22.7167 bits
+Epoch None Iter 0, test loss 14.4047 nats / 20.7816 bits
+Epoch None Iter 0, test loss 12.5692 nats / 18.1335 bits
+Epoch None Iter 0, test loss 12.6494 nats / 18.2493 bits
+Epoch None Iter 0, test loss 12.2364 nats / 17.6534 bits
+Epoch None Iter 0, test loss 12.9950 nats / 18.7478 bits
+Epoch None Iter 0, test loss 13.2471 nats / 19.1116 bits
+Epoch None Iter 0, test loss 15.1731 nats / 21.8901 bits
+Epoch None Iter 0, test loss 14.9600 nats / 21.5827 bits
+Epoch None Iter 0, test loss 14.7833 nats / 21.3278 bits
+Epoch None Iter 0, test loss 12.8150 nats / 18.4881 bits
+Epoch None Iter 0, test loss 12.7657 nats / 18.4170 bits
+Epoch None Iter 0, test loss 14.1286 nats / 20.3833 bits
+Epoch None Iter 0, test loss 14.5857 nats / 21.0428 bits
+Epoch None Iter 0, test loss 13.4486 nats / 19.4022 bits
+Epoch None Iter 0, test loss 13.8440 nats / 19.9726 bits
+Epoch None Iter 0, test loss 14.0636 nats / 20.2896 bits
+Epoch None Iter 0, test loss 13.5241 nats / 19.5112 bits
+Epoch None Iter 0, test loss 13.4177 nats / 19.3577 bits
+Epoch None Iter 0, test loss 14.9082 nats / 21.5080 bits
+Epoch None Iter 0, test loss 14.4601 nats / 20.8615 bits
+Epoch None Iter 0, test loss 12.7077 nats / 18.3333 bits
+Epoch None Iter 0, test loss 13.3308 nats / 19.2323 bits
+Epoch None Iter 0, test loss 15.1118 nats / 21.8017 bits
+Epoch None Iter 0, test loss 15.0373 nats / 21.6942 bits
+Epoch None Iter 0, test loss 16.9906 nats / 24.5123 bits
+Epoch None Iter 0, test loss 14.2437 nats / 20.5493 bits
+Epoch None Iter 0, test loss 15.0582 nats / 21.7244 bits
+Epoch None Iter 0, test loss 14.0831 nats / 20.3176 bits
+Epoch None Iter 0, test loss 13.1219 nats / 18.9310 bits
+Epoch None Iter 0, test loss 13.5409 nats / 19.5354 bits
+Epoch None Iter 0, test loss 13.3561 nats / 19.2687 bits
+Epoch None Iter 0, test loss 13.7934 nats / 19.8996 bits
+Epoch None Iter 0, test loss 13.0404 nats / 18.8133 bits
+Epoch None Iter 0, test loss 13.7247 nats / 19.8006 bits
+Epoch None Iter 0, test loss 13.1388 nats / 18.9553 bits
+Epoch None Iter 0, test loss 14.2991 nats / 20.6292 bits
+Epoch None Iter 0, test loss 13.4588 nats / 19.4169 bits
+Epoch None Iter 0, test loss 13.4031 nats / 19.3366 bits
+Epoch None Iter 0, test loss 16.1163 nats / 23.2510 bits
+Epoch None Iter 0, test loss 14.6630 nats / 21.1542 bits
+Epoch None Iter 0, test loss 13.5397 nats / 19.5336 bits
+Epoch None Iter 0, test loss 13.6369 nats / 19.6739 bits
+Epoch None Iter 0, test loss 12.6628 nats / 18.2686 bits
+Epoch None Iter 0, test loss 13.0243 nats / 18.7901 bits
+Epoch None Iter 0, test loss 12.9059 nats / 18.6193 bits
+Epoch None Iter 0, test loss 15.2415 nats / 21.9889 bits
+Epoch None Iter 0, test loss 12.8095 nats / 18.4802 bits
+Epoch None Iter 0, test loss 13.8882 nats / 20.0364 bits
+Epoch None Iter 0, test loss 14.8785 nats / 21.4651 bits
+Epoch None Iter 0, test loss 13.7076 nats / 19.7759 bits
+Epoch None Iter 0, test loss 13.6093 nats / 19.6341 bits
+Epoch None Iter 0, test loss 14.5706 nats / 21.0209 bits
+Epoch None Iter 0, test loss 15.4046 nats / 22.2242 bits
+Epoch None Iter 0, test loss 13.6356 nats / 19.6721 bits
+Epoch None Iter 0, test loss 13.3506 nats / 19.2609 bits
+Epoch None Iter 0, test loss 14.7072 nats / 21.2181 bits
+Epoch None Iter 0, test loss 14.1510 nats / 20.4156 bits
+Epoch None Iter 0, test loss 13.8758 nats / 20.0185 bits
+Epoch None Iter 0, test loss 13.3712 nats / 19.2905 bits
+Epoch None Iter 0, test loss 14.7706 nats / 21.3095 bits
+Epoch None Iter 0, test loss 13.4855 nats / 19.4555 bits
+Epoch None Iter 0, test loss 14.0410 nats / 20.2569 bits
+Epoch None Iter 0, test loss 14.1727 nats / 20.4468 bits
+Epoch None Iter 0, test loss 12.8083 nats / 18.4785 bits
+Epoch None Iter 0, test loss 15.4394 nats / 22.2743 bits
+Epoch None Iter 0, test loss 13.5622 nats / 19.5661 bits
+Epoch None Iter 0, test loss 13.7396 nats / 19.8220 bits
+Epoch None Iter 0, test loss 14.0178 nats / 20.2234 bits
+Epoch None Iter 0, test loss 14.0580 nats / 20.2814 bits
+Epoch None Iter 0, test loss 12.8428 nats / 18.5282 bits
+Epoch None Iter 0, test loss 12.7644 nats / 18.4152 bits
+Epoch None Iter 0, test loss 13.0526 nats / 18.8310 bits
+Epoch None Iter 0, test loss 13.5134 nats / 19.4957 bits
+Epoch None Iter 0, test loss 14.9651 nats / 21.5900 bits
+Epoch None Iter 0, test loss 13.8568 nats / 19.9911 bits
+Epoch None Iter 0, test loss 12.5700 nats / 18.1346 bits
+Epoch None Iter 0, test loss 13.4122 nats / 19.3498 bits
+Epoch None Iter 0, test loss 13.3696 nats / 19.2883 bits
+Epoch None Iter 0, test loss 13.8020 nats / 19.9120 bits
+Epoch None Iter 0, test loss 14.0661 nats / 20.2931 bits
+Epoch None Iter 0, test loss 13.4060 nats / 19.3407 bits
+Epoch None Iter 0, test loss 13.8999 nats / 20.0534 bits
+Epoch None Iter 0, test loss 13.6373 nats / 19.6745 bits
+Epoch None Iter 0, test loss 14.6303 nats / 21.1071 bits
+Epoch None Iter 0, test loss 14.7901 nats / 21.3376 bits
+Epoch None Iter 0, test loss 14.6079 nats / 21.0748 bits
+Epoch None Iter 0, test loss 12.9113 nats / 18.6270 bits
+Epoch None Iter 0, test loss 13.6759 nats / 19.7302 bits
+Epoch None Iter 0, test loss 14.7679 nats / 21.3056 bits
+Epoch None Iter 0, test loss 14.5936 nats / 21.0541 bits
+Epoch None Iter 0, test loss 12.8378 nats / 18.5210 bits
+Epoch None Iter 0, test loss 13.6899 nats / 19.7504 bits
+Epoch None Iter 0, test loss 13.6069 nats / 19.6305 bits
+Epoch None Iter 0, test loss 14.9972 nats / 21.6364 bits
+Epoch None Iter 0, test loss 12.9411 nats / 18.6700 bits
+Epoch None Iter 0, test loss 14.3216 nats / 20.6616 bits
+Epoch None Iter 0, test loss 14.6393 nats / 21.1200 bits
+Epoch None Iter 0, test loss 14.6496 nats / 21.1349 bits
+Epoch None Iter 0, test loss 12.5867 nats / 18.1587 bits
+Epoch None Iter 0, test loss 12.8536 nats / 18.5438 bits
+Epoch None Iter 0, test loss 13.8226 nats / 19.9418 bits
+Epoch None Iter 0, test loss 13.1471 nats / 18.9673 bits
+Epoch None Iter 0, test loss 13.9580 nats / 20.1372 bits
+Epoch None Iter 0, test loss 13.2602 nats / 19.1305 bits
+Epoch None Iter 0, test loss 13.5768 nats / 19.5872 bits
+Epoch None Iter 0, test loss 13.5993 nats / 19.6197 bits
+Epoch None Iter 0, test loss 12.6078 nats / 18.1893 bits
+Epoch None Iter 0, test loss 14.4875 nats / 20.9010 bits
+Epoch None Iter 0, test loss 14.0375 nats / 20.2518 bits
+Epoch None Iter 0, test loss 14.5481 nats / 20.9885 bits
+Epoch None Iter 0, test loss 13.7026 nats / 19.7687 bits
+Epoch None Iter 0, test loss 14.5697 nats / 21.0197 bits
+Epoch None Iter 0, test loss 14.5922 nats / 21.0521 bits
+Epoch None Iter 0, test loss 13.3055 nats / 19.1958 bits
+Epoch None Iter 0, test loss 14.5599 nats / 21.0055 bits
+Epoch None Iter 0, test loss 14.9712 nats / 21.5989 bits
+Epoch None Iter 0, test loss 13.7070 nats / 19.7750 bits
+Epoch None Iter 0, test loss 13.3930 nats / 19.3220 bits
+Epoch None Iter 0, test loss 12.9960 nats / 18.7493 bits
+Epoch None Iter 0, test loss 13.7630 nats / 19.8558 bits
+Epoch None Iter 0, test loss 13.9617 nats / 20.1424 bits
+Epoch None Iter 0, test loss 14.7160 nats / 21.2307 bits
+Epoch None Iter 0, test loss 12.6983 nats / 18.3198 bits
+Epoch None Iter 0, test loss 13.7632 nats / 19.8562 bits
+Epoch None Iter 0, test loss 13.3931 nats / 19.3221 bits
+Epoch None Iter 0, test loss 14.2323 nats / 20.5329 bits
+Epoch None Iter 0, test loss 14.0663 nats / 20.2933 bits
+Epoch None Iter 0, test loss 12.1115 nats / 17.4732 bits
+Epoch None Iter 0, test loss 14.8102 nats / 21.3666 bits
+Epoch None Iter 0, test loss 13.9757 nats / 20.1627 bits
+Epoch None Iter 0, test loss 12.9573 nats / 18.6935 bits
+Epoch None Iter 0, test loss 13.6352 nats / 19.6714 bits
+Epoch None Iter 0, test loss 13.7244 nats / 19.8001 bits
+Epoch None Iter 0, test loss 14.4330 nats / 20.8224 bits
+Epoch None Iter 0, test loss 15.0488 nats / 21.7108 bits
+Epoch None Iter 0, test loss 13.0640 nats / 18.8473 bits
+Epoch None Iter 0, test loss 13.8728 nats / 20.0142 bits
+Epoch None Iter 0, test loss 15.0481 nats / 21.7098 bits
+Epoch None Iter 0, test loss 14.6280 nats / 21.1038 bits
+Epoch None Iter 0, test loss 15.5653 nats / 22.4560 bits
+Epoch None Iter 0, test loss 13.7023 nats / 19.7682 bits
+Epoch None Iter 0, test loss 12.3828 nats / 17.8646 bits
+Epoch None Iter 0, test loss 14.0846 nats / 20.3198 bits
+Epoch None Iter 0, test loss 14.3218 nats / 20.6620 bits
+Epoch None Iter 0, test loss 13.2303 nats / 19.0873 bits
+Epoch None Iter 0, test loss 13.4392 nats / 19.3886 bits
+Epoch None Iter 0, test loss 14.1111 nats / 20.3581 bits
+Epoch None Iter 0, test loss 13.9001 nats / 20.0537 bits
+Epoch None Iter 0, test loss 13.2460 nats / 19.1100 bits
+Epoch None Iter 0, test loss 14.3045 nats / 20.6370 bits
+Epoch None Iter 0, test loss 13.2978 nats / 19.1847 bits
+Epoch None Iter 0, test loss 13.4258 nats / 19.3694 bits
+Epoch None Iter 0, test loss 14.4247 nats / 20.8104 bits
+Epoch None Iter 0, test loss 14.9227 nats / 21.5289 bits
+Epoch None Iter 0, test loss 14.0704 nats / 20.2993 bits
+Epoch None Iter 0, test loss 13.2519 nats / 19.1184 bits
+Epoch None Iter 0, test loss 13.0971 nats / 18.8951 bits
+Epoch None Iter 0, test loss 14.9577 nats / 21.5794 bits
+Epoch None Iter 0, test loss 14.3703 nats / 20.7319 bits
+Epoch None Iter 0, test loss 13.0139 nats / 18.7751 bits
+Epoch None Iter 0, test loss 14.2443 nats / 20.5502 bits
+Epoch None Iter 0, test loss 13.9256 nats / 20.0904 bits
+Epoch None Iter 0, test loss 13.2467 nats / 19.1109 bits
+Epoch None Iter 0, test loss 13.8186 nats / 19.9360 bits
+Epoch None Iter 0, test loss 14.0353 nats / 20.2486 bits
+Epoch None Iter 0, test loss 13.3524 nats / 19.2634 bits
+Epoch None Iter 0, test loss 12.8438 nats / 18.5297 bits
+Epoch None Iter 0, test loss 15.0175 nats / 21.6657 bits
+Epoch None Iter 0, test loss 13.2008 nats / 19.0448 bits
+Epoch None Iter 0, test loss 14.7616 nats / 21.2965 bits
+Epoch None Iter 0, test loss 14.2594 nats / 20.5720 bits
+Epoch None Iter 0, test loss 13.5401 nats / 19.5343 bits
+Epoch None Iter 0, test loss 13.5781 nats / 19.5890 bits
+Epoch None Iter 0, test loss 12.9534 nats / 18.6878 bits
+Epoch None Iter 0, test loss 13.3522 nats / 19.2631 bits
+Epoch None Iter 0, test loss 13.2857 nats / 19.1672 bits
+Epoch None Iter 0, test loss 13.7338 nats / 19.8136 bits
+Epoch None Iter 0, test loss 13.8415 nats / 19.9691 bits
+Epoch None Iter 0, test loss 14.2332 nats / 20.5341 bits
+Epoch None Iter 0, test loss 13.2712 nats / 19.1463 bits
+Epoch None Iter 0, test loss 13.8221 nats / 19.9410 bits
+Epoch None Iter 0, test loss 13.4763 nats / 19.4421 bits
+Epoch None Iter 0, test loss 13.9628 nats / 20.1440 bits
+Epoch None Iter 0, test loss 14.0583 nats / 20.2818 bits
+Epoch None Iter 0, test loss 13.8263 nats / 19.9472 bits
+Epoch None Iter 0, test loss 14.7524 nats / 21.2832 bits
+Epoch None Iter 0, test loss 14.6060 nats / 21.0720 bits
+Epoch None Iter 0, test loss 16.1912 nats / 23.3589 bits
+Epoch None Iter 0, test loss 14.1368 nats / 20.3952 bits
+Epoch None Iter 0, test loss 14.3141 nats / 20.6508 bits
+Epoch None Iter 0, test loss 14.1074 nats / 20.3526 bits
+Epoch None Iter 0, test loss 15.4000 nats / 22.2174 bits
+Epoch None Iter 0, test loss 12.6668 nats / 18.2743 bits
+Epoch None Iter 0, test loss 13.8124 nats / 19.9271 bits
+Epoch None Iter 0, test loss 13.3793 nats / 19.3023 bits
+Epoch None Iter 0, test loss 13.8617 nats / 19.9982 bits
+Epoch None Iter 0, test loss 14.1516 nats / 20.4164 bits
+Epoch None Iter 0, test loss 14.6442 nats / 21.1271 bits
+Epoch None Iter 0, test loss 13.3770 nats / 19.2989 bits
+Epoch None Iter 0, test loss 13.3018 nats / 19.1904 bits
+Epoch None Iter 0, test loss 13.5833 nats / 19.5966 bits
+Epoch None Iter 0, test loss 13.1834 nats / 19.0196 bits
+Epoch None Iter 0, test loss 13.9943 nats / 20.1894 bits
+Epoch None Iter 0, test loss 13.6896 nats / 19.7500 bits
+Epoch None Iter 0, test loss 15.1594 nats / 21.8704 bits
+Epoch None Iter 0, test loss 13.9843 nats / 20.1750 bits
+Epoch None Iter 0, test loss 13.4114 nats / 19.3486 bits
+Epoch None Iter 0, test loss 13.2311 nats / 19.0885 bits
+Epoch None Iter 0, test loss 14.3478 nats / 20.6994 bits
+Epoch None Iter 0, test loss 14.4260 nats / 20.8123 bits
+Epoch None Iter 0, test loss 13.5183 nats / 19.5028 bits
+Epoch None Iter 0, test loss 14.6755 nats / 21.1723 bits
+Epoch None Iter 0, test loss 15.4580 nats / 22.3012 bits
+Epoch None Iter 0, test loss 14.9214 nats / 21.5270 bits
+Epoch None Iter 0, test loss 13.6104 nats / 19.6356 bits
+Epoch None Iter 0, test loss 14.6455 nats / 21.1290 bits
+Epoch None Iter 0, test loss 13.3048 nats / 19.1948 bits
+Epoch None Iter 0, test loss 14.2510 nats / 20.5599 bits
+Epoch None Iter 0, test loss 13.7526 nats / 19.8408 bits
+Epoch None Iter 0, test loss 12.6595 nats / 18.2638 bits
+Epoch None Iter 0, test loss 14.8987 nats / 21.4942 bits
+Epoch None Iter 0, test loss 13.2085 nats / 19.0559 bits
+Epoch None Iter 0, test loss 13.3728 nats / 19.2929 bits
+Epoch None Iter 0, test loss 13.0602 nats / 18.8419 bits
+Epoch None Iter 0, test loss 13.8639 nats / 20.0013 bits
+Epoch None Iter 0, test loss 13.5262 nats / 19.5141 bits
+Epoch None Iter 0, test loss 14.0578 nats / 20.2811 bits
+Epoch None Iter 0, test loss 14.4726 nats / 20.8796 bits
+Epoch None Iter 0, test loss 12.9792 nats / 18.7250 bits
+Epoch None Iter 0, test loss 12.2996 nats / 17.7446 bits
+Epoch None Iter 0, test loss 13.4431 nats / 19.3943 bits
+Epoch None Iter 0, test loss 14.4446 nats / 20.8392 bits
+Epoch None Iter 0, test loss 14.4389 nats / 20.8309 bits
+Epoch None Iter 0, test loss 15.3864 nats / 22.1979 bits
+Epoch None Iter 0, test loss 13.0841 nats / 18.8764 bits
+Epoch None Iter 0, test loss 12.7111 nats / 18.3383 bits
+Epoch None Iter 0, test loss 13.7539 nats / 19.8426 bits
+Epoch None Iter 0, test loss 14.5975 nats / 21.0597 bits
+Epoch None Iter 0, test loss 13.6146 nats / 19.6417 bits
+Epoch None Iter 0, test loss 12.2862 nats / 17.7252 bits
+Epoch None Iter 0, test loss 12.8520 nats / 18.5415 bits
+Epoch None Iter 0, test loss 15.2019 nats / 21.9317 bits
+Epoch None Iter 0, test loss 13.4387 nats / 19.3880 bits
+Epoch None Iter 0, test loss 13.9272 nats / 20.0927 bits
+Epoch None Iter 0, test loss 15.6590 nats / 22.5912 bits
+Epoch None Iter 0, test loss 13.3567 nats / 19.2696 bits
+Epoch None Iter 0, test loss 13.9561 nats / 20.1345 bits
+Epoch None Iter 0, test loss 13.0854 nats / 18.8783 bits
+Epoch None Iter 0, test loss 14.4872 nats / 20.9006 bits
+Epoch None Iter 0, test loss 13.3555 nats / 19.2679 bits
+Epoch None Iter 0, test loss 12.8488 nats / 18.5370 bits
+Epoch None Iter 0, test loss 16.1070 nats / 23.2376 bits
+Epoch None Iter 0, test loss 13.2132 nats / 19.0627 bits
+Epoch None Iter 0, test loss 14.1156 nats / 20.3646 bits
+Epoch None Iter 0, test loss 13.1606 nats / 18.9867 bits
+Epoch None Iter 0, test loss 14.1571 nats / 20.4243 bits
+Epoch None Iter 0, test loss 14.1453 nats / 20.4073 bits
+Epoch None Iter 0, test loss 13.4153 nats / 19.3542 bits
+Epoch None Iter 0, test loss 14.9935 nats / 21.6310 bits
+Epoch None Iter 0, test loss 14.4651 nats / 20.8687 bits
+Epoch None Iter 0, test loss 12.7278 nats / 18.3624 bits
+Epoch None Iter 0, test loss 13.2583 nats / 19.1277 bits
+Epoch None Iter 0, test loss 13.0676 nats / 18.8525 bits
+Epoch None Iter 0, test loss 13.7887 nats / 19.8928 bits
+Epoch None Iter 0, test loss 13.5007 nats / 19.4773 bits
+Epoch None Iter 0, test loss 12.9359 nats / 18.6626 bits
+Epoch None Iter 0, test loss 15.4390 nats / 22.2738 bits
+Epoch None Iter 0, test loss 14.7580 nats / 21.2912 bits
+Epoch None Iter 0, test loss 15.1596 nats / 21.8707 bits
+Epoch None Iter 0, test loss 13.1151 nats / 18.9210 bits
+Epoch None Iter 0, test loss 13.4341 nats / 19.3814 bits
+Epoch None Iter 0, test loss 30.6392 nats / 44.2030 bits
+Entropy of DMV_ofnan_200000dmv([Column(Record Type, distribution_size=2), Column(Registration Class, distribution_size=69), Column(State, distribution_size=77), Column(County, distribution_size=63), Column(Body Type, distribution_size=57), Column(Fuel Type, distribution_size=8), Column(Reg Valid Date, distribution_size=2828), Column(Color, distribution_size=218), Column(Scofflaw Indicator, distribution_size=2), Column(Suspension Indicator, distribution_size=2), Column(Revocation Indicator, distribution_size=2)]): 19.3972 bits
+Parsing... done, took 0.0s
+Discretizing table... done, took 0.0s
+Entropy of DMV([Column(Record Type, distribution_size=2), Column(Registration Class, distribution_size=30), Column(State, distribution_size=19), Column(County, distribution_size=63), Column(Body Type, distribution_size=32), Column(Fuel Type, distribution_size=6), Column(Reg Valid Date, distribution_size=803), Column(Color, distribution_size=45), Column(Scofflaw Indicator, distribution_size=2), Column(Suspension Indicator, distribution_size=2), Column(Revocation Indicator, distribution_size=2)]): 12.2638 bits
+Parsing... done, took 0.0s
+Discretizing table... done, took 0.0s
+Discretizing table... done, took 0.1s
+Parsing... done, took 0.0s
+Discretizing table... done, took 0.0s
+Entropy of DMV([Column(Record Type, distribution_size=2), Column(Registration Class, distribution_size=32), Column(State, distribution_size=19), Column(County, distribution_size=63), Column(Body Type, distribution_size=33), Column(Fuel Type, distribution_size=7), Column(Reg Valid Date, distribution_size=802), Column(Color, distribution_size=48), Column(Scofflaw Indicator, distribution_size=2), Column(Suspension Indicator, distribution_size=2), Column(Revocation Indicator, distribution_size=2)]): 12.2644 bits
+Number of model parameters: 414464 (~= 1.6MB)
+Transformer(
+  (blocks): Sequential(
+    (0): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (1): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (2): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (3): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+  )
+  (norm): LayerNorm()
+  (embeddings): ModuleList(
+    (0): Embedding(2, 64)
+    (1): Embedding(69, 64)
+    (2): Embedding(77, 64)
+    (3): Embedding(63, 64)
+    (4): Embedding(57, 64)
+    (5): Embedding(8, 64)
+    (6): Embedding(2828, 64)
+    (7): Embedding(218, 64)
+    (8): Embedding(2, 64)
+    (9): Embedding(2, 64)
+    (10): Embedding(2, 64)
+  )
+  (pos_embeddings): Embedding(11, 64)
+  (unk_embeddings): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (6): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (7): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (8): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (9): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (10): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+  )
+)
+Epoch 1 Iter 0, train loss 21.755, distilll loss 12.122, model loss 24.164) 
+Epoch 1 Iter 200, train loss 13.822, distilll loss 10.617, model loss 14.623) 
+Device cuda
+Loading csv... done, took 6.0s
+Parsing... done, took 5.0s
+Loading csv... done, took 0.0s
+Parsing... done, took 0.0s
+MASK_SCHEME 0
+ordering [ 0  1  2  3  4  5  6  7  8  9 10]
+using orig mask
+ tensor([[ True, False, False, False, False, False, False, False, False, False,
+         False],
+        [ True,  True, False, False, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True, False, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True]])
+Number of model parameters: 414464 (~= 1.6MB)
+Transformer(
+  (blocks): Sequential(
+    (0): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (1): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (2): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (3): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+  )
+  (norm): LayerNorm()
+  (embeddings): ModuleList(
+    (0): Embedding(2, 64)
+    (1): Embedding(69, 64)
+    (2): Embedding(77, 64)
+    (3): Embedding(63, 64)
+    (4): Embedding(57, 64)
+    (5): Embedding(8, 64)
+    (6): Embedding(2828, 64)
+    (7): Embedding(218, 64)
+    (8): Embedding(2, 64)
+    (9): Embedding(2, 64)
+    (10): Embedding(2, 64)
+  )
+  (pos_embeddings): Embedding(11, 64)
+  (unk_embeddings): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (6): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (7): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (8): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (9): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (10): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+  )
+)
+Loading ckpt: /home/jixy/naru/models/pretrained/DMV/DMV_ofnan_p100/dmv-ofnan-1.6MB-model20.172-data19.343-transformer-blocks4-model64-ff256-heads4-use_flash_attnFalse-posEmb-gelu-colmask-20epochs-seed0.pt
+Parsing... done, took 3.9s
+Discretizing table... done, took 3.6s
+Discretizing table... done, took 0.0s
+Discretizing table... done, took 3.7s
+Epoch None Iter 0, test loss 14.1358 nats / 20.3936 bits
+Epoch None Iter 0, test loss 13.6796 nats / 19.7355 bits
+Epoch None Iter 0, test loss 13.1555 nats / 18.9794 bits
+Epoch None Iter 0, test loss 13.0505 nats / 18.8280 bits
+Epoch None Iter 0, test loss 15.0989 nats / 21.7831 bits
+Epoch None Iter 0, test loss 13.0318 nats / 18.8009 bits
+Epoch None Iter 0, test loss 13.1807 nats / 19.0157 bits
+Epoch None Iter 0, test loss 13.7887 nats / 19.8929 bits
+Epoch None Iter 0, test loss 13.1617 nats / 18.9883 bits
+Epoch None Iter 0, test loss 13.7552 nats / 19.8445 bits
+Epoch None Iter 0, test loss 15.3935 nats / 22.2082 bits
+Epoch None Iter 0, test loss 13.2001 nats / 19.0438 bits
+Epoch None Iter 0, test loss 14.1513 nats / 20.4160 bits
+Epoch None Iter 0, test loss 13.3606 nats / 19.2752 bits
+Epoch None Iter 0, test loss 14.1682 nats / 20.4404 bits
+Epoch None Iter 0, test loss 13.5064 nats / 19.4856 bits
+Epoch None Iter 0, test loss 13.7882 nats / 19.8921 bits
+Epoch None Iter 0, test loss 13.6941 nats / 19.7565 bits
+Epoch None Iter 0, test loss 13.8878 nats / 20.0358 bits
+Epoch None Iter 0, test loss 14.1442 nats / 20.4058 bits
+Epoch None Iter 0, test loss 13.3040 nats / 19.1936 bits
+Epoch None Iter 0, test loss 16.5835 nats / 23.9249 bits
+Epoch None Iter 0, test loss 13.8143 nats / 19.9299 bits
+Epoch None Iter 0, test loss 14.4291 nats / 20.8167 bits
+Epoch None Iter 0, test loss 13.8797 nats / 20.0242 bits
+Epoch None Iter 0, test loss 12.9584 nats / 18.6950 bits
+Epoch None Iter 0, test loss 13.6127 nats / 19.6390 bits
+Epoch None Iter 0, test loss 14.2717 nats / 20.5898 bits
+Epoch None Iter 0, test loss 13.7227 nats / 19.7977 bits
+Epoch None Iter 0, test loss 14.1457 nats / 20.4079 bits
+Epoch None Iter 0, test loss 14.0045 nats / 20.2042 bits
+Epoch None Iter 0, test loss 13.5025 nats / 19.4800 bits
+Epoch None Iter 0, test loss 13.4816 nats / 19.4498 bits
+Epoch None Iter 0, test loss 13.8581 nats / 19.9930 bits
+Epoch None Iter 0, test loss 12.9870 nats / 18.7363 bits
+Epoch None Iter 0, test loss 12.7905 nats / 18.4528 bits
+Epoch None Iter 0, test loss 14.3304 nats / 20.6743 bits
+Epoch None Iter 0, test loss 13.7077 nats / 19.7761 bits
+Epoch None Iter 0, test loss 13.6290 nats / 19.6625 bits
+Epoch None Iter 0, test loss 12.2771 nats / 17.7121 bits
+Epoch None Iter 0, test loss 12.5772 nats / 18.1450 bits
+Epoch None Iter 0, test loss 12.4315 nats / 17.9348 bits
+Epoch None Iter 0, test loss 15.0371 nats / 21.6940 bits
+Epoch None Iter 0, test loss 13.2763 nats / 19.1536 bits
+Epoch None Iter 0, test loss 14.0657 nats / 20.2926 bits
+Epoch None Iter 0, test loss 13.9269 nats / 20.0923 bits
+Epoch None Iter 0, test loss 14.3109 nats / 20.6462 bits
+Epoch None Iter 0, test loss 14.0236 nats / 20.2318 bits
+Epoch None Iter 0, test loss 14.8680 nats / 21.4500 bits
+Epoch None Iter 0, test loss 13.6780 nats / 19.7331 bits
+Epoch None Iter 0, test loss 14.0921 nats / 20.3306 bits
+Epoch None Iter 0, test loss 13.0715 nats / 18.8582 bits
+Epoch None Iter 0, test loss 14.2186 nats / 20.5131 bits
+Epoch None Iter 0, test loss 13.5723 nats / 19.5807 bits
+Epoch None Iter 0, test loss 14.0615 nats / 20.2865 bits
+Epoch None Iter 0, test loss 14.3361 nats / 20.6826 bits
+Epoch None Iter 0, test loss 14.3463 nats / 20.6973 bits
+Epoch None Iter 0, test loss 13.5707 nats / 19.5784 bits
+Epoch None Iter 0, test loss 14.8305 nats / 21.3958 bits
+Epoch None Iter 0, test loss 13.6414 nats / 19.6804 bits
+Epoch None Iter 0, test loss 14.4942 nats / 20.9107 bits
+Epoch None Iter 0, test loss 15.2049 nats / 21.9361 bits
+Epoch None Iter 0, test loss 14.7724 nats / 21.3121 bits
+Epoch None Iter 0, test loss 14.1259 nats / 20.3794 bits
+Epoch None Iter 0, test loss 13.0478 nats / 18.8241 bits
+Epoch None Iter 0, test loss 15.1752 nats / 21.8932 bits
+Epoch None Iter 0, test loss 15.2421 nats / 21.9896 bits
+Epoch None Iter 0, test loss 13.3435 nats / 19.2506 bits
+Epoch None Iter 0, test loss 15.1711 nats / 21.8872 bits
+Epoch None Iter 0, test loss 14.9513 nats / 21.5701 bits
+Epoch None Iter 0, test loss 12.8008 nats / 18.4677 bits
+Epoch None Iter 0, test loss 13.5931 nats / 19.6107 bits
+Epoch None Iter 0, test loss 13.4520 nats / 19.4071 bits
+Epoch None Iter 0, test loss 14.6040 nats / 21.0691 bits
+Epoch None Iter 0, test loss 15.3831 nats / 22.1931 bits
+Epoch None Iter 0, test loss 13.6814 nats / 19.7381 bits
+Epoch None Iter 0, test loss 13.7931 nats / 19.8993 bits
+Epoch None Iter 0, test loss 12.8498 nats / 18.5384 bits
+Epoch None Iter 0, test loss 13.3903 nats / 19.3182 bits
+Epoch None Iter 0, test loss 13.4533 nats / 19.4090 bits
+Epoch None Iter 0, test loss 13.6948 nats / 19.7575 bits
+Epoch None Iter 0, test loss 13.9037 nats / 20.0588 bits
+Epoch None Iter 0, test loss 13.5864 nats / 19.6010 bits
+Epoch None Iter 0, test loss 13.8577 nats / 19.9924 bits
+Epoch None Iter 0, test loss 15.2019 nats / 21.9317 bits
+Epoch None Iter 0, test loss 14.2655 nats / 20.5807 bits
+Epoch None Iter 0, test loss 12.4579 nats / 17.9729 bits
+Epoch None Iter 0, test loss 13.5370 nats / 19.5298 bits
+Epoch None Iter 0, test loss 13.7121 nats / 19.7823 bits
+Epoch None Iter 0, test loss 14.6861 nats / 21.1876 bits
+Epoch None Iter 0, test loss 12.9883 nats / 18.7382 bits
+Epoch None Iter 0, test loss 14.6357 nats / 21.1149 bits
+Epoch None Iter 0, test loss 13.0980 nats / 18.8964 bits
+Epoch None Iter 0, test loss 14.5272 nats / 20.9583 bits
+Epoch None Iter 0, test loss 13.9387 nats / 20.1093 bits
+Epoch None Iter 0, test loss 13.9156 nats / 20.0759 bits
+Epoch None Iter 0, test loss 13.4442 nats / 19.3959 bits
+Epoch None Iter 0, test loss 14.3546 nats / 20.7092 bits
+Epoch None Iter 0, test loss 13.3592 nats / 19.2732 bits
+Epoch None Iter 0, test loss 13.6314 nats / 19.6659 bits
+Epoch None Iter 0, test loss 14.5787 nats / 21.0326 bits
+Epoch None Iter 0, test loss 14.5084 nats / 20.9312 bits
+Epoch None Iter 0, test loss 14.3920 nats / 20.7633 bits
+Epoch None Iter 0, test loss 13.9817 nats / 20.1714 bits
+Epoch None Iter 0, test loss 13.8647 nats / 20.0025 bits
+Epoch None Iter 0, test loss 13.5617 nats / 19.5654 bits
+Epoch None Iter 0, test loss 13.4156 nats / 19.3547 bits
+Epoch None Iter 0, test loss 13.9264 nats / 20.0915 bits
+Epoch None Iter 0, test loss 14.6666 nats / 21.1595 bits
+Epoch None Iter 0, test loss 14.1286 nats / 20.3833 bits
+Epoch None Iter 0, test loss 14.3821 nats / 20.7490 bits
+Epoch None Iter 0, test loss 12.9952 nats / 18.7481 bits
+Epoch None Iter 0, test loss 13.3635 nats / 19.2795 bits
+Epoch None Iter 0, test loss 13.9341 nats / 20.1027 bits
+Epoch None Iter 0, test loss 14.2879 nats / 20.6131 bits
+Epoch None Iter 0, test loss 14.7572 nats / 21.2901 bits
+Epoch None Iter 0, test loss 13.9936 nats / 20.1885 bits
+Epoch None Iter 0, test loss 14.7259 nats / 21.2449 bits
+Epoch None Iter 0, test loss 15.3878 nats / 22.1999 bits
+Epoch None Iter 0, test loss 14.5191 nats / 20.9466 bits
+Epoch None Iter 0, test loss 14.7134 nats / 21.2269 bits
+Epoch None Iter 0, test loss 14.0138 nats / 20.2176 bits
+Epoch None Iter 0, test loss 15.2122 nats / 21.9466 bits
+Epoch None Iter 0, test loss 14.5093 nats / 20.9325 bits
+Epoch None Iter 0, test loss 13.9109 nats / 20.0692 bits
+Epoch None Iter 0, test loss 15.0695 nats / 21.7406 bits
+Epoch None Iter 0, test loss 14.0939 nats / 20.3331 bits
+Epoch None Iter 0, test loss 14.4317 nats / 20.8205 bits
+Epoch None Iter 0, test loss 13.6190 nats / 19.6480 bits
+Epoch None Iter 0, test loss 14.3272 nats / 20.6698 bits
+Epoch None Iter 0, test loss 13.6264 nats / 19.6588 bits
+Epoch None Iter 0, test loss 13.6997 nats / 19.7645 bits
+Epoch None Iter 0, test loss 13.7509 nats / 19.8383 bits
+Epoch None Iter 0, test loss 12.9647 nats / 18.7041 bits
+Epoch None Iter 0, test loss 12.2423 nats / 17.6619 bits
+Epoch None Iter 0, test loss 13.6932 nats / 19.7552 bits
+Epoch None Iter 0, test loss 13.2289 nats / 19.0853 bits
+Epoch None Iter 0, test loss 13.2287 nats / 19.0849 bits
+Epoch None Iter 0, test loss 13.2759 nats / 19.1531 bits
+Epoch None Iter 0, test loss 14.7277 nats / 21.2476 bits
+Epoch None Iter 0, test loss 15.2298 nats / 21.9720 bits
+Epoch None Iter 0, test loss 12.6848 nats / 18.3003 bits
+Epoch None Iter 0, test loss 14.1462 nats / 20.4087 bits
+Epoch None Iter 0, test loss 13.2463 nats / 19.1104 bits
+Epoch None Iter 0, test loss 14.3032 nats / 20.6351 bits
+Epoch None Iter 0, test loss 14.3281 nats / 20.6711 bits
+Epoch None Iter 0, test loss 13.6998 nats / 19.7646 bits
+Epoch None Iter 0, test loss 13.8883 nats / 20.0366 bits
+Epoch None Iter 0, test loss 14.1970 nats / 20.4819 bits
+Epoch None Iter 0, test loss 14.7963 nats / 21.3465 bits
+Epoch None Iter 0, test loss 14.6164 nats / 21.0870 bits
+Epoch None Iter 0, test loss 14.3993 nats / 20.7738 bits
+Epoch None Iter 0, test loss 13.7282 nats / 19.8056 bits
+Epoch None Iter 0, test loss 13.5475 nats / 19.5450 bits
+Epoch None Iter 0, test loss 12.9215 nats / 18.6418 bits
+Epoch None Iter 0, test loss 15.8999 nats / 22.9388 bits
+Epoch None Iter 0, test loss 13.7819 nats / 19.8830 bits
+Epoch None Iter 0, test loss 15.5622 nats / 22.4515 bits
+Epoch None Iter 0, test loss 13.5299 nats / 19.5196 bits
+Epoch None Iter 0, test loss 12.7568 nats / 18.4042 bits
+Epoch None Iter 0, test loss 13.4143 nats / 19.3528 bits
+Epoch None Iter 0, test loss 14.5686 nats / 21.0180 bits
+Epoch None Iter 0, test loss 14.3289 nats / 20.6722 bits
+Epoch None Iter 0, test loss 13.6102 nats / 19.6354 bits
+Epoch None Iter 0, test loss 13.4666 nats / 19.4282 bits
+Epoch None Iter 0, test loss 14.5024 nats / 20.9225 bits
+Epoch None Iter 0, test loss 14.2236 nats / 20.5203 bits
+Epoch None Iter 0, test loss 13.5311 nats / 19.5212 bits
+Epoch None Iter 0, test loss 12.8314 nats / 18.5117 bits
+Epoch None Iter 0, test loss 13.8353 nats / 19.9602 bits
+Epoch None Iter 0, test loss 16.6266 nats / 23.9872 bits
+Epoch None Iter 0, test loss 14.7928 nats / 21.3415 bits
+Epoch None Iter 0, test loss 13.1145 nats / 18.9203 bits
+Epoch None Iter 0, test loss 13.8817 nats / 20.0271 bits
+Epoch None Iter 0, test loss 13.3051 nats / 19.1953 bits
+Epoch None Iter 0, test loss 14.4459 nats / 20.8410 bits
+Epoch None Iter 0, test loss 13.4350 nats / 19.3827 bits
+Epoch None Iter 0, test loss 14.0829 nats / 20.3174 bits
+Epoch None Iter 0, test loss 13.6982 nats / 19.7623 bits
+Epoch None Iter 0, test loss 15.1438 nats / 21.8479 bits
+Epoch None Iter 0, test loss 14.1700 nats / 20.4431 bits
+Epoch None Iter 0, test loss 13.4978 nats / 19.4732 bits
+Epoch None Iter 0, test loss 15.1572 nats / 21.8672 bits
+Epoch None Iter 0, test loss 13.5735 nats / 19.5825 bits
+Epoch None Iter 0, test loss 13.2381 nats / 19.0986 bits
+Epoch None Iter 0, test loss 13.3428 nats / 19.2496 bits
+Epoch None Iter 0, test loss 13.4166 nats / 19.3560 bits
+Epoch None Iter 0, test loss 14.4366 nats / 20.8277 bits
+Epoch None Iter 0, test loss 13.6949 nats / 19.7575 bits
+Epoch None Iter 0, test loss 13.3191 nats / 19.2154 bits
+Epoch None Iter 0, test loss 13.9488 nats / 20.1238 bits
+Epoch None Iter 0, test loss 13.1329 nats / 18.9468 bits
+Epoch None Iter 0, test loss 14.8427 nats / 21.4135 bits
+Epoch None Iter 0, test loss 13.4905 nats / 19.4626 bits
+Epoch None Iter 0, test loss 13.4173 nats / 19.3571 bits
+Epoch None Iter 0, test loss 13.0488 nats / 18.8254 bits
+Epoch None Iter 0, test loss 13.6903 nats / 19.7509 bits
+Epoch None Iter 0, test loss 12.6944 nats / 18.3141 bits
+Epoch None Iter 0, test loss 11.7385 nats / 16.9351 bits
+Epoch None Iter 0, test loss 14.1935 nats / 20.4769 bits
+Epoch None Iter 0, test loss 14.8486 nats / 21.4220 bits
+Epoch None Iter 0, test loss 13.9343 nats / 20.1030 bits
+Epoch None Iter 0, test loss 15.6054 nats / 22.5139 bits
+Epoch None Iter 0, test loss 14.0246 nats / 20.2332 bits
+Epoch None Iter 0, test loss 14.4862 nats / 20.8992 bits
+Epoch None Iter 0, test loss 16.7251 nats / 24.1293 bits
+Epoch None Iter 0, test loss 13.0894 nats / 18.8841 bits
+Epoch None Iter 0, test loss 14.9272 nats / 21.5354 bits
+Epoch None Iter 0, test loss 14.4405 nats / 20.8332 bits
+Epoch None Iter 0, test loss 13.9212 nats / 20.0841 bits
+Epoch None Iter 0, test loss 13.5692 nats / 19.5762 bits
+Epoch None Iter 0, test loss 15.1242 nats / 21.8196 bits
+Epoch None Iter 0, test loss 14.0760 nats / 20.3074 bits
+Epoch None Iter 0, test loss 15.4087 nats / 22.2300 bits
+Epoch None Iter 0, test loss 14.5468 nats / 20.9866 bits
+Epoch None Iter 0, test loss 13.5095 nats / 19.4900 bits
+Epoch None Iter 0, test loss 13.4447 nats / 19.3965 bits
+Epoch None Iter 0, test loss 14.5627 nats / 21.0096 bits
+Epoch None Iter 0, test loss 15.0223 nats / 21.6726 bits
+Epoch None Iter 0, test loss 14.1777 nats / 20.4541 bits
+Epoch None Iter 0, test loss 14.0755 nats / 20.3066 bits
+Epoch None Iter 0, test loss 12.5690 nats / 18.1332 bits
+Epoch None Iter 0, test loss 14.8175 nats / 21.3772 bits
+Epoch None Iter 0, test loss 14.8758 nats / 21.4613 bits
+Epoch None Iter 0, test loss 14.0283 nats / 20.2386 bits
+Epoch None Iter 0, test loss 13.8868 nats / 20.0344 bits
+Epoch None Iter 0, test loss 15.2255 nats / 21.9658 bits
+Epoch None Iter 0, test loss 14.1858 nats / 20.4658 bits
+Epoch None Iter 0, test loss 14.6233 nats / 21.0970 bits
+Epoch None Iter 0, test loss 13.9585 nats / 20.1379 bits
+Epoch None Iter 0, test loss 12.5691 nats / 18.1334 bits
+Epoch None Iter 0, test loss 14.0611 nats / 20.2859 bits
+Epoch None Iter 0, test loss 14.7259 nats / 21.2450 bits
+Epoch None Iter 0, test loss 13.2549 nats / 19.1227 bits
+Epoch None Iter 0, test loss 14.7976 nats / 21.3484 bits
+Epoch None Iter 0, test loss 13.9069 nats / 20.0633 bits
+Epoch None Iter 0, test loss 13.6459 nats / 19.6868 bits
+Epoch None Iter 0, test loss 14.4527 nats / 20.8509 bits
+Epoch None Iter 0, test loss 13.6094 nats / 19.6343 bits
+Epoch None Iter 0, test loss 14.5667 nats / 21.0153 bits
+Epoch None Iter 0, test loss 13.4664 nats / 19.4279 bits
+Epoch None Iter 0, test loss 12.6646 nats / 18.2711 bits
+Epoch None Iter 0, test loss 15.1030 nats / 21.7890 bits
+Epoch None Iter 0, test loss 13.2760 nats / 19.1532 bits
+Epoch None Iter 0, test loss 12.9183 nats / 18.6371 bits
+Epoch None Iter 0, test loss 13.1330 nats / 18.9469 bits
+Epoch None Iter 0, test loss 13.6086 nats / 19.6330 bits
+Epoch None Iter 0, test loss 15.7842 nats / 22.7718 bits
+Epoch None Iter 0, test loss 14.6802 nats / 21.1791 bits
+Epoch None Iter 0, test loss 14.5369 nats / 20.9724 bits
+Epoch None Iter 0, test loss 13.8039 nats / 19.9148 bits
+Epoch None Iter 0, test loss 14.5826 nats / 21.0383 bits
+Epoch None Iter 0, test loss 15.3457 nats / 22.1392 bits
+Epoch None Iter 0, test loss 13.3808 nats / 19.3044 bits
+Epoch None Iter 0, test loss 14.3250 nats / 20.6665 bits
+Epoch None Iter 0, test loss 13.9781 nats / 20.1662 bits
+Epoch None Iter 0, test loss 14.4370 nats / 20.8283 bits
+Epoch None Iter 0, test loss 14.9498 nats / 21.5679 bits
+Epoch None Iter 0, test loss 12.6213 nats / 18.2087 bits
+Epoch None Iter 0, test loss 14.2398 nats / 20.5437 bits
+Epoch None Iter 0, test loss 13.6625 nats / 19.7108 bits
+Epoch None Iter 0, test loss 13.8214 nats / 19.9401 bits
+Epoch None Iter 0, test loss 14.0934 nats / 20.3324 bits
+Epoch None Iter 0, test loss 13.2399 nats / 19.1011 bits
+Epoch None Iter 0, test loss 15.8109 nats / 22.8103 bits
+Epoch None Iter 0, test loss 14.1204 nats / 20.3714 bits
+Epoch None Iter 0, test loss 13.7607 nats / 19.8525 bits
+Epoch None Iter 0, test loss 15.4873 nats / 22.3435 bits
+Epoch None Iter 0, test loss 13.7475 nats / 19.8335 bits
+Epoch None Iter 0, test loss 14.1981 nats / 20.4835 bits
+Epoch None Iter 0, test loss 13.3414 nats / 19.2475 bits
+Epoch None Iter 0, test loss 14.1335 nats / 20.3903 bits
+Epoch None Iter 0, test loss 14.4760 nats / 20.8844 bits
+Epoch None Iter 0, test loss 13.6324 nats / 19.6675 bits
+Epoch None Iter 0, test loss 13.7636 nats / 19.8566 bits
+Epoch None Iter 0, test loss 13.8461 nats / 19.9757 bits
+Epoch None Iter 0, test loss 14.2301 nats / 20.5297 bits
+Epoch None Iter 0, test loss 13.1962 nats / 19.0382 bits
+Epoch None Iter 0, test loss 13.5369 nats / 19.5296 bits
+Epoch None Iter 0, test loss 13.5526 nats / 19.5523 bits
+Epoch None Iter 0, test loss 13.0191 nats / 18.7827 bits
+Epoch None Iter 0, test loss 14.6786 nats / 21.1768 bits
+Epoch None Iter 0, test loss 13.6335 nats / 19.6690 bits
+Epoch None Iter 0, test loss 13.7900 nats / 19.8948 bits
+Epoch None Iter 0, test loss 12.8531 nats / 18.5431 bits
+Epoch None Iter 0, test loss 13.4765 nats / 19.4424 bits
+Epoch None Iter 0, test loss 13.3646 nats / 19.2811 bits
+Epoch None Iter 0, test loss 13.3509 nats / 19.2612 bits
+Epoch None Iter 0, test loss 14.8721 nats / 21.4558 bits
+Epoch None Iter 0, test loss 13.0551 nats / 18.8345 bits
+Epoch None Iter 0, test loss 14.2232 nats / 20.5197 bits
+Epoch None Iter 0, test loss 13.8121 nats / 19.9266 bits
+Epoch None Iter 0, test loss 12.9760 nats / 18.7204 bits
+Epoch None Iter 0, test loss 13.9075 nats / 20.0643 bits
+Epoch None Iter 0, test loss 13.9340 nats / 20.1025 bits
+Epoch None Iter 0, test loss 14.9319 nats / 21.5422 bits
+Epoch None Iter 0, test loss 13.9975 nats / 20.1941 bits
+Epoch None Iter 0, test loss 15.7629 nats / 22.7410 bits
+Epoch None Iter 0, test loss 13.6397 nats / 19.6780 bits
+Epoch None Iter 0, test loss 15.2598 nats / 22.0152 bits
+Epoch None Iter 0, test loss 13.9524 nats / 20.1290 bits
+Epoch None Iter 0, test loss 13.7873 nats / 19.8909 bits
+Epoch None Iter 0, test loss 14.6713 nats / 21.1662 bits
+Epoch None Iter 0, test loss 13.8113 nats / 19.9255 bits
+Epoch None Iter 0, test loss 15.6537 nats / 22.5835 bits
+Epoch None Iter 0, test loss 14.6413 nats / 21.1230 bits
+Epoch None Iter 0, test loss 14.9495 nats / 21.5676 bits
+Epoch None Iter 0, test loss 13.6387 nats / 19.6766 bits
+Epoch None Iter 0, test loss 13.2080 nats / 19.0550 bits
+Epoch None Iter 0, test loss 15.0595 nats / 21.7263 bits
+Epoch None Iter 0, test loss 14.6463 nats / 21.1301 bits
+Epoch None Iter 0, test loss 14.8411 nats / 21.4111 bits
+Epoch None Iter 0, test loss 13.2276 nats / 19.0834 bits
+Epoch None Iter 0, test loss 14.3971 nats / 20.7706 bits
+Epoch None Iter 0, test loss 13.5998 nats / 19.6203 bits
+Epoch None Iter 0, test loss 12.6065 nats / 18.1873 bits
+Epoch None Iter 0, test loss 14.4634 nats / 20.8663 bits
+Epoch None Iter 0, test loss 14.0310 nats / 20.2425 bits
+Epoch None Iter 0, test loss 14.8153 nats / 21.3740 bits
+Epoch None Iter 0, test loss 14.1032 nats / 20.3466 bits
+Epoch None Iter 0, test loss 14.0334 nats / 20.2460 bits
+Epoch None Iter 0, test loss 14.0602 nats / 20.2846 bits
+Epoch None Iter 0, test loss 13.5165 nats / 19.5002 bits
+Epoch None Iter 0, test loss 15.0503 nats / 21.7130 bits
+Epoch None Iter 0, test loss 14.4346 nats / 20.8248 bits
+Epoch None Iter 0, test loss 13.6409 nats / 19.6797 bits
+Epoch None Iter 0, test loss 14.1911 nats / 20.4735 bits
+Epoch None Iter 0, test loss 13.0911 nats / 18.8865 bits
+Epoch None Iter 0, test loss 13.4053 nats / 19.3398 bits
+Epoch None Iter 0, test loss 13.9003 nats / 20.0539 bits
+Epoch None Iter 0, test loss 15.4712 nats / 22.3203 bits
+Epoch None Iter 0, test loss 13.4536 nats / 19.4095 bits
+Epoch None Iter 0, test loss 13.0918 nats / 18.8874 bits
+Epoch None Iter 0, test loss 14.2509 nats / 20.5596 bits
+Epoch None Iter 0, test loss 13.4247 nats / 19.3678 bits
+Epoch None Iter 0, test loss 13.3612 nats / 19.2762 bits
+Epoch None Iter 0, test loss 12.9909 nats / 18.7419 bits
+Epoch None Iter 0, test loss 14.0162 nats / 20.2210 bits
+Epoch None Iter 0, test loss 13.6062 nats / 19.6296 bits
+Epoch None Iter 0, test loss 13.9814 nats / 20.1709 bits
+Epoch None Iter 0, test loss 13.8403 nats / 19.9674 bits
+Epoch None Iter 0, test loss 13.5184 nats / 19.5029 bits
+Epoch None Iter 0, test loss 13.8554 nats / 19.9891 bits
+Epoch None Iter 0, test loss 14.3390 nats / 20.6868 bits
+Epoch None Iter 0, test loss 15.1355 nats / 21.8359 bits
+Epoch None Iter 0, test loss 15.4359 nats / 22.2693 bits
+Epoch None Iter 0, test loss 14.3879 nats / 20.7574 bits
+Epoch None Iter 0, test loss 14.3370 nats / 20.6839 bits
+Epoch None Iter 0, test loss 13.8962 nats / 20.0479 bits
+Epoch None Iter 0, test loss 14.2125 nats / 20.5044 bits
+Epoch None Iter 0, test loss 13.7974 nats / 19.9054 bits
+Epoch None Iter 0, test loss 12.8219 nats / 18.4981 bits
+Epoch None Iter 0, test loss 13.1598 nats / 18.9856 bits
+Epoch None Iter 0, test loss 14.3695 nats / 20.7308 bits
+Epoch None Iter 0, test loss 14.3182 nats / 20.6567 bits
+Epoch None Iter 0, test loss 14.9689 nats / 21.5956 bits
+Epoch None Iter 0, test loss 14.3500 nats / 20.7027 bits
+Epoch None Iter 0, test loss 13.1906 nats / 19.0300 bits
+Epoch None Iter 0, test loss 15.3311 nats / 22.1181 bits
+Epoch None Iter 0, test loss 14.5506 nats / 20.9921 bits
+Epoch None Iter 0, test loss 16.2095 nats / 23.3853 bits
+Epoch None Iter 0, test loss 13.5534 nats / 19.5534 bits
+Epoch None Iter 0, test loss 14.6289 nats / 21.1051 bits
+Epoch None Iter 0, test loss 14.2185 nats / 20.5129 bits
+Epoch None Iter 0, test loss 15.1109 nats / 21.8004 bits
+Epoch None Iter 0, test loss 13.8209 nats / 19.9393 bits
+Epoch None Iter 0, test loss 15.1092 nats / 21.7980 bits
+Epoch None Iter 0, test loss 15.1180 nats / 21.8106 bits
+Epoch None Iter 0, test loss 13.3133 nats / 19.2070 bits
+Epoch None Iter 0, test loss 16.2268 nats / 23.4103 bits
+Epoch None Iter 0, test loss 14.5995 nats / 21.0627 bits
+Epoch None Iter 0, test loss 14.2707 nats / 20.5883 bits
+Epoch None Iter 0, test loss 13.6382 nats / 19.6757 bits
+Epoch None Iter 0, test loss 14.7262 nats / 21.2454 bits
+Epoch None Iter 0, test loss 14.3411 nats / 20.6898 bits
+Epoch None Iter 0, test loss 13.8962 nats / 20.0480 bits
+Epoch None Iter 0, test loss 14.5545 nats / 20.9978 bits
+Epoch None Iter 0, test loss 13.6543 nats / 19.6990 bits
+Epoch None Iter 0, test loss 15.8473 nats / 22.8628 bits
+Epoch None Iter 0, test loss 13.6908 nats / 19.7517 bits
+Epoch None Iter 0, test loss 13.0507 nats / 18.8282 bits
+Epoch None Iter 0, test loss 14.3235 nats / 20.6644 bits
+Epoch None Iter 0, test loss 13.7084 nats / 19.7770 bits
+Epoch None Iter 0, test loss 13.8920 nats / 20.0419 bits
+Epoch None Iter 0, test loss 14.6723 nats / 21.1677 bits
+Epoch None Iter 0, test loss 13.0620 nats / 18.8445 bits
+Epoch None Iter 0, test loss 13.8948 nats / 20.0459 bits
+Epoch None Iter 0, test loss 13.7276 nats / 19.8047 bits
+Epoch None Iter 0, test loss 13.0237 nats / 18.7893 bits
+Epoch None Iter 0, test loss 13.0564 nats / 18.8364 bits
+Epoch None Iter 0, test loss 14.0577 nats / 20.2810 bits
+Epoch None Iter 0, test loss 14.6517 nats / 21.1380 bits
+Epoch None Iter 0, test loss 13.7086 nats / 19.7774 bits
+Epoch None Iter 0, test loss 13.4645 nats / 19.4252 bits
+Epoch None Iter 0, test loss 13.4045 nats / 19.3386 bits
+Epoch None Iter 0, test loss 14.0833 nats / 20.3179 bits
+Epoch None Iter 0, test loss 14.8687 nats / 21.4510 bits
+Epoch None Iter 0, test loss 12.7929 nats / 18.4563 bits
+Epoch None Iter 0, test loss 13.4177 nats / 19.3576 bits
+Epoch None Iter 0, test loss 12.8794 nats / 18.5811 bits
+Epoch None Iter 0, test loss 33.0039 nats / 47.6145 bits
+Entropy of DMV_ofnan_20000dmv([Column(Record Type, distribution_size=2), Column(Registration Class, distribution_size=69), Column(State, distribution_size=77), Column(County, distribution_size=63), Column(Body Type, distribution_size=57), Column(Fuel Type, distribution_size=8), Column(Reg Valid Date, distribution_size=2828), Column(Color, distribution_size=218), Column(Scofflaw Indicator, distribution_size=2), Column(Suspension Indicator, distribution_size=2), Column(Revocation Indicator, distribution_size=2)]): 19.3541 bits
+Parsing... done, took 0.0s
+Discretizing table... done, took 0.0s
+Entropy of DMV([Column(Record Type, distribution_size=2), Column(Registration Class, distribution_size=34), Column(State, distribution_size=19), Column(County, distribution_size=63), Column(Body Type, distribution_size=34), Column(Fuel Type, distribution_size=6), Column(Reg Valid Date, distribution_size=786), Column(Color, distribution_size=46), Column(Scofflaw Indicator, distribution_size=2), Column(Suspension Indicator, distribution_size=2), Column(Revocation Indicator, distribution_size=2)]): 12.2640 bits
+Parsing... done, took 0.0s
+Discretizing table... done, took 0.0s
+Discretizing table... done, took 0.0s
+Parsing... done, took 0.0s
+Discretizing table... done, took 0.0s
+Entropy of DMV([Column(Record Type, distribution_size=2), Column(Registration Class, distribution_size=36), Column(State, distribution_size=21), Column(County, distribution_size=63), Column(Body Type, distribution_size=29), Column(Fuel Type, distribution_size=6), Column(Reg Valid Date, distribution_size=812), Column(Color, distribution_size=49), Column(Scofflaw Indicator, distribution_size=2), Column(Suspension Indicator, distribution_size=2), Column(Revocation Indicator, distribution_size=2)]): 12.2654 bits
+Number of model parameters: 414464 (~= 1.6MB)
+Transformer(
+  (blocks): Sequential(
+    (0): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (1): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (2): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (3): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+  )
+  (norm): LayerNorm()
+  (embeddings): ModuleList(
+    (0): Embedding(2, 64)
+    (1): Embedding(69, 64)
+    (2): Embedding(77, 64)
+    (3): Embedding(63, 64)
+    (4): Embedding(57, 64)
+    (5): Embedding(8, 64)
+    (6): Embedding(2828, 64)
+    (7): Embedding(218, 64)
+    (8): Embedding(2, 64)
+    (9): Embedding(2, 64)
+    (10): Embedding(2, 64)
+  )
+  (pos_embeddings): Embedding(11, 64)
+  (unk_embeddings): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (6): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (7): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (8): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (9): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (10): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+  )
+)
+Epoch 1 Iter 0, train loss 25.550, distilll loss 12.198, model loss 28.888) 

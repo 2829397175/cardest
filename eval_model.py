@@ -119,6 +119,10 @@ parser.add_argument('--flash_dim',
                     type=int,
                     default=256,
                     help='the dim of flash.')
+parser.add_argument('--group_size',
+                    type=int,
+                    default=128,
+                    help='the dim of group attention.')
 
 # Estimators to enable.
 parser.add_argument('--run-sampling',
@@ -147,6 +151,20 @@ parser.add_argument(
     default=30000,
     help='Maximum number of partitions of the Maxdiff histogram.')
 
+# model path
+parser.add_argument(
+    '--model_path',
+    type=str,
+    help='Model path.')
+
+# pretrain DMV
+parser.add_argument(
+    '--pretrain',
+    type=str, 
+    default=None, 
+    help='pretrain_path.'
+)
+
 args = parser.parse_args()
 
 
@@ -164,11 +182,17 @@ def InvertOrder(order):
 
 
 def MakeTable():
-    assert args.dataset in ['dmv-tiny', 'dmv']
+    assert args.dataset in ['dmv-tiny', 'dmv','adult','cup','dmv-100k','dmv-ofnan']
     if args.dataset == 'dmv-tiny':
         table = datasets.LoadDmv('dmv-tiny.csv')
     elif args.dataset == 'dmv':
         table = datasets.LoadDmv()
+    elif args.dataset == 'dmv-100k':
+        table = datasets.LoadDmv('dmv_100k.csv')
+    elif args.dataset == 'dmv-ofnan':
+        table = datasets.LoadDmv('dmv_ofnan.csv')
+    else:
+        table = datasets.LoadDataset(args.dataset)
 
     oracle_est = estimators_lib.Oracle(table)
     if args.run_bn:
@@ -453,10 +477,14 @@ def LoadOracleCardinalities():
 
 
 def Main():
-    all_ckpts = glob.glob('./models/{}'.format(args.glob))
-    if args.blacklist:
-        all_ckpts = [ckpt for ckpt in all_ckpts if args.blacklist not in ckpt]
-
+    # all_ckpts = glob.glob('./models/{}'.format(args.glob))
+    # if args.blacklist:
+    #     all_ckpts = [ckpt for ckpt in all_ckpts if args.blacklist not in ckpt]
+    
+    if args.pretrain is not None:
+         all_ckpts=[os.path.join(args.pretrain,args.model_path)]
+    else:
+        all_ckpts=[os.path.join("/home/jixy/naru/models/",args.model_path)]
     selected_ckpts = all_ckpts
     oracle_cards = LoadOracleCardinalities()
     print('ckpts', selected_ckpts)
@@ -500,12 +528,13 @@ def Main():
         
         
         else:
-            if args.dataset in ['dmv-tiny', 'dmv']:
+            if args.dataset in ['dmv-tiny', 'dmv','cup','adult','dmv-ofnan']:
                 model = MakeMade(
                     scale=args.fc_hiddens,
                     cols_to_train=table.columns,
                     seed=seed,
                     fixed_ordering=order,
+                    args=args
                 )
             else:
                 assert False, args.dataset
@@ -546,6 +575,7 @@ def Main():
         for est, ckpt in zip(estimators, parsed_ckpts):
             est.name = str(est) + '_{}_{:.3f}'.format(ckpt.seed, ckpt.bits_gap)
 
+
         if args.inference_opts:
             print('Tracing forward_with_encoded_input()...')
             for est in estimators:
@@ -560,7 +590,10 @@ def Main():
                     est.model.forward_with_encoded_input, encoded_input)
 
         if args.run_sampling:
-            SAMPLE_RATIO = {'dmv': [0.0013]}  # ~1.3MB.
+            SAMPLE_RATIO = {'dmv': [0.0013],
+                            'cup':[0.0013],
+                            'adult':[0.0013],
+                            'dmv-tiny':[0.0013]}  # ~1.3MB.
             for p in SAMPLE_RATIO.get(args.dataset, [0.01]):
                 estimators.append(estimators_lib.Sampling(table, p=p))
 
@@ -581,7 +614,9 @@ def Main():
                  oracle_cards=oracle_cards,
                  oracle_est=oracle_est)
      
-    err_path="results/results_{}.csv".format(args.glob) 
+    err_path="results/results_{}.csv".format(args.model_path[:-3])
+    if os.path.exists(err_path):
+        err_path=err_path[:-4]+"_num{}.csv".format(args.num_queries)    
     # SaveEstimators(args.err_csv, estimators)
     SaveEstimators(err_path, estimators)
     print('...Done, result:', err_path)

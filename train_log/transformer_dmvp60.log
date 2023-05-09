@@ -1,0 +1,627 @@
+Device cuda
+Loading csv... Device cuda
+Loading csv... done, took 5.8s
+Parsing... done, took 4.9s
+Entropy of DMV_ofnan([Column(Record Type, distribution_size=2), Column(Registration Class, distribution_size=69), Column(State, distribution_size=77), Column(County, distribution_size=63), Column(Body Type, distribution_size=57), Column(Fuel Type, distribution_size=8), Column(Reg Valid Date, distribution_size=2828), Column(Color, distribution_size=218), Column(Scofflaw Indicator, distribution_size=2), Column(Suspension Indicator, distribution_size=2), Column(Revocation Indicator, distribution_size=2)]): 19.3435 bits
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 7315785 entries, 0 to 7315784
+Data columns (total 11 columns):
+ #   Column                Dtype         
+---  ------                -----         
+ 0   Record Type           object        
+ 1   Registration Class    object        
+ 2   State                 object        
+ 3   County                object        
+ 4   Body Type             object        
+ 5   Fuel Type             object        
+ 6   Reg Valid Date        datetime64[ns]
+ 7   Color                 object        
+ 8   Scofflaw Indicator    object        
+ 9   Suspension Indicator  object        
+ 10  Revocation Indicator  object        
+dtypes: datetime64[ns](1), object(10)
+memory usage: 614.0+ MB
+None
+MASK_SCHEME 0
+ordering [ 0  1  2  3  4  5  6  7  8  9 10]
+using orig mask
+ tensor([[ True, False, False, False, False, False, False, False, False, False,
+         False],
+        [ True,  True, False, False, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True, False, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True, False, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True, False, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True, False, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True, False, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True, False, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True, False,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+         False],
+        [ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True]])
+Number of model parameters: 414464 (~= 1.6MB)
+Transformer(
+  (blocks): Sequential(
+    (0): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (1): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (2): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+    (3): Block(
+      (mlp): Sequential(
+        (0): Conv1d()
+        (1): GeLU()
+        (2): Conv1d()
+      )
+      (norm1): LayerNorm()
+      (norm2): LayerNorm()
+      (attn): MultiHeadSelfAttention(
+        (qkv_linear): Conv1d()
+        (linear): Conv1d()
+      )
+    )
+  )
+  (norm): LayerNorm()
+  (embeddings): ModuleList(
+    (0): Embedding(2, 64)
+    (1): Embedding(69, 64)
+    (2): Embedding(77, 64)
+    (3): Embedding(63, 64)
+    (4): Embedding(57, 64)
+    (5): Embedding(8, 64)
+    (6): Embedding(2828, 64)
+    (7): Embedding(218, 64)
+    (8): Embedding(2, 64)
+    (9): Embedding(2, 64)
+    (10): Embedding(2, 64)
+  )
+  (pos_embeddings): Embedding(11, 64)
+  (unk_embeddings): ParameterList(
+      (0): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (1): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (2): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (3): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (4): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (5): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (6): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (7): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (8): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (9): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+      (10): Parameter containing: [torch.cuda.FloatTensor of size 64 (GPU 0)]
+  )
+)
+Discretizing table... done, took 3.7s
+Epoch 0 Iter 0, train entropy gap 31.1273 bits (loss 50.471, data 19.343) 
+Epoch 0 Iter 200, train entropy gap 28.0485 bits (loss 47.392, data 19.343) 
+Epoch 0 Iter 400, train entropy gap 24.1870 bits (loss 43.530, data 19.343) 
+Epoch 0 Iter 600, train entropy gap 21.4749 bits (loss 40.818, data 19.343) 
+Epoch 0 Iter 800, train entropy gap 19.8283 bits (loss 39.172, data 19.343) 
+Epoch 0 Iter 1000, train entropy gap 18.1982 bits (loss 37.542, data 19.343) 
+Epoch 0 Iter 1200, train entropy gap 16.4988 bits (loss 35.842, data 19.343) 
+Epoch 0 Iter 1400, train entropy gap 14.4235 bits (loss 33.767, data 19.343) 
+Epoch 0 Iter 1600, train entropy gap 12.3012 bits (loss 31.645, data 19.343) 
+Epoch 0 Iter 1800, train entropy gap 10.1469 bits (loss 29.490, data 19.343) 
+Epoch 0 Iter 2000, train entropy gap 7.9117 bits (loss 27.255, data 19.343) 
+Epoch 0 Iter 2200, train entropy gap 6.6325 bits (loss 25.976, data 19.343) 
+Epoch 0 Iter 2400, train entropy gap 4.6965 bits (loss 24.040, data 19.343) 
+Epoch 0 Iter 2600, train entropy gap 3.4010 bits (loss 22.744, data 19.343) 
+Epoch 0 Iter 2800, train entropy gap 2.5926 bits (loss 21.936, data 19.343) 
+Epoch 0 Iter 3000, train entropy gap 1.8072 bits (loss 21.151, data 19.343) 
+Epoch 0 Iter 3200, train entropy gap 1.8608 bits (loss 21.204, data 19.343) 
+Epoch 0 Iter 3400, train entropy gap 2.0269 bits (loss 21.370, data 19.343) 
+Epoch 0 Iter 3600, train entropy gap 2.2661 bits (loss 21.610, data 19.343) 
+Epoch 0 Iter 3800, train entropy gap 1.4991 bits (loss 20.843, data 19.343) 
+Epoch 0 Iter 4000, train entropy gap 1.3336 bits (loss 20.677, data 19.343) 
+Epoch 0 Iter 4200, train entropy gap 1.9215 bits (loss 21.265, data 19.343) 
+epoch 0 train loss 20.5769 nats / 29.6862 bits
+time since start: 72.7 secs
+Epoch 1 Iter 0, train entropy gap 1.4049 bits (loss 20.748, data 19.343) 
+Epoch 1 Iter 200, train entropy gap 1.1519 bits (loss 20.495, data 19.343) 
+Epoch 1 Iter 400, train entropy gap 1.3896 bits (loss 20.733, data 19.343) 
+Epoch 1 Iter 600, train entropy gap 2.5430 bits (loss 21.886, data 19.343) 
+Epoch 1 Iter 800, train entropy gap 1.7903 bits (loss 21.134, data 19.343) 
+Epoch 1 Iter 1000, train entropy gap 2.1152 bits (loss 21.459, data 19.343) 
+Epoch 1 Iter 1200, train entropy gap 1.5707 bits (loss 20.914, data 19.343) 
+Epoch 1 Iter 1400, train entropy gap 1.4501 bits (loss 20.794, data 19.343) 
+Epoch 1 Iter 1600, train entropy gap 1.8694 bits (loss 21.213, data 19.343) 
+Epoch 1 Iter 1800, train entropy gap 1.0931 bits (loss 20.437, data 19.343) 
+Epoch 1 Iter 2000, train entropy gap 2.1858 bits (loss 21.529, data 19.343) 
+Epoch 1 Iter 2200, train entropy gap 0.8720 bits (loss 20.215, data 19.343) 
+Epoch 1 Iter 2400, train entropy gap 2.3687 bits (loss 21.712, data 19.343) 
+Epoch 1 Iter 2600, train entropy gap 0.7897 bits (loss 20.133, data 19.343) 
+Epoch 1 Iter 2800, train entropy gap 1.6158 bits (loss 20.959, data 19.343) 
+Epoch 1 Iter 3000, train entropy gap 1.3635 bits (loss 20.707, data 19.343) 
+Epoch 1 Iter 3200, train entropy gap 1.9125 bits (loss 21.256, data 19.343) 
+Epoch 1 Iter 3400, train entropy gap 0.9324 bits (loss 20.276, data 19.343) 
+Epoch 1 Iter 3600, train entropy gap 0.8992 bits (loss 20.243, data 19.343) 
+Epoch 1 Iter 3800, train entropy gap 1.8519 bits (loss 21.195, data 19.343) 
+Epoch 1 Iter 4000, train entropy gap 2.6812 bits (loss 22.025, data 19.343) 
+Epoch 1 Iter 4200, train entropy gap 1.1783 bits (loss 20.522, data 19.343) 
+epoch 1 train loss 14.4772 nats / 20.8862 bits
+time since start: 145.1 secs
+Epoch 2 Iter 0, train entropy gap 2.3929 bits (loss 21.736, data 19.343) 
+Epoch 2 Iter 200, train entropy gap 1.1971 bits (loss 20.541, data 19.343) 
+Epoch 2 Iter 400, train entropy gap 0.5701 bits (loss 19.914, data 19.343) 
+Epoch 2 Iter 600, train entropy gap 1.7801 bits (loss 21.124, data 19.343) 
+Epoch 2 Iter 800, train entropy gap 0.7469 bits (loss 20.090, data 19.343) 
+Epoch 2 Iter 1000, train entropy gap 2.3019 bits (loss 21.645, data 19.343) 
+Epoch 2 Iter 1200, train entropy gap 0.9059 bits (loss 20.249, data 19.343) 
+Epoch 2 Iter 1400, train entropy gap 1.3847 bits (loss 20.728, data 19.343) 
+Epoch 2 Iter 1600, train entropy gap 1.2521 bits (loss 20.596, data 19.343) 
+Epoch 2 Iter 1800, train entropy gap 1.2751 bits (loss 20.619, data 19.343) 
+Epoch 2 Iter 2000, train entropy gap 1.5837 bits (loss 20.927, data 19.343) 
+Epoch 2 Iter 2200, train entropy gap 2.4184 bits (loss 21.762, data 19.343) 
+Epoch 2 Iter 2400, train entropy gap 1.4640 bits (loss 20.807, data 19.343) 
+Epoch 2 Iter 2600, train entropy gap 2.8062 bits (loss 22.150, data 19.343) 
+Epoch 2 Iter 2800, train entropy gap 1.9429 bits (loss 21.286, data 19.343) 
+Epoch 2 Iter 3000, train entropy gap 2.0002 bits (loss 21.344, data 19.343) 
+Epoch 2 Iter 3200, train entropy gap 0.5457 bits (loss 19.889, data 19.343) 
+Epoch 2 Iter 3400, train entropy gap 0.9851 bits (loss 20.329, data 19.343) 
+Epoch 2 Iter 3600, train entropy gap 1.3837 bits (loss 20.727, data 19.343) 
+Epoch 2 Iter 3800, train entropy gap 1.5048 bits (loss 20.848, data 19.343) 
+Epoch 2 Iter 4000, train entropy gap 0.7671 bits (loss 20.111, data 19.343) 
+Epoch 2 Iter 4200, train entropy gap 1.0259 bits (loss 20.369, data 19.343) 
+epoch 2 train loss 14.3576 nats / 20.7136 bits
+time since start: 217.4 secs
+Epoch 3 Iter 0, train entropy gap 1.3055 bits (loss 20.649, data 19.343) 
+Epoch 3 Iter 200, train entropy gap 1.4195 bits (loss 20.763, data 19.343) 
+Epoch 3 Iter 400, train entropy gap 0.7102 bits (loss 20.054, data 19.343) 
+Epoch 3 Iter 600, train entropy gap 1.3785 bits (loss 20.722, data 19.343) 
+Epoch 3 Iter 800, train entropy gap 1.4634 bits (loss 20.807, data 19.343) 
+Epoch 3 Iter 1000, train entropy gap 0.4203 bits (loss 19.764, data 19.343) 
+Epoch 3 Iter 1200, train entropy gap 1.1632 bits (loss 20.507, data 19.343) 
+Epoch 3 Iter 1400, train entropy gap 2.2442 bits (loss 21.588, data 19.343) 
+Epoch 3 Iter 1600, train entropy gap 1.1768 bits (loss 20.520, data 19.343) 
+Epoch 3 Iter 1800, train entropy gap 2.0340 bits (loss 21.377, data 19.343) 
+Epoch 3 Iter 2000, train entropy gap 1.6349 bits (loss 20.978, data 19.343) 
+Epoch 3 Iter 2200, train entropy gap 1.5936 bits (loss 20.937, data 19.343) 
+Epoch 3 Iter 2400, train entropy gap 1.1654 bits (loss 20.509, data 19.343) 
+Epoch 3 Iter 2600, train entropy gap 0.5059 bits (loss 19.849, data 19.343) 
+Epoch 3 Iter 2800, train entropy gap 2.1182 bits (loss 21.462, data 19.343) 
+Epoch 3 Iter 3000, train entropy gap 1.0550 bits (loss 20.399, data 19.343) 
+Epoch 3 Iter 3200, train entropy gap 0.3161 bits (loss 19.660, data 19.343) 
+Epoch 3 Iter 3400, train entropy gap 1.5722 bits (loss 20.916, data 19.343) 
+Epoch 3 Iter 3600, train entropy gap 1.1243 bits (loss 20.468, data 19.343) 
+Epoch 3 Iter 3800, train entropy gap 0.4295 bits (loss 19.773, data 19.343) 
+Epoch 3 Iter 4000, train entropy gap 0.4786 bits (loss 19.822, data 19.343) 
+Epoch 3 Iter 4200, train entropy gap 1.6494 bits (loss 20.993, data 19.343) 
+epoch 3 train loss 14.3026 nats / 20.6342 bits
+time since start: 290.4 secs
+Epoch 4 Iter 0, train entropy gap 1.7398 bits (loss 21.083, data 19.343) 
+Epoch 4 Iter 200, train entropy gap 0.4733 bits (loss 19.817, data 19.343) 
+Epoch 4 Iter 400, train entropy gap 1.0132 bits (loss 20.357, data 19.343) 
+Epoch 4 Iter 600, train entropy gap 1.2189 bits (loss 20.562, data 19.343) 
+Epoch 4 Iter 800, train entropy gap 1.2956 bits (loss 20.639, data 19.343) 
+Epoch 4 Iter 1000, train entropy gap 0.5734 bits (loss 19.917, data 19.343) 
+Epoch 4 Iter 1200, train entropy gap 1.4626 bits (loss 20.806, data 19.343) 
+Epoch 4 Iter 1400, train entropy gap 2.2120 bits (loss 21.555, data 19.343) 
+Epoch 4 Iter 1600, train entropy gap 0.7299 bits (loss 20.073, data 19.343) 
+Epoch 4 Iter 1800, train entropy gap 0.2697 bits (loss 19.613, data 19.343) 
+Epoch 4 Iter 2000, train entropy gap 1.5061 bits (loss 20.850, data 19.343) 
+Epoch 4 Iter 2200, train entropy gap 2.3061 bits (loss 21.650, data 19.343) 
+Epoch 4 Iter 2400, train entropy gap 2.0201 bits (loss 21.364, data 19.343) 
+Epoch 4 Iter 2600, train entropy gap 1.0421 bits (loss 20.386, data 19.343) 
+Epoch 4 Iter 2800, train entropy gap 2.2986 bits (loss 21.642, data 19.343) 
+Epoch 4 Iter 3000, train entropy gap 2.3156 bits (loss 21.659, data 19.343) 
+Epoch 4 Iter 3200, train entropy gap 0.4494 bits (loss 19.793, data 19.343) 
+Epoch 4 Iter 3400, train entropy gap 2.7064 bits (loss 22.050, data 19.343) 
+Epoch 4 Iter 3600, train entropy gap 2.6248 bits (loss 21.968, data 19.343) 
+Epoch 4 Iter 3800, train entropy gap 0.2688 bits (loss 19.612, data 19.343) 
+Epoch 4 Iter 4000, train entropy gap 2.6650 bits (loss 22.009, data 19.343) 
+Epoch 4 Iter 4200, train entropy gap 0.3496 bits (loss 19.693, data 19.343) 
+epoch 4 train loss 14.2757 nats / 20.5955 bits
+time since start: 363.5 secs
+Epoch 5 Iter 0, train entropy gap 0.5141 bits (loss 19.858, data 19.343) 
+Epoch 5 Iter 200, train entropy gap 2.4089 bits (loss 21.752, data 19.343) 
+Epoch 5 Iter 400, train entropy gap 1.8731 bits (loss 21.217, data 19.343) 
+Epoch 5 Iter 600, train entropy gap 0.6765 bits (loss 20.020, data 19.343) 
+Epoch 5 Iter 800, train entropy gap 0.2593 bits (loss 19.603, data 19.343) 
+Epoch 5 Iter 1000, train entropy gap 1.7131 bits (loss 21.057, data 19.343) 
+Epoch 5 Iter 1200, train entropy gap 0.7501 bits (loss 20.094, data 19.343) 
+Epoch 5 Iter 1400, train entropy gap 1.3738 bits (loss 20.717, data 19.343) 
+Epoch 5 Iter 1600, train entropy gap 0.4986 bits (loss 19.842, data 19.343) 
+Epoch 5 Iter 1800, train entropy gap 1.5498 bits (loss 20.893, data 19.343) 
+Epoch 5 Iter 2000, train entropy gap 1.2910 bits (loss 20.634, data 19.343) 
+Epoch 5 Iter 2200, train entropy gap 1.0770 bits (loss 20.420, data 19.343) 
+Epoch 5 Iter 2400, train entropy gap 1.4052 bits (loss 20.749, data 19.343) 
+Epoch 5 Iter 2600, train entropy gap 1.8542 bits (loss 21.198, data 19.343) 
+Epoch 5 Iter 2800, train entropy gap 0.9667 bits (loss 20.310, data 19.343) 
+Epoch 5 Iter 3000, train entropy gap 0.6421 bits (loss 19.986, data 19.343) 
+Epoch 5 Iter 3200, train entropy gap 0.4510 bits (loss 19.794, data 19.343) 
+Epoch 5 Iter 3400, train entropy gap 1.0405 bits (loss 20.384, data 19.343) 
+Epoch 5 Iter 3600, train entropy gap 0.1442 bits (loss 19.488, data 19.343) 
+Epoch 5 Iter 3800, train entropy gap 1.8137 bits (loss 21.157, data 19.343) 
+Epoch 5 Iter 4000, train entropy gap 0.5255 bits (loss 19.869, data 19.343) 
+Epoch 5 Iter 4200, train entropy gap 1.5740 bits (loss 20.917, data 19.343) 
+epoch 5 train loss 14.2643 nats / 20.5790 bits
+time since start: 435.7 secs
+Epoch 6 Iter 0, train entropy gap 1.1545 bits (loss 20.498, data 19.343) 
+Epoch 6 Iter 200, train entropy gap 1.4807 bits (loss 20.824, data 19.343) 
+Epoch 6 Iter 400, train entropy gap 0.9762 bits (loss 20.320, data 19.343) 
+Epoch 6 Iter 600, train entropy gap 2.9123 bits (loss 22.256, data 19.343) 
+Epoch 6 Iter 800, train entropy gap 0.9301 bits (loss 20.274, data 19.343) 
+Epoch 6 Iter 1000, train entropy gap 1.6271 bits (loss 20.971, data 19.343) 
+Epoch 6 Iter 1200, train entropy gap 0.3108 bits (loss 19.654, data 19.343) 
+Epoch 6 Iter 1400, train entropy gap 1.0827 bits (loss 20.426, data 19.343) 
+Epoch 6 Iter 1600, train entropy gap 0.4856 bits (loss 19.829, data 19.343) 
+Epoch 6 Iter 1800, train entropy gap 1.6531 bits (loss 20.997, data 19.343) 
+Epoch 6 Iter 2000, train entropy gap 1.1070 bits (loss 20.450, data 19.343) 
+Epoch 6 Iter 2200, train entropy gap 0.4025 bits (loss 19.746, data 19.343) 
+Epoch 6 Iter 2400, train entropy gap 0.3135 bits (loss 19.657, data 19.343) 
+Epoch 6 Iter 2600, train entropy gap 0.6310 bits (loss 19.974, data 19.343) 
+Epoch 6 Iter 2800, train entropy gap 1.5546 bits (loss 20.898, data 19.343) 
+Epoch 6 Iter 3000, train entropy gap 0.4530 bits (loss 19.796, data 19.343) 
+Epoch 6 Iter 3200, train entropy gap 1.5510 bits (loss 20.894, data 19.343) 
+Epoch 6 Iter 3400, train entropy gap 0.8766 bits (loss 20.220, data 19.343) 
+Epoch 6 Iter 3600, train entropy gap 1.5093 bits (loss 20.853, data 19.343) 
+Epoch 6 Iter 3800, train entropy gap 0.8912 bits (loss 20.235, data 19.343) 
+Epoch 6 Iter 4000, train entropy gap 2.6097 bits (loss 21.953, data 19.343) 
+Epoch 6 Iter 4200, train entropy gap 1.3185 bits (loss 20.662, data 19.343) 
+epoch 6 train loss 14.2737 nats / 20.5926 bits
+time since start: 509.6 secs
+Epoch 7 Iter 0, train entropy gap 1.2045 bits (loss 20.548, data 19.343) 
+Epoch 7 Iter 200, train entropy gap 1.8966 bits (loss 21.240, data 19.343) 
+Epoch 7 Iter 400, train entropy gap 1.8495 bits (loss 21.193, data 19.343) 
+Epoch 7 Iter 600, train entropy gap 0.5249 bits (loss 19.868, data 19.343) 
+Epoch 7 Iter 800, train entropy gap 0.3861 bits (loss 19.730, data 19.343) 
+Epoch 7 Iter 1000, train entropy gap 0.4658 bits (loss 19.809, data 19.343) 
+Epoch 7 Iter 1200, train entropy gap 1.4515 bits (loss 20.795, data 19.343) 
+Epoch 7 Iter 1400, train entropy gap 1.0359 bits (loss 20.379, data 19.343) 
+Epoch 7 Iter 1600, train entropy gap 1.9507 bits (loss 21.294, data 19.343) 
+Epoch 7 Iter 1800, train entropy gap 0.8014 bits (loss 20.145, data 19.343) 
+Epoch 7 Iter 2000, train entropy gap 1.0132 bits (loss 20.357, data 19.343) 
+Epoch 7 Iter 2200, train entropy gap 0.7852 bits (loss 20.129, data 19.343) 
+Epoch 7 Iter 2400, train entropy gap 0.4138 bits (loss 19.757, data 19.343) 
+Epoch 7 Iter 2600, train entropy gap 1.2507 bits (loss 20.594, data 19.343) 
+Epoch 7 Iter 2800, train entropy gap 0.2621 bits (loss 19.606, data 19.343) 
+Epoch 7 Iter 3000, train entropy gap 2.4219 bits (loss 21.765, data 19.343) 
+Epoch 7 Iter 3200, train entropy gap 0.2399 bits (loss 19.583, data 19.343) 
+Epoch 7 Iter 3400, train entropy gap 2.0925 bits (loss 21.436, data 19.343) 
+Epoch 7 Iter 3600, train entropy gap 1.9514 bits (loss 21.295, data 19.343) 
+Epoch 7 Iter 3800, train entropy gap 0.6775 bits (loss 20.021, data 19.343) 
+Epoch 7 Iter 4000, train entropy gap 0.9194 bits (loss 20.263, data 19.343) 
+Epoch 7 Iter 4200, train entropy gap 0.9031 bits (loss 20.247, data 19.343) 
+epoch 7 train loss 14.2554 nats / 20.5662 bits
+time since start: 582.4 secs
+Epoch 8 Iter 0, train entropy gap 0.2989 bits (loss 19.642, data 19.343) 
+Epoch 8 Iter 200, train entropy gap 0.4635 bits (loss 19.807, data 19.343) 
+Epoch 8 Iter 400, train entropy gap 2.4871 bits (loss 21.831, data 19.343) 
+Epoch 8 Iter 600, train entropy gap 1.3785 bits (loss 20.722, data 19.343) 
+Epoch 8 Iter 800, train entropy gap 0.5790 bits (loss 19.922, data 19.343) 
+Epoch 8 Iter 1000, train entropy gap 2.5084 bits (loss 21.852, data 19.343) 
+Epoch 8 Iter 1200, train entropy gap 0.1225 bits (loss 19.466, data 19.343) 
+Epoch 8 Iter 1400, train entropy gap 2.7726 bits (loss 22.116, data 19.343) 
+Epoch 8 Iter 1600, train entropy gap 0.2483 bits (loss 19.592, data 19.343) 
+Epoch 8 Iter 1800, train entropy gap 1.5829 bits (loss 20.926, data 19.343) 
+Epoch 8 Iter 2000, train entropy gap 0.5447 bits (loss 19.888, data 19.343) 
+Epoch 8 Iter 2200, train entropy gap 1.2220 bits (loss 20.565, data 19.343) 
+Epoch 8 Iter 2400, train entropy gap 3.0069 bits (loss 22.350, data 19.343) 
+Epoch 8 Iter 2600, train entropy gap 0.8713 bits (loss 20.215, data 19.343) 
+Epoch 8 Iter 2800, train entropy gap 0.3479 bits (loss 19.691, data 19.343) 
+Epoch 8 Iter 3000, train entropy gap 2.4177 bits (loss 21.761, data 19.343) 
+Epoch 8 Iter 3200, train entropy gap 0.4089 bits (loss 19.752, data 19.343) 
+Epoch 8 Iter 3400, train entropy gap 0.3930 bits (loss 19.736, data 19.343) 
+Epoch 8 Iter 3600, train entropy gap 0.2820 bits (loss 19.625, data 19.343) 
+Epoch 8 Iter 3800, train entropy gap 1.0108 bits (loss 20.354, data 19.343) 
+Epoch 8 Iter 4000, train entropy gap 1.6589 bits (loss 21.002, data 19.343) 
+Epoch 8 Iter 4200, train entropy gap 0.3954 bits (loss 19.739, data 19.343) 
+epoch 8 train loss 14.2491 nats / 20.5571 bits
+time since start: 654.4 secs
+Epoch 9 Iter 0, train entropy gap 0.3671 bits (loss 19.711, data 19.343) 
+Epoch 9 Iter 200, train entropy gap 0.5660 bits (loss 19.909, data 19.343) 
+Epoch 9 Iter 400, train entropy gap 1.6132 bits (loss 20.957, data 19.343) 
+Epoch 9 Iter 600, train entropy gap 2.5748 bits (loss 21.918, data 19.343) 
+Epoch 9 Iter 800, train entropy gap 2.4421 bits (loss 21.786, data 19.343) 
+Epoch 9 Iter 1000, train entropy gap 1.3948 bits (loss 20.738, data 19.343) 
+Epoch 9 Iter 1200, train entropy gap 0.7939 bits (loss 20.137, data 19.343) 
+Epoch 9 Iter 1400, train entropy gap 2.7207 bits (loss 22.064, data 19.343) 
+Epoch 9 Iter 1600, train entropy gap 2.1755 bits (loss 21.519, data 19.343) 
+Epoch 9 Iter 1800, train entropy gap 0.3263 bits (loss 19.670, data 19.343) 
+Epoch 9 Iter 2000, train entropy gap 0.5973 bits (loss 19.941, data 19.343) 
+Epoch 9 Iter 2200, train entropy gap 1.0701 bits (loss 20.414, data 19.343) 
+Epoch 9 Iter 2400, train entropy gap 1.5545 bits (loss 20.898, data 19.343) 
+Epoch 9 Iter 2600, train entropy gap 0.7935 bits (loss 20.137, data 19.343) 
+Epoch 9 Iter 2800, train entropy gap 1.2649 bits (loss 20.608, data 19.343) 
+Epoch 9 Iter 3000, train entropy gap 0.6300 bits (loss 19.973, data 19.343) 
+Epoch 9 Iter 3200, train entropy gap 1.3507 bits (loss 20.694, data 19.343) 
+Epoch 9 Iter 3400, train entropy gap 2.6102 bits (loss 21.954, data 19.343) 
+Epoch 9 Iter 3600, train entropy gap 2.5153 bits (loss 21.859, data 19.343) 
+Epoch 9 Iter 3800, train entropy gap 0.5802 bits (loss 19.924, data 19.343) 
+Epoch 9 Iter 4000, train entropy gap 0.1159 bits (loss 19.459, data 19.343) 
+Epoch 9 Iter 4200, train entropy gap 0.5060 bits (loss 19.849, data 19.343) 
+epoch 9 train loss 14.2449 nats / 20.5511 bits
+time since start: 726.1 secs
+Epoch 10 Iter 0, train entropy gap 0.4370 bits (loss 19.780, data 19.343) 
+Epoch 10 Iter 200, train entropy gap 0.3235 bits (loss 19.667, data 19.343) 
+Epoch 10 Iter 400, train entropy gap 0.6548 bits (loss 19.998, data 19.343) 
+Epoch 10 Iter 600, train entropy gap 0.5453 bits (loss 19.889, data 19.343) 
+Epoch 10 Iter 800, train entropy gap 1.6617 bits (loss 21.005, data 19.343) 
+Epoch 10 Iter 1000, train entropy gap 1.2678 bits (loss 20.611, data 19.343) 
+Epoch 10 Iter 1200, train entropy gap 1.2281 bits (loss 20.572, data 19.343) 
+Epoch 10 Iter 1400, train entropy gap 0.1195 bits (loss 19.463, data 19.343) 
+Epoch 10 Iter 1600, train entropy gap 2.3948 bits (loss 21.738, data 19.343) 
+Epoch 10 Iter 1800, train entropy gap 1.6054 bits (loss 20.949, data 19.343) 
+Epoch 10 Iter 2000, train entropy gap 0.3536 bits (loss 19.697, data 19.343) 
+Epoch 10 Iter 2200, train entropy gap 2.3218 bits (loss 21.665, data 19.343) 
+Epoch 10 Iter 2400, train entropy gap 1.8340 bits (loss 21.177, data 19.343) 
+Epoch 10 Iter 2600, train entropy gap 1.1730 bits (loss 20.516, data 19.343) 
+Epoch 10 Iter 2800, train entropy gap 2.6778 bits (loss 22.021, data 19.343) 
+Epoch 10 Iter 3000, train entropy gap 2.0788 bits (loss 21.422, data 19.343) 
+Epoch 10 Iter 3200, train entropy gap 1.0387 bits (loss 20.382, data 19.343) 
+Epoch 10 Iter 3400, train entropy gap 0.7350 bits (loss 20.078, data 19.343) 
+Epoch 10 Iter 3600, train entropy gap 1.0904 bits (loss 20.434, data 19.343) 
+Epoch 10 Iter 3800, train entropy gap 1.0618 bits (loss 20.405, data 19.343) 
+Epoch 10 Iter 4000, train entropy gap 0.5040 bits (loss 19.847, data 19.343) 
+Epoch 10 Iter 4200, train entropy gap 1.3293 bits (loss 20.673, data 19.343) 
+epoch 10 train loss 14.2403 nats / 20.5444 bits
+time since start: 798.7 secs
+Epoch 11 Iter 0, train entropy gap 1.1199 bits (loss 20.463, data 19.343) 
+Epoch 11 Iter 200, train entropy gap 0.9218 bits (loss 20.265, data 19.343) 
+Epoch 11 Iter 400, train entropy gap 0.4626 bits (loss 19.806, data 19.343) 
+Epoch 11 Iter 600, train entropy gap 0.6603 bits (loss 20.004, data 19.343) 
+Epoch 11 Iter 800, train entropy gap 0.6055 bits (loss 19.949, data 19.343) 
+Epoch 11 Iter 1000, train entropy gap 2.5285 bits (loss 21.872, data 19.343) 
+Epoch 11 Iter 1200, train entropy gap 0.4043 bits (loss 19.748, data 19.343) 
+Epoch 11 Iter 1400, train entropy gap 0.4496 bits (loss 19.793, data 19.343) 
+Epoch 11 Iter 1600, train entropy gap 2.5558 bits (loss 21.899, data 19.343) 
+Epoch 11 Iter 1800, train entropy gap 1.9638 bits (loss 21.307, data 19.343) 
+Epoch 11 Iter 2000, train entropy gap 1.1821 bits (loss 20.526, data 19.343) 
+Epoch 11 Iter 2200, train entropy gap 1.0840 bits (loss 20.427, data 19.343) 
+Epoch 11 Iter 2400, train entropy gap 0.6569 bits (loss 20.000, data 19.343) 
+Epoch 11 Iter 2600, train entropy gap 1.4453 bits (loss 20.789, data 19.343) 
+Epoch 11 Iter 2800, train entropy gap 0.5404 bits (loss 19.884, data 19.343) 
+Epoch 11 Iter 3000, train entropy gap 2.6076 bits (loss 21.951, data 19.343) 
+Epoch 11 Iter 3200, train entropy gap 1.9409 bits (loss 21.284, data 19.343) 
+Epoch 11 Iter 3400, train entropy gap 2.6913 bits (loss 22.035, data 19.343) 
+Epoch 11 Iter 3600, train entropy gap 1.6939 bits (loss 21.037, data 19.343) 
+Epoch 11 Iter 3800, train entropy gap 1.7363 bits (loss 21.080, data 19.343) 
+Epoch 11 Iter 4000, train entropy gap 2.5342 bits (loss 21.878, data 19.343) 
+Epoch 11 Iter 4200, train entropy gap 1.3081 bits (loss 20.652, data 19.343) 
+epoch 11 train loss 14.2417 nats / 20.5464 bits
+time since start: 871.2 secs
+Epoch 12 Iter 0, train entropy gap 1.6740 bits (loss 21.017, data 19.343) 
+Epoch 12 Iter 200, train entropy gap 0.5550 bits (loss 19.899, data 19.343) 
+Epoch 12 Iter 400, train entropy gap 0.5930 bits (loss 19.936, data 19.343) 
+Epoch 12 Iter 600, train entropy gap 0.9637 bits (loss 20.307, data 19.343) 
+Epoch 12 Iter 800, train entropy gap 0.8421 bits (loss 20.186, data 19.343) 
+Epoch 12 Iter 1000, train entropy gap 1.6685 bits (loss 21.012, data 19.343) 
+Epoch 12 Iter 1200, train entropy gap 2.9579 bits (loss 22.301, data 19.343) 
+Epoch 12 Iter 1400, train entropy gap 0.2005 bits (loss 19.544, data 19.343) 
+Epoch 12 Iter 1600, train entropy gap 0.3949 bits (loss 19.738, data 19.343) 
+Epoch 12 Iter 1800, train entropy gap 2.5054 bits (loss 21.849, data 19.343) 
+Epoch 12 Iter 2000, train entropy gap 1.2738 bits (loss 20.617, data 19.343) 
+Epoch 12 Iter 2200, train entropy gap 2.3479 bits (loss 21.691, data 19.343) 
+Epoch 12 Iter 2400, train entropy gap 1.7891 bits (loss 21.133, data 19.343) 
+Epoch 12 Iter 2600, train entropy gap 1.4811 bits (loss 20.825, data 19.343) 
+Epoch 12 Iter 2800, train entropy gap 2.9491 bits (loss 22.293, data 19.343) 
+Epoch 12 Iter 3000, train entropy gap 1.0219 bits (loss 20.365, data 19.343) 
+Epoch 12 Iter 3200, train entropy gap 0.8981 bits (loss 20.242, data 19.343) 
+Epoch 12 Iter 3400, train entropy gap 1.6139 bits (loss 20.957, data 19.343) 
+Epoch 12 Iter 3600, train entropy gap 1.0391 bits (loss 20.383, data 19.343) 
+Epoch 12 Iter 3800, train entropy gap 1.0371 bits (loss 20.381, data 19.343) 
+Epoch 12 Iter 4000, train entropy gap 0.5111 bits (loss 19.855, data 19.343) 
+Epoch 12 Iter 4200, train entropy gap 1.0259 bits (loss 20.369, data 19.343) 
+epoch 12 train loss 14.2412 nats / 20.5457 bits
+time since start: 942.9 secs
+Epoch 13 Iter 0, train entropy gap 1.1839 bits (loss 20.527, data 19.343) 
+Epoch 13 Iter 200, train entropy gap 0.5369 bits (loss 19.880, data 19.343) 
+Epoch 13 Iter 400, train entropy gap 0.9678 bits (loss 20.311, data 19.343) 
+Epoch 13 Iter 600, train entropy gap 1.6540 bits (loss 20.997, data 19.343) 
+Epoch 13 Iter 800, train entropy gap 0.7182 bits (loss 20.062, data 19.343) 
+Epoch 13 Iter 1000, train entropy gap 0.8038 bits (loss 20.147, data 19.343) 
+Epoch 13 Iter 1200, train entropy gap 0.2425 bits (loss 19.586, data 19.343) 
+Epoch 13 Iter 1400, train entropy gap 0.5999 bits (loss 19.943, data 19.343) 
+Epoch 13 Iter 1600, train entropy gap 0.3458 bits (loss 19.689, data 19.343) 
+Epoch 13 Iter 1800, train entropy gap 0.2512 bits (loss 19.595, data 19.343) 
+Epoch 13 Iter 2000, train entropy gap 2.4909 bits (loss 21.834, data 19.343) 
+Epoch 13 Iter 2200, train entropy gap 0.2507 bits (loss 19.594, data 19.343) 
+Epoch 13 Iter 2400, train entropy gap 0.7686 bits (loss 20.112, data 19.343) 
+Epoch 13 Iter 2600, train entropy gap 0.3645 bits (loss 19.708, data 19.343) 
+Epoch 13 Iter 2800, train entropy gap 0.7669 bits (loss 20.110, data 19.343) 
+Epoch 13 Iter 3000, train entropy gap 1.9357 bits (loss 21.279, data 19.343) 
+Epoch 13 Iter 3200, train entropy gap 1.7321 bits (loss 21.076, data 19.343) 
+Epoch 13 Iter 3400, train entropy gap 1.0388 bits (loss 20.382, data 19.343) 
+Epoch 13 Iter 3600, train entropy gap 1.0061 bits (loss 20.350, data 19.343) 
+Epoch 13 Iter 3800, train entropy gap 1.6483 bits (loss 20.992, data 19.343) 
+Epoch 13 Iter 4000, train entropy gap 0.3602 bits (loss 19.704, data 19.343) 
+Epoch 13 Iter 4200, train entropy gap 1.0060 bits (loss 20.349, data 19.343) 
+epoch 13 train loss 14.2485 nats / 20.5562 bits
+time since start: 1014.6 secs
+Epoch 14 Iter 0, train entropy gap 0.3448 bits (loss 19.688, data 19.343) 
+Epoch 14 Iter 200, train entropy gap 0.9088 bits (loss 20.252, data 19.343) 
+Epoch 14 Iter 400, train entropy gap 1.3074 bits (loss 20.651, data 19.343) 
+Epoch 14 Iter 600, train entropy gap 2.5592 bits (loss 21.903, data 19.343) 
+Epoch 14 Iter 800, train entropy gap 0.3511 bits (loss 19.695, data 19.343) 
+Epoch 14 Iter 1000, train entropy gap 1.4084 bits (loss 20.752, data 19.343) 
+Epoch 14 Iter 1200, train entropy gap 1.3255 bits (loss 20.669, data 19.343) 
+Epoch 14 Iter 1400, train entropy gap 2.4126 bits (loss 21.756, data 19.343) 
+Epoch 14 Iter 1600, train entropy gap 0.8727 bits (loss 20.216, data 19.343) 
+Epoch 14 Iter 1800, train entropy gap 0.4137 bits (loss 19.757, data 19.343) 
+Epoch 14 Iter 2000, train entropy gap 1.9302 bits (loss 21.274, data 19.343) 
+Epoch 14 Iter 2200, train entropy gap 0.7192 bits (loss 20.063, data 19.343) 
+Epoch 14 Iter 2400, train entropy gap 0.6238 bits (loss 19.967, data 19.343) 
+Epoch 14 Iter 2600, train entropy gap 0.7004 bits (loss 20.044, data 19.343) 
+Epoch 14 Iter 2800, train entropy gap 1.5783 bits (loss 20.922, data 19.343) 
+Epoch 14 Iter 3000, train entropy gap 1.7765 bits (loss 21.120, data 19.343) 
+Epoch 14 Iter 3200, train entropy gap 0.4242 bits (loss 19.768, data 19.343) 
+Epoch 14 Iter 3400, train entropy gap 0.2924 bits (loss 19.636, data 19.343) 
+Epoch 14 Iter 3600, train entropy gap 0.7624 bits (loss 20.106, data 19.343) 
+Epoch 14 Iter 3800, train entropy gap 2.4445 bits (loss 21.788, data 19.343) 
+Epoch 14 Iter 4000, train entropy gap 0.1575 bits (loss 19.501, data 19.343) 
+Epoch 14 Iter 4200, train entropy gap 1.4840 bits (loss 20.828, data 19.343) 
+epoch 14 train loss 14.2400 nats / 20.5439 bits
+time since start: 1086.0 secs
+Epoch 15 Iter 0, train entropy gap 0.5415 bits (loss 19.885, data 19.343) 
+Epoch 15 Iter 200, train entropy gap 1.2508 bits (loss 20.594, data 19.343) 
+Epoch 15 Iter 400, train entropy gap 0.8568 bits (loss 20.200, data 19.343) 
+Epoch 15 Iter 600, train entropy gap 1.7430 bits (loss 21.087, data 19.343) 
+Epoch 15 Iter 800, train entropy gap 1.4332 bits (loss 20.777, data 19.343) 
+Epoch 15 Iter 1000, train entropy gap 0.8823 bits (loss 20.226, data 19.343) 
+Epoch 15 Iter 1200, train entropy gap 0.0957 bits (loss 19.439, data 19.343) 
+Epoch 15 Iter 1400, train entropy gap 1.1323 bits (loss 20.476, data 19.343) 
+Epoch 15 Iter 1600, train entropy gap 1.7979 bits (loss 21.141, data 19.343) 
+Epoch 15 Iter 1800, train entropy gap 2.1369 bits (loss 21.480, data 19.343) 
+Epoch 15 Iter 2000, train entropy gap 2.5312 bits (loss 21.875, data 19.343) 
+Epoch 15 Iter 2200, train entropy gap 0.5984 bits (loss 19.942, data 19.343) 
+Epoch 15 Iter 2400, train entropy gap 1.2746 bits (loss 20.618, data 19.343) 
+Epoch 15 Iter 2600, train entropy gap 2.8912 bits (loss 22.235, data 19.343) 
+Epoch 15 Iter 2800, train entropy gap 2.7049 bits (loss 22.048, data 19.343) 
+Epoch 15 Iter 3000, train entropy gap 0.5867 bits (loss 19.930, data 19.343) 
+Epoch 15 Iter 3200, train entropy gap 0.8894 bits (loss 20.233, data 19.343) 
+Epoch 15 Iter 3400, train entropy gap 0.6090 bits (loss 19.953, data 19.343) 
+Epoch 15 Iter 3600, train entropy gap 2.4514 bits (loss 21.795, data 19.343) 
+Epoch 15 Iter 3800, train entropy gap 0.8784 bits (loss 20.222, data 19.343) 
+Epoch 15 Iter 4000, train entropy gap 0.8509 bits (loss 20.194, data 19.343) 
+Epoch 15 Iter 4200, train entropy gap 0.2092 bits (loss 19.553, data 19.343) 
+epoch 15 train loss 14.2367 nats / 20.5392 bits
+time since start: 1157.7 secs
+Epoch 16 Iter 0, train entropy gap 1.5633 bits (loss 20.907, data 19.343) 
+Epoch 16 Iter 200, train entropy gap 0.2562 bits (loss 19.600, data 19.343) 
+Epoch 16 Iter 400, train entropy gap 0.2257 bits (loss 19.569, data 19.343) 
+Epoch 16 Iter 600, train entropy gap 1.0581 bits (loss 20.402, data 19.343) 
+Epoch 16 Iter 800, train entropy gap 0.3963 bits (loss 19.740, data 19.343) 
+Epoch 16 Iter 1000, train entropy gap 1.5516 bits (loss 20.895, data 19.343) 
+Epoch 16 Iter 1200, train entropy gap 0.7132 bits (loss 20.057, data 19.343) 
+Epoch 16 Iter 1400, train entropy gap 2.1258 bits (loss 21.469, data 19.343) 
+Epoch 16 Iter 1600, train entropy gap 1.2451 bits (loss 20.589, data 19.343) 
+Epoch 16 Iter 1800, train entropy gap 1.1497 bits (loss 20.493, data 19.343) 
+Epoch 16 Iter 2000, train entropy gap 2.7079 bits (loss 22.051, data 19.343) 
+Epoch 16 Iter 2200, train entropy gap 0.8332 bits (loss 20.177, data 19.343) 
+Epoch 16 Iter 2400, train entropy gap 0.5116 bits (loss 19.855, data 19.343) 
+Epoch 16 Iter 2600, train entropy gap 1.2494 bits (loss 20.593, data 19.343) 
+Epoch 16 Iter 2800, train entropy gap 0.3035 bits (loss 19.647, data 19.343) 
+Epoch 16 Iter 3000, train entropy gap 2.4636 bits (loss 21.807, data 19.343) 
+Epoch 16 Iter 3200, train entropy gap 0.6639 bits (loss 20.007, data 19.343) 
+Epoch 16 Iter 3400, train entropy gap 1.2354 bits (loss 20.579, data 19.343) 
+Epoch 16 Iter 3600, train entropy gap 1.4543 bits (loss 20.798, data 19.343) 
+Epoch 16 Iter 3800, train entropy gap 0.2914 bits (loss 19.635, data 19.343) 
+Epoch 16 Iter 4000, train entropy gap 2.4156 bits (loss 21.759, data 19.343) 
+Epoch 16 Iter 4200, train entropy gap 2.2433 bits (loss 21.587, data 19.343) 
+epoch 16 train loss 14.2304 nats / 20.5302 bits
+time since start: 1229.1 secs
+Epoch 17 Iter 0, train entropy gap 1.6687 bits (loss 21.012, data 19.343) 
+Epoch 17 Iter 200, train entropy gap 3.0567 bits (loss 22.400, data 19.343) 
+Epoch 17 Iter 400, train entropy gap 0.9512 bits (loss 20.295, data 19.343) 
+Epoch 17 Iter 600, train entropy gap 0.3212 bits (loss 19.665, data 19.343) 
+Epoch 17 Iter 800, train entropy gap 1.9468 bits (loss 21.290, data 19.343) 
+Epoch 17 Iter 1000, train entropy gap 2.5674 bits (loss 21.911, data 19.343) 
+Epoch 17 Iter 1200, train entropy gap 0.5344 bits (loss 19.878, data 19.343) 
+Epoch 17 Iter 1400, train entropy gap 0.2020 bits (loss 19.545, data 19.343) 
+Epoch 17 Iter 1600, train entropy gap 0.7504 bits (loss 20.094, data 19.343) 
+Epoch 17 Iter 1800, train entropy gap 2.1632 bits (loss 21.507, data 19.343) 
+Epoch 17 Iter 2000, train entropy gap 1.9283 bits (loss 21.272, data 19.343) 
+Epoch 17 Iter 2200, train entropy gap 0.2759 bits (loss 19.619, data 19.343) 
+Epoch 17 Iter 2400, train entropy gap 0.5305 bits (loss 19.874, data 19.343) 
+Epoch 17 Iter 2600, train entropy gap 1.9236 bits (loss 21.267, data 19.343) 
+Epoch 17 Iter 2800, train entropy gap 2.4227 bits (loss 21.766, data 19.343) 
+Epoch 17 Iter 3000, train entropy gap 1.5852 bits (loss 20.929, data 19.343) 
+Epoch 17 Iter 3200, train entropy gap 1.0237 bits (loss 20.367, data 19.343) 
+Epoch 17 Iter 3400, train entropy gap 0.4947 bits (loss 19.838, data 19.343) 
+Epoch 17 Iter 3600, train entropy gap 0.9431 bits (loss 20.287, data 19.343) 
+Epoch 17 Iter 3800, train entropy gap 0.5709 bits (loss 19.914, data 19.343) 
+Epoch 17 Iter 4000, train entropy gap 2.2183 bits (loss 21.562, data 19.343) 
+Epoch 17 Iter 4200, train entropy gap 1.9494 bits (loss 21.293, data 19.343) 
+epoch 17 train loss 14.2407 nats / 20.5450 bits
+time since start: 1301.6 secs
+Epoch 18 Iter 0, train entropy gap 1.1007 bits (loss 20.444, data 19.343) 
+Epoch 18 Iter 200, train entropy gap 0.7393 bits (loss 20.083, data 19.343) 
+Epoch 18 Iter 400, train entropy gap 1.6970 bits (loss 21.040, data 19.343) 
+Epoch 18 Iter 600, train entropy gap 2.2300 bits (loss 21.573, data 19.343) 
+Epoch 18 Iter 800, train entropy gap 2.4959 bits (loss 21.839, data 19.343) 
+Epoch 18 Iter 1000, train entropy gap 2.4903 bits (loss 21.834, data 19.343) 
+Epoch 18 Iter 1200, train entropy gap 1.0391 bits (loss 20.383, data 19.343) 
+Epoch 18 Iter 1400, train entropy gap 1.1451 bits (loss 20.489, data 19.343) 
+Epoch 18 Iter 1600, train entropy gap 1.5105 bits (loss 20.854, data 19.343) 
+Epoch 18 Iter 1800, train entropy gap 1.5514 bits (loss 20.895, data 19.343) 
+Epoch 18 Iter 2000, train entropy gap 0.7966 bits (loss 20.140, data 19.343) 
+Epoch 18 Iter 2200, train entropy gap 2.0731 bits (loss 21.417, data 19.343) 
+Epoch 18 Iter 2400, train entropy gap 2.5572 bits (loss 21.901, data 19.343) 
+Epoch 18 Iter 2600, train entropy gap 0.8926 bits (loss 20.236, data 19.343) 
+Epoch 18 Iter 2800, train entropy gap 2.1460 bits (loss 21.489, data 19.343) 
+Epoch 18 Iter 3000, train entropy gap 1.2472 bits (loss 20.591, data 19.343) 
+Epoch 18 Iter 3200, train entropy gap 0.7769 bits (loss 20.120, data 19.343) 
+Epoch 18 Iter 3400, train entropy gap 2.6837 bits (loss 22.027, data 19.343) 
+Epoch 18 Iter 3600, train entropy gap 1.1210 bits (loss 20.464, data 19.343) 
+Epoch 18 Iter 3800, train entropy gap 2.6027 bits (loss 21.946, data 19.343) 
+Epoch 18 Iter 4000, train entropy gap 1.3343 bits (loss 20.678, data 19.343) 
+Epoch 18 Iter 4200, train entropy gap 1.9061 bits (loss 21.250, data 19.343) 
+epoch 18 train loss 14.2271 nats / 20.5254 bits
+time since start: 1374.0 secs
+Epoch 19 Iter 0, train entropy gap 0.8559 bits (loss 20.199, data 19.343) 
+Epoch 19 Iter 200, train entropy gap 2.2652 bits (loss 21.609, data 19.343) 
+Epoch 19 Iter 400, train entropy gap 0.8530 bits (loss 20.196, data 19.343) 
+Epoch 19 Iter 600, train entropy gap 1.7033 bits (loss 21.047, data 19.343) 
+Epoch 19 Iter 800, train entropy gap 1.3830 bits (loss 20.726, data 19.343) 
+Epoch 19 Iter 1000, train entropy gap 0.2109 bits (loss 19.554, data 19.343) 
+Epoch 19 Iter 1200, train entropy gap 2.8182 bits (loss 22.162, data 19.343) 
+Epoch 19 Iter 1400, train entropy gap 2.5781 bits (loss 21.922, data 19.343) 
+Epoch 19 Iter 1600, train entropy gap 1.3833 bits (loss 20.727, data 19.343) 
+Epoch 19 Iter 1800, train entropy gap 0.1726 bits (loss 19.516, data 19.343) 
+Epoch 19 Iter 2000, train entropy gap 0.6956 bits (loss 20.039, data 19.343) 
+Epoch 19 Iter 2200, train entropy gap 0.3075 bits (loss 19.651, data 19.343) 
+Epoch 19 Iter 2400, train entropy gap 1.3907 bits (loss 20.734, data 19.343) 
+Epoch 19 Iter 2600, train entropy gap 0.4598 bits (loss 19.803, data 19.343) 
+Epoch 19 Iter 2800, train entropy gap 0.6572 bits (loss 20.001, data 19.343) 
+Epoch 19 Iter 3000, train entropy gap 0.6739 bits (loss 20.017, data 19.343) 
+Epoch 19 Iter 3200, train entropy gap 2.5614 bits (loss 21.905, data 19.343) 
+Epoch 19 Iter 3400, train entropy gap 0.4473 bits (loss 19.791, data 19.343) 
+Epoch 19 Iter 3600, train entropy gap 1.6189 bits (loss 20.962, data 19.343) 
+Epoch 19 Iter 3800, train entropy gap 2.7209 bits (loss 22.064, data 19.343) 
+Epoch 19 Iter 4000, train entropy gap 0.5685 bits (loss 19.912, data 19.343) 
+Epoch 19 Iter 4200, train entropy gap 0.3779 bits (loss 19.721, data 19.343) 
+epoch 19 train loss 14.2234 nats / 20.5200 bits
+time since start: 1446.3 secs
+Training done; evaluating likelihood on full data:
+Epoch None Iter 0, test loss 18.1493 nats / 26.1838 bits
+Epoch None Iter 500, test loss 15.4800 nats / 22.3330 bits
+Epoch None Iter 1000, test loss 13.1726 nats / 19.0040 bits
+Epoch None Iter 1500, test loss 12.3676 nats / 17.8426 bits
+Epoch None Iter 2000, test loss 13.3540 nats / 19.2658 bits
+Epoch None Iter 2500, test loss 12.1496 nats / 17.5281 bits
+Epoch None Iter 3000, test loss 16.0363 nats / 23.1355 bits
+Epoch None Iter 3500, test loss 12.7585 nats / 18.4066 bits
+Epoch None Iter 4000, test loss 12.3705 nats / 17.8468 bits
+Saved to:
+models/DMV_ofnan_tr0.6-1.6MB-model19.593-data19.343-transformer-blocks4-model64-ff256-heads4-use_flash_attnFalse-posEmb-gelu-colmask-20epochs-seed0.pt

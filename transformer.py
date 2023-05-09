@@ -111,6 +111,7 @@ class LayerNorm(nn.Module):
         self.scale = nn.Parameter(torch.ones(features))
         self.shift = nn.Parameter(torch.zeros(features))
         self.eps = eps
+        self.model_bits = None
 
     def forward(self, x):
         mean = x.mean(-1, keepdim=True)
@@ -248,13 +249,15 @@ class Block(nn.Module):
         self.norm2 = LayerNorm(features=d_model)
         self.use_flash_attn=use_flash_attn
         if use_flash_attn:
-            self.attn = FlashMHA(embed_dim= d_model,num_heads=num_heads,device=device,dtype=torch.float16)
+            self.attn = FlashMHA(embed_dim= d_model,num_heads=num_heads,device=device,dtype=torch.float16,
+                                 causal=True)
         else:
             self.attn = MultiHeadSelfAttention(d_model, num_heads)
         self.do_residual = do_residual
 
     def set_attn_mask(self, mask):
         if self.use_flash_attn:
+            
             return # not support yet
         else:
             self.attn.attn_mask = mask
@@ -417,6 +420,20 @@ class Transformer(nn.Module):
         # Interface required by ProgressiveSampling.
         self.input_bins_encoded_cumsum = np.cumsum(encoded_bins)
         self.orderings = [self.fixed_ordering]
+
+
+    def update_structure(self,nin,input_bins):
+        with torch.no_grad():
+            self.input_bins = input_bins
+            self.nin = nin
+            for idx in range(nin):
+                if self.input_bins[idx]==  self.embeddings[idx].weight.shape[0] \
+                    and self.embed_dim == self.embeddings[idx].weight.shape[1]:
+                        continue
+                else:
+                    self.embeddings[idx]=nn.Embedding(self.input_bins[idx], self.embed_dim)
+                    nn.init.normal_(self.embeddings[idx].weight, std=0.02)
+            self.norm = LayerNorm(self.d_model)
 
     def name(self):
         n = 'transformer'
@@ -623,6 +640,17 @@ class Transformer(nn.Module):
         """
         embed = self.embeddings[idx]
         return torch.matmul(logits[:, idx, :], embed.weight.t())
+    
+    def distillation_loss(self,logits,target_logits,model_old):
+        # loss_ce = torch.zeros(logits.size()[0], device=logits.device)
+        # for i in range(self.nin):
+        #     old_logits_col=model_old.logits_for_col(i,target_logits)
+        #     new_logits_col=self.logits_for_col(i,logits)
+        #     ce = F.mse_loss(new_logits_col,old_logits_col,reduction='none')
+        #     loss_ce += ce
+        loss_mse = F.mse_loss(logits,target_logits,reduction='none')
+        return loss_mse
+                        
 
 
 if __name__ == '__main__':

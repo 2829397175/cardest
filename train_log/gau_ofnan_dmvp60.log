@@ -1,0 +1,63 @@
+Device cuda
+Loading csv... done, took 5.8s
+Parsing... done, took 5.0s
+Entropy of DMV_ofnan([Column(Record Type, distribution_size=2), Column(Registration Class, distribution_size=69), Column(State, distribution_size=77), Column(County, distribution_size=63), Column(Body Type, distribution_size=57), Column(Fuel Type, distribution_size=8), Column(Reg Valid Date, distribution_size=2828), Column(Color, distribution_size=218), Column(Scofflaw Indicator, distribution_size=2), Column(Suspension Indicator, distribution_size=2), Column(Revocation Indicator, distribution_size=2)]): 19.3435 bits
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 7315785 entries, 0 to 7315784
+Data columns (total 11 columns):
+ #   Column                Dtype         
+---  ------                -----         
+ 0   Record Type           object        
+ 1   Registration Class    object        
+ 2   State                 object        
+ 3   County                object        
+ 4   Body Type             object        
+ 5   Fuel Type             object        
+ 6   Reg Valid Date        datetime64[ns]
+ 7   Color                 object        
+ 8   Scofflaw Indicator    object        
+ 9   Suspension Indicator  object        
+ 10  Revocation Indicator  object        
+dtypes: datetime64[ns](1), object(10)
+memory usage: 614.0+ MB
+None
+ordering [ 0  1  2  3  4  5  6  7  8  9 10]
+Number of model parameters: 544177 (~= 2.1MB)
+FLASHTransformer(
+  (layers): Sequential(
+    (0): FLASH(
+      (attn_fn): ReLUSquared()
+      (rotary_pos_emb): RotaryEmbedding()
+      (rel_pos_bias): T5RelativePositionBias(
+        (relative_attention_bias): Embedding(32, 1)
+      )
+      (norm): ScaleNorm()
+      (dropout): Dropout(p=0.0, inplace=False)
+      (to_hidden): Sequential(
+        (0): Linear(in_features=128, out_features=512, bias=True)
+        (1): SiLU()
+      )
+      (to_qk): Sequential(
+        (0): Linear(in_features=128, out_features=128, bias=True)
+        (1): SiLU()
+      )
+      (qk_offset_scale): OffsetScale()
+      (to_out): Linear(in_features=256, out_features=128, bias=True)
+    )
+  )
+  (to_logits): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+  (embeddings): ModuleList(
+    (0): Embedding(2, 128)
+    (1): Embedding(69, 128)
+    (2): Embedding(77, 128)
+    (3): Embedding(63, 128)
+    (4): Embedding(57, 128)
+    (5): Embedding(8, 128)
+    (6): Embedding(2828, 128)
+    (7): Embedding(218, 128)
+    (8): Embedding(2, 128)
+    (9): Embedding(2, 128)
+    (10): Embedding(2, 128)
+  )
+  (pos_embeddings): Embedding(11, 128)
+)

@@ -803,7 +803,8 @@ class FLASHTransformer(nn.Module):
         for i in range(self.nin):
             old_logits_col=model_old.logits_for_col(i,target_logits)
             new_logits_col=self.logits_for_col(i,logits)
-            ce = F.cross_entropy(F.softmax(new_logits_col,dim=1),F.softmax(old_logits_col,dim=1),reduction='none')
+            # ce = F.cross_entropy(F.softmax(new_logits_col,dim=1),F.softmax(old_logits_col,dim=1),reduction='none')
+            ce = F.mse_loss(new_logits_col,old_logits_col,reduction='none')
             loss_ce += ce
         return loss_ce
                             

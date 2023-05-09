@@ -21,10 +21,11 @@ class DB_cardest():
                  table,
                  updater=OOD_DDup_detection,
                  args=None):
-        self.updater = updater(old_sample_num=10,
+        self.updater = updater(old_sample_num=400,
                              old_sample_size=10,
                              new_sample_size=10,
-                             update_step_threshold=5)
+                             update_step_threshold=5,
+                             queue_size=400)
         self.model = self.load_model(model_path,table,args)
         
         
@@ -53,14 +54,33 @@ class DB_cardest():
             return df.values.reshape(-1)
         return None
                
+             
+    def SaveEstimators(self,path, estimators, return_df=False,args=None):
+        # name, query_dur_ms, errs, est_cards, true_cards
+        results = pd.DataFrame()
+        for est in estimators:
+            data = {
+                'est': [est.name] * len(est.errs),
+                'err': est.errs,
+                'est_card': est.est_cards,
+                'true_card': est.true_cards,
+                'query_dur_ms': est.query_dur_ms,
+            }
+            results = results.append(pd.DataFrame(data))
+        if return_df:
+            return results
+        results.to_csv(path, index=False)
                
-    def run_ester(self, table, args):
+    def run_ester(self, table, args=None,save_err=False):
         import estimators as estimators_lib
         estimators=[estimators_lib.ProgressiveSampling(self.model,
                                             table,
                                             args.psample,
                                             device=DEVICE,
                                             shortcircuit=args.column_masking)]
+        for est in estimators:
+            est.name=str(est)
+        
         oracle_est = estimators_lib.Oracle(table)
         oracle_cards = self.LoadOracleCardinalities(args)
         cols_to_train = table.columns
@@ -75,6 +95,24 @@ class DB_cardest():
             num_filters=None,
             oracle_cards=oracle_cards,
             oracle_est=oracle_est)
+        
+        if (save_err):
+            root_dir="distill_results/"
+            if (args.finetune):
+                root_dir+="finetune"
+            elif (args.retrain):
+                root_dir+="retrain"
+            else:
+                root_dir+="distill"
+            
+            model_path='{}-{}'.format(table.name,self.model.name())
+            err_path=os.path.join(root_dir,"results_{}.csv".format(model_path))
+            if os.path.exists(err_path):
+                err_path=err_path[:-4]+"_num{}.csv".format(args.num_queries)    
+            # SaveEstimators(args.err_csv, estimators)
+            os.makedirs(os.path.dirname(err_path), exist_ok=True)
+            self.SaveEstimators(err_path, estimators)
+            print('...Done, result:', err_path)
     
     def SampleTupleThenRandom(self,
                               all_cols,
@@ -278,35 +316,52 @@ class DB_cardest():
     
 
         
+    
         
         
             
     def update(self,
-               insert_table:common.CsvTable,
                old_table:common.CsvTable,
-               args,
+                insert_table:common.CsvTable=None,
+                new_table:common.CsvTable=None, 
                update_epoches=20,
-               save_model = False):
+               save_model = False,
+               save_log=False,
+               args=None):
             # remain to be modified!!!!
-            
-        new_table, self.model=self.updater.online_update_db(insert_table,old_table, epochs=update_epoches)
+    # new_table :replace old table
+    # insert table :insert table+old table = new
+    # when new table is set,insert table is useless 
+        new_table, self.model, ood, df_distill = self.updater.online_update_db(old_table,
+                                                            insert_table=insert_table, 
+                                                            new_table=new_table,
+                                                            epochs=update_epoches,
+                                                            save_model=save_model,
+                                                            save_log=save_log,
+                                                            args=args)
 
-        seed = self.updater.seed
-        mb = self.ReportModel(self.model)
         
 
     
         
-        if(save_model):
-            PATH = 'models/distilled/{}-{:.1f}MB-model{:.3f}-data{:.3f}-{}-{}epochs-seed{}.pt'.format(
-                new_table.name, mb, self.model.model_bits, self.model.table_bits, self.model.name(),
-                update_epoches, seed)
-            os.makedirs(os.path.dirname(PATH), exist_ok=True)
-            torch.save(self.model.state_dict(), PATH)
-            print('Saved to:')
-            print(PATH)
+        # if(save_model):
+        #     if (ood):
+                
+        #         PATH = 'models/distilled/{}-{:.1f}MB-model{:.3f}-{}-{}epochs-seed{}.pt'.format(
+        #         new_table.name, mb, self.model.model_bits, self.model.name(),
+        #         update_epoches, seed)
+        #         if (df_distill is not None):
+        #             df_distill.to_csv("distill_log/"+PATH[17:-3]+".csv")
+        #     else:
+        #         PATH = 'models/finetune/{}-{:.1f}MB-model{:.3f}-{}-{}epochs-seed{}.pt'.format(
+        #         new_table.name, mb, self.model.model_bits, self.model.name(),
+        #         update_epoches, seed)
+        #     os.makedirs(os.path.dirname(PATH), exist_ok=True)
+        #     torch.save(self.model.state_dict(), PATH)
+        #     print('Saved to:')
+        #     print(PATH)
         
-        return new_table
+        return new_table,self.model,ood,df_distill
         # self.model = self.updater.get_model()
         
         
@@ -411,6 +466,10 @@ if __name__=="__main__":
                         type=int,
                         default=256,
                         help='the dim of flash.')
+    parser.add_argument('--group_size',
+                    type=int,
+                    default=128,
+                    help='the dim of group attention.')
 
     # Estimators to enable.
     parser.add_argument('--run-sampling',
@@ -439,32 +498,66 @@ if __name__=="__main__":
         default=30000,
         help='Maximum number of partitions of the Maxdiff histogram.')
 
-    args = parser.parse_args()
+    # backbone_distill    
+    parser.add_argument(
+    '--backbone',
+    type=str,
+    default="/home/jixy/naru/models/pretrained/DMV/DMV_ori_p100",
+    help='Backbone of distill.')
     
-    model_path="/home/jixy/naru/models/dmv-tiny-1.0MB-model7.008-data6.629-flash-blocks2-embed_dim128-expansion_factor2.0-posEmb-20epochs-seed0.pt"
-    table=datasets.LoadDmv("dmv-tiny.csv")
+    
+    # experiment setup
+    parser.add_argument(
+    '--alpha',
+    type=float,
+    default=0.8,
+    help='loss parameter.')
+    
+    parser.add_argument(
+    '--finetune',
+    action='store_true',
+    help='Run finetune experiment.')
+        
+    parser.add_argument(
+    '--retrain',
+    action='store_true',
+    help='Run retrain experiment.')
+    
+    parser.add_argument(
+    '--insert_dataset',
+    type=str,
+    default="insert_dmv_2000.csv",
+    help='file name of insert data.')
+    
+    args = parser.parse_args()
+    model_path= args.backbone
+    table=datasets.LoadDmv()
 
     # db_est=DB_cardest(model_path,table,args=args)
     # # db_est.run_ester(table,args)
     
     # # update_db
-    table_insert=datasets.LoadDmv("insert_dmv_ood.csv")
-
+    # table_insert=datasets.LoadDmv("insert_dmv_2000.csv",name='2000dmv')
+    # table_insert=datasets.LoadDmv("insert_dmv_2000.csv",name='2000dmv')
+    match = re.search( r'insert_dmv_(\d+).csv', args.insert_dataset, re.M|re.I)
+    num_insert=match.group(1)
+    table_insert=datasets.LoadDmv(args.insert_dataset,name=f'{num_insert}dmv')
+    # table_insert=datasets.LoadDmv('chop_dmv.csv')
+    # new_table=table_insert
     
-    # db_est.update(table_insert,table,args,save_model=True,update_epoches=20)
-    from datasets import UpdateDmv
-    new_table = UpdateDmv(table_insert,table)
+    # from datasets import UpdateDmv
+    # new_table = UpdateDmv(table_insert,table)
 
 
-    new_data = common.TableDataset(new_table)
-    old_data = common.TableDataset(table)
-    insert_data = common.TableDataset(table_insert)
+    # new_data = common.TableDataset(table_insert)
+    # old_data = common.TableDataset(table)
+    # insert_data = common.TableDataset(table_insert)
     
 
     
     def gridsearch(db_est:DB_cardest):     
-        epochs = [10,15,20]
-        start_lossw=np.arange(0,1.1,0.1)
+        epochs = [20]
+        start_lossw=np.arange(0.8,0.91,0.01)
         import pandas as pd
         from time import time
         df_params=pd.DataFrame()
@@ -480,10 +573,9 @@ if __name__=="__main__":
                                                   'data_type':data_type})
 
                     start_time=time()
-                    model_bits=db_est_temp.updater.search_param(insert_table=table_insert,
-                                                           old_table=table,
+                    model_bits,df_distill=db_est_temp.updater.search_param(
                                                            new_table=new_table,
-                                                           new_tablebits=6.768,
+                                                           new_tablebits=3.322,
                                                            train_data=new_data,
                                                            new_data=new_data,
                                                            epochs=epoch_nums,
@@ -503,11 +595,15 @@ if __name__=="__main__":
                                                   'data_type':data_type,
                                                 'err':model_bits,
                                                 'time_avg_epoch':(end_time-start_time)/epoch_nums},ignore_index=True)
-        df_params.to_csv("/home/jixy/naru/params/params_gridsearch_newdata.csv")      
+        df_params.to_csv("/home/jixy/naru/params/params_gridsearch_transformer_mse.csv")      
         print(best_param)
         
     import copy
     db_est_ori=DB_cardest(model_path,table,args=args)
-    gridsearch(db_est_ori)
+    new_table,model, ood, df_distill= db_est_ori.update(old_table=table,insert_table=table_insert,save_model=False,save_log=True,update_epoches=20,args=args)
+    db_est_ori.run_ester(new_table,args,save_err=True)
+    db_est_ori.run_ester(table,args,save_err=True)
+    # db_est_ori.run_ester(table_insert,args,save_err=True)
+    #gridsearch(db_est_ori)
     
     

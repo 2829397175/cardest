@@ -2,6 +2,7 @@
 import argparse
 import os
 import time
+from tkinter import N
 
 import numpy as np
 import torch
@@ -98,15 +99,6 @@ parser.add_argument('--transformer-act',
                     default='gelu',
                     help='Transformer activation.')
 
-# MFlow
-parser.add_argument('--hidden_features',
-                    type=int,
-                    default=128,
-                    help='Hidden features in Mflow.')
-parser.add_argument('--mflow',
-                    action='store_true',
-                    help='use Mflow?')
-
 # flash
 parser.add_argument('--FLASH',
                     action='store_true',
@@ -115,6 +107,10 @@ parser.add_argument('--flash_dim',
                     type=int,
                     default=128,
                     help='the dim of flash.')
+parser.add_argument('--group_size',
+                    type=int,
+                    default=128,
+                    help='the dim of group attention.')
 
 # Ordering.
 parser.add_argument('--num-orderings',
@@ -129,6 +125,29 @@ parser.add_argument(
     help=
     'Use a specific ordering.  '\
     'Format: e.g., [0 2 1] means variable 2 appears second.'
+)
+
+# Knowledge distillution experiment
+parser.add_argument(
+    '--re_train',
+    action='store_true',
+    help='doing knowledge distillution experiment?'
+)
+
+# pretrain DMV
+parser.add_argument(
+    '--pretrain',
+    type=str, 
+    default=None, 
+    help='pretrain_path.'
+)
+
+# dmv p60
+parser.add_argument(
+    '--rate_data',
+    type=float, 
+    default=None, 
+    help='using rate of training data.'
 )
 
 args = parser.parse_args()
@@ -177,7 +196,6 @@ def RunEpoch(split,
     model.train() if split == 'train' else model.eval()
     dataset = train_data if split == 'train' else val_data
     losses = []
-
     loader = torch.utils.data.DataLoader(dataset,
                                          batch_size=batch_size,
                                          shuffle=(split == 'train'))
@@ -189,23 +207,22 @@ def RunEpoch(split,
     if args.warmups and split == 'train':
         lr_scheduler = WarmupLR(opt, args.warmups)
     for step, xb in enumerate(loader):
-        if split == 'train':
-            base_lr = 8e-4
-            for param_group in opt.param_groups:
-                if args.constant_lr:
-                    lr = args.constant_lr
-                elif args.warmups: # Transformer, FLASH
-                    t = args.warmups
-                    d_model = model.embed_dim 
-                    global_steps = len(loader) * epoch_num + step + 1
-                    lr = (d_model**-0.5) * min(
-                        (global_steps**-.5), global_steps * (t**-1.5))
+        # if split == 'train':
+            # base_lr = 8e-4
+            # for param_group in opt.param_groups:
+            #     if args.constant_lr:
+            #         lr = args.constant_lr
+            #     elif args.warmups: # Transformer, FLASH
+            #         t = args.warmups
+            #         d_model = model.embed_dim 
+            #         global_steps = len(loader) * epoch_num + step + 1
+            #         lr = (d_model**-0.5) * min(
+            #             (global_steps**-.5), global_steps * (t**-1.5))
                     
-                    lr_scheduler = WarmupLR(opt, args.warmups)
-                else:
-                    lr = 1e-2
+            #     else:
+            #         lr = 1e-2
 
-                param_group['lr'] = lr
+            #     param_group['lr'] = lr
 
         if upto and step >= upto:
             break
@@ -321,11 +338,19 @@ def TrainTask(seed=0):
     torch.manual_seed(0)
     np.random.seed(0)
 
-    assert args.dataset in ['dmv-tiny', 'dmv']
+    # assert args.dataset in ['dmv-tiny', 'dmv']
     if args.dataset == 'dmv-tiny':
         table = datasets.LoadDmv('dmv-tiny.csv')
+    elif args.dataset =='dmv-p60':
+        table = datasets.LoadDmv('dmv_p60.csv')
+    elif args.dataset == 'dmv-100k':
+        table = datasets.LoadDmv('dmv_100k.csv')
+    elif args.dataset == 'dmv-ofnan':
+        table = datasets.LoadDmv('dmv_ofnan.csv')
     elif args.dataset == 'dmv':
         table = datasets.LoadDmv()
+    else:
+        table = datasets.LoadDataset(args.dataset)
 
     table_bits = Entropy(
         table,
@@ -352,16 +377,16 @@ def TrainTask(seed=0):
                                 seed=seed,args=args)
     
     else:
-        if args.dataset in ['dmv-tiny', 'dmv']:
-            model = MakeMade(
-                scale=args.fc_hiddens,
-                cols_to_train=table.columns,
-                seed=seed,
-                fixed_ordering=fixed_ordering,
-                args=args
-            )
-        else:
-            assert False, args.dataset
+
+        model = MakeMade(
+            scale=args.fc_hiddens,
+            cols_to_train=table.columns,
+            seed=seed,
+            fixed_ordering=fixed_ordering,
+            args=args
+        )
+
+        # assert False, args.dataset
 
     mb = ReportModel(model)
 
@@ -382,15 +407,20 @@ def TrainTask(seed=0):
         model.apply(InitWeight)
         opt = torch.optim.AdamW(list(model.parameters()),
                                 lr=2e-4,
-                                # betas=(0.9, 0.98),
-                                # eps=1e-9,
-                                # weight_decay=0.01
+                                betas=(0.9, 0.98),
+                                eps=1e-9,
+                                weight_decay=0.01
                                 )
     
+    # model.load_state_dict(torch.load())
     bs = args.bs
     log_every = 200
 
-    train_data = common.TableDataset(table_train)
+    # train p60
+    if args.rate_data is not None:
+        train_data = common.TableDataset(table_train,rate=args.rate_data)
+    else:
+        train_data = common.TableDataset(table_train)
 
     train_losses = []
     
@@ -399,6 +429,7 @@ def TrainTask(seed=0):
     train_start = time.time()
     
     df_train=pd.DataFrame()
+    
     for epoch in range(args.epochs):
 
         mean_epoch_train_loss = RunEpoch('train',
@@ -437,25 +468,96 @@ def TrainTask(seed=0):
     if fixed_ordering is None:
         if seed is not None:
             PATH = 'models/{}-{:.1f}MB-model{:.3f}-data{:.3f}-{}-{}epochs-seed{}.pt'.format(
-                args.dataset, mb, model.model_bits, table_bits, model.name(),
+                train_data.name, mb, model.model_bits, table_bits, model.name(),
                 args.epochs, seed)
         else:
             PATH = 'models/{}-{:.1f}MB-model{:.3f}-data{:.3f}-{}-{}epochs-seed{}-{}.pt'.format(
-                args.dataset, mb, model.model_bits, table_bits, model.name(),
+                train_data.name, mb, model.model_bits, table_bits, model.name(),
                 args.epochs, seed, time.time())
     else:
         annot = ''
         if args.inv_order:
             annot = '-invOrder'
-
-        PATH = 'models/{}-{:.1f}MB-model{:.3f}-data{:.3f}-{}-{}epochs-seed{}-order{}{}.pt'.format(
-            args.dataset, mb, model.model_bits, table_bits, model.name(),
+            PATH = 'models/{}-{:.1f}MB-model{:.3f}-data{:.3f}-{}-{}epochs-seed{}-order{}{}.pt'.format(   
+            train_data.name, mb, model.model_bits, table_bits, model.name(),
             args.epochs, seed, '_'.join(map(str, fixed_ordering)), annot)
-    os.makedirs(os.path.dirname(PATH), exist_ok=True)
-    torch.save(model.state_dict(), PATH)
+    if args.pretrain is not None:
+            PATH_pt = os.path.join(args.pretrain,PATH[7:])
+    os.makedirs(os.path.dirname(PATH_pt), exist_ok=True)
+    if os.path.exists(PATH_pt):
+        PATH_pt=PATH_pt[:-3]+"exist.pt"
+    torch.save(model.state_dict(), PATH_pt)
     print('Saved to:')
     print(PATH)
     df_train.to_csv("train_log/"+PATH[7:-3]+".csv")
 
 
 TrainTask()
+
+# def get_ood_data():
+#     torch.manual_seed(0)
+#     seed=np.random.seed(0)
+#     table= pd.read_csv("/home/jixy/naru/datasets/Vehicle__Snowmobile__and_Boat_Registrations_modified.csv")
+
+#     fixed_ordering = None
+
+#     if args.order is not None:
+#         print('Using passed-in order:', args.order)
+#         fixed_ordering = args.order
+
+#     print(table.data.info())
+
+#     table_train = table
+
+#     if args.heads > 0:
+#         model = MakeTransformer(cols_to_train=table.columns,
+#                                 fixed_ordering=fixed_ordering,
+#                                 use_flash_attn=args.use_flash_attn,
+#                                 seed=seed,args=args)
+#     elif args.FLASH:
+#         model = MakeFlash(cols_to_train=table.columns,
+#                                 fixed_ordering=fixed_ordering,
+#                                 seed=seed,args=args)
+    
+#     else:
+#         if args.dataset in ['dmv-tiny', 'dmv']:
+#             model = MakeMade(
+#                 scale=args.fc_hiddens,
+#                 cols_to_train=table.columns,
+#                 seed=seed,
+#                 fixed_ordering=fixed_ordering,
+#                 args=args
+#             )
+#         else:
+#             assert False, args.dataset
+
+    
+#     model.load_state_dict(torch.load("/home/jixy/naru/models/dmv-1.6MB-model0.103-data19.381-transformer-blocks4-model64-ff256-heads4-use_flash_attnTrue-posEmb-gelu-20epochs-seed0.pt"))
+#     model.eval()
+#     for i in range(100):
+#         dict_data={}
+#         for j in range(table_train.shape[1]):
+#             rand_idx_=np.random.randint(0,table_train.shape[1],1)
+#             dict_data[df_dmv.columns[j]]=df_dmv.iloc[rand_idx_,j]
+#         df_insert_dmv=df_insert_dmv.append(df_insert_dmv,ignore_index=True)    
+#     train_data = common.TableDataset(train_table_sub)
+#     table_bits = Entropy(
+#     table,
+#     table.data.fillna(value=0).groupby([c.name for c in table.columns
+#                                         ]).size(), [2])[0]
+#     all_losses = RunEpoch('test',
+#                           model,
+#                           train_data=train_data,
+#                           val_data=train_data,
+#                           opt=None,
+#                           batch_size=1024,
+#                           log_every=500,
+#                           table_bits=table_bits,
+#                           return_losses=True)
+#     model_nats = np.mean(all_losses)
+#     model_bits = model_nats / np.log(2)
+
+
+
+
+

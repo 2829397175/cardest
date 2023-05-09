@@ -9,6 +9,8 @@ import json
 import operator
 import time
 
+from numpy import NaN
+
 import numpy as np
 import pandas as pd
 import torch
@@ -205,6 +207,8 @@ class ProgressiveSampling(CardEst):
             n = int(self.r * self.table.columns[0].DistributionSize())
         return 'psample_{}'.format(n)
 
+
+    # origin version
     def _sample_n(self,
                   num_samples,
                   ordering,
@@ -227,7 +231,25 @@ class ProgressiveSampling(CardEst):
             op = operators[natural_idx]
             if op is not None:
                 # There exists a filter.
-                valid_i = OPS[op](columns[natural_idx].all_distinct_values,
+                ndv_list = columns[natural_idx].all_distinct_values
+                isnan = pd.isnull(ndv_list)
+                if pd.isnull(vals[natural_idx]):
+                    valid_i = np.zeros(len(ndv_list)).astype(np.float32,
+                                                            copy=False)
+                    valid_i[0]=True
+                    
+                elif isnan.any():
+                    valid_i = OPS[op](ndv_list[1:],
+                                  vals[natural_idx]).astype(np.float32,
+                                                            copy=False)
+                    valid_i = np.concatenate(([False],valid_i))
+                else:
+                    if isinstance(vals[natural_idx],pd.Timestamp):
+                        valid_i = OPS[op](ndv_list,
+                                  vals[natural_idx].to_datetime64()).astype(np.float32,
+                                                            copy=False)
+                    else:
+                        valid_i = OPS[op](ndv_list,
                                   vals[natural_idx]).astype(np.float32,
                                                             copy=False)
             else:
@@ -367,6 +389,192 @@ class ProgressiveSampling(CardEst):
         p *= masked_probs[0]
 
         return p.mean().item()
+    
+    
+    # # processed version
+    # def _sample_n(self,
+    #               num_samples,
+    #               ordering,
+    #               columns,
+    #               operators,
+    #               vals,
+    #               inp=None):
+    #     ncols = len(columns)
+    #     logits = self.init_logits
+    #     if inp is None:
+    #         inp = self.inp[:num_samples]
+    #     masked_probs = []
+
+    #     # Use the qu`ery to filter each colum`n's domain.
+    #     valid_i_list = [None] * ncols  # None means all valid.
+    #     for i in range(ncols):
+    #         natural_idx = ordering[i]
+
+    #         # Column i.
+    #         op = operators[natural_idx]
+    #         if op is not None:
+    #             # There exists a filter.
+    #             ndv_list = columns[natural_idx].all_distinct_values
+    #             isnan = pd.isnull(ndv_list)
+    #             if pd.isnull(vals[natural_idx]):
+    #                 valid_i = np.zeros(len(ndv_list)).astype(np.float32,
+    #                                                         copy=False)
+    #                 valid_i[0]=True
+                    
+    #             elif isnan.any():
+    #                 valid_i = OPS[op](ndv_list[1:],
+    #                               vals[natural_idx]).astype(np.float32,
+    #                                                         copy=False)
+    #                 valid_i = np.concatenate(([False],valid_i))
+    #             else:
+    #                 valid_i = OPS[op](ndv_list,
+    #                               vals[natural_idx]).astype(np.float32,
+    #                                                         copy=False)
+    #         else:
+    #             continue
+
+    #         # This line triggers a host -> gpu copy, showing up as a
+    #         # hotspot in cprofile.
+    #         valid_i_list[i] = torch.as_tensor(valid_i, device=self.device)
+
+    #     # Fill in wildcards, if enabled.
+    #     if self.shortcircuit:
+    #         for i in range(ncols):
+    #             natural_idx = i if ordering is None else ordering[i]
+    #             if operators[natural_idx] is None and natural_idx != ncols - 1:
+    #                 if natural_idx == 0:
+    #                     self.model.EncodeInput(
+    #                         None,
+    #                         natural_col=0,
+    #                         out=inp[:, :self.model.
+    #                                 input_bins_encoded_cumsum[0]])
+    #                 else:
+    #                     l = self.model.input_bins_encoded_cumsum[natural_idx -
+    #                                                              1]
+    #                     r = self.model.input_bins_encoded_cumsum[natural_idx]
+    #                     self.model.EncodeInput(None,
+    #                                            natural_col=natural_idx,
+    #                                            out=inp[:, l:r])
+
+    #     # Actual progressive sampling.  Repeat:
+    #     #   Sample next var from curr logits -> fill in next var
+    #     #   Forward pass -> curr logits
+    #     for i in range(ncols):
+    #         natural_idx = i if ordering is None else ordering[i]
+
+    #         # If wildcard enabled, 'logits' wasn't assigned last iter.
+    #         if not self.shortcircuit or operators[natural_idx] is not None:
+    #             probs_i = torch.softmax(
+    #                 self.model.logits_for_col(natural_idx, logits), 1)
+
+    #             valid_i = valid_i_list[i]
+    #             if valid_i is not None:
+    #                 probs_i *= valid_i
+
+    #             probs_i_summed = probs_i.sum(1)
+
+    #             masked_probs.append(probs_i_summed)
+
+    #             # If some paths have vanished (~0 prob), assign some nonzero
+    #             # mass to the whole row so that multinomial() doesn't complain.
+    #             paths_vanished = (probs_i_summed <= 0).view(-1, 1)
+    #             probs_i = probs_i.masked_fill_(paths_vanished, 1.0)
+
+    #         if i < ncols - 1:
+    #             # Num samples to draw for column i.
+    #             if i != 0:
+    #                 num_i = 1
+    #             else:
+    #                 num_i = num_samples if num_samples else int(
+    #                     self.r * self.dom_sizes[natural_idx])
+
+    #             if self.shortcircuit and operators[natural_idx] is None:
+    #                 data_to_encode = None
+    #             else:
+                    
+    #                 logits_list=[]
+    #                 for i in range(2):
+    #                     samples_i = torch.multinomial(
+    #                         probs_i, num_samples=num_i,
+    #                         replacement=True)  # [bs, num_i]
+    #                     data_to_encode = samples_i.view(-1, 1)  
+    #                     # 通过这里影响后续的选择域
+
+    #                     # Encode input: i.e., put sampled vars into input buffer.
+    #                     if data_to_encode is not None:  # Wildcards are encoded already.
+    #                         if isinstance(self.model, made.MADE):
+    #                             if natural_idx == 0:
+    #                                 self.model.EncodeInput(
+    #                                     data_to_encode,
+    #                                     natural_col=0,
+    #                                     out=inp[:, :self.model.
+    #                                             input_bins_encoded_cumsum[0]])
+    #                             else:
+    #                                 l = self.model.input_bins_encoded_cumsum[natural_idx
+    #                                                                         - 1]
+    #                                 r = self.model.input_bins_encoded_cumsum[
+    #                                     natural_idx]
+    #                                 self.model.EncodeInput(data_to_encode,
+    #                                                     natural_col=natural_idx,
+    #                                                     out=inp[:, l:r])
+    #                         elif isinstance(self.model, (transformer.Transformer,
+    #                                                     flash.FLASHTransformer)):
+    #                             # Transformer.  Need special treatment due to
+    #                             # right-shift.
+    #                             embed_dim = self.model.d_model if isinstance(self.model, (transformer.Transformer)) \
+    #                                 else self.model.embed_dim
+    #                             l = (natural_idx + 1) * embed_dim
+    #                             r = l + embed_dim
+    #                             if i == 0:
+    #                                 # Let's also add E_pos=0 to SOS (if enabled).
+    #                                 # This is a no-op if disabled pos embs.
+    #                                 self.model.EncodeInput(
+    #                                     data_to_encode,  # Will ignore.
+    #                                     natural_col=-1,  # Signals SOS.
+    #                                     out=inp[:, :embed_dim])
+
+    #                             if MASK_SCHEME == 1:
+    #                                 # Should encode natural_col \in [0, ncols).
+    #                                 self.model.EncodeInput(data_to_encode,
+    #                                                     natural_col=natural_idx,
+    #                                                     out=inp[:, l:r])
+    #                             elif natural_idx < self.model.nin - 1:
+    #                                 # If scheme is 0, should not encode the last
+    #                                 # variable.
+    #                                 self.model.EncodeInput(data_to_encode,
+    #                                                     natural_col=natural_idx,
+    #                                                     out=inp[:, l:r])
+
+    #                     # Actual forward pass.
+    #                     next_natural_idx = i + 1 if ordering is None else ordering[i +
+    #                                                                             1]
+    #                     if self.shortcircuit and operators[next_natural_idx] is None:
+    #                         # If next variable in line is wildcard, then don't do
+    #                         # this forward pass.  Var 'logits' won't be accessed.
+    #                         continue
+
+    #                     if hasattr(self.model, 'do_forward'):
+    #                         # With a specific ordering.
+    #                         logits = self.model.do_forward(inp, ordering)
+    #                     else:
+    #                         if self.traced_fwd is not None:
+    #                             logits = self.traced_fwd(inp)
+    #                         else:
+    #                             logits = self.model.forward_with_encoded_input(inp)
+                                
+    #                     logits_list.append(logits)
+                    
+
+    #                 logits=(logits_list[0]+logits_list[1])/2
+
+    #     # Doing this convoluted scheme because m_p[0] is a scalar, and
+    #     # we want the corret shape to broadcast.
+    #     p = masked_probs[1]
+    #     for ls in masked_probs[2:]:
+    #         p *= ls
+    #     p *= masked_probs[0]
+
+    #     return p.mean().item()
 
     def Query(self, columns, operators, vals):
         # Massages queries into natural order.
@@ -595,7 +803,12 @@ class Sampling(CardEst):
         self.table = table
 
         self.p = p
-        self.num_samples = int(p * table.cardinality)
+        if int(p * table.cardinality) > 0:
+            self.num_samples = int(p * table.cardinality)
+        else:
+            self.p=0.05
+            self.num_samples=int(0.05*table.cardinality)
+            
         self.size = table.cardinality
 
         # TODO: add seed for repro.

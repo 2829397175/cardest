@@ -123,6 +123,7 @@ class MADE(nn.Module):
         self.do_direct_io_connections = do_direct_io_connections
         self.column_masking = column_masking
         self.residual_connections = residual_connections
+        self.model_bits = None
 
         self.fixed_ordering = fixed_ordering
         if fixed_ordering is not None:
