@@ -1,3 +1,4 @@
+from numpy import NaN
 import pandas as pd
 import numpy as np
 import re
@@ -143,7 +144,7 @@ df_infos=[
     
 ]
 
-new_dataset="distill_result"
+new_dataset="alpha0.85_result"
 
 
 
@@ -172,6 +173,19 @@ def judge_type(name,value):
         return "error",None
     
     
+    
+def judge_train_data(dataset,name):
+    try:
+        match = re.search( r'DMV_ofnan_(\d+)dmv', dataset, re.M|re.I)
+        insert_len=int(match.group(1))
+        return insert_len
+    except:
+        try:
+            match = re.search( r'train_data(.*?)-', name, re.M|re.I)
+            train_data=match.group(1)
+            return judge_train_data(train_data,name)
+        except:
+            return NaN
 
 import os
 
@@ -199,15 +213,49 @@ if __name__=="__main__":
                 model_type,dataset=judge_type(df_name,value)
                 assert model_type!="error",print(df_name,value)
                 res_d['Dataset']=dataset   
-                res_d['Model']=model_type    
-                res_d['queries']=group.shape[0]
+                res_d['Model']=model_type  
+                res_d['Type']=type  
+                res_d['Train_len']=judge_train_data(dataset,df_name)
                 res_d['Mean']="{:.3f}".format(np.mean(err))
                 res_d['Median']="{:.3f}".format(err[indexs[1]])
                 res_d['95th']="{:.3f}".format(err[indexs[0]])
                 res_d['MAX']="{:.3f}".format(np.max(err))
+                res_d['queries']=group.shape[0]
                 res_d['query_ms']="{:.3f}".format(np.mean(group['query_dur_ms']))
-                res_d['type']=type
+
                 
+                # 补充信息:
+                try:
+                    match = re.search( r'a(\d+\.?\d+)_', df_name, re.M|re.I)
+                    alpha=match.group(1)
+                except:
+                    try:
+                        match = re.search( r'-alpha(\d+\.?\d+)-', df_name, re.M|re.I)
+                        alpha=match.group(1)
+                    except:
+                        alpha=NaN
+                res_d['alpha']=alpha
+                
+                                # 补充信息:
+                try:
+                    match = re.search( r'b(\d+\.?\d+)_', df_name, re.M|re.I)
+                    beta=match.group(1)
+                except:
+                    try:
+                        match = re.search( r'-beta(\d+\.?\d+)-', df_name, re.M|re.I)
+                        beta=match.group(1)
+                    except:
+                        beta=NaN
+                res_d['beta']=beta
+                
+                try:
+                    match = re.search( r'-mixup(.*?)-', df_name, re.M|re.I)
+                    mixup=match.group(1)
+                except:
+                    mixup=NaN
+                res_d['mixup']=mixup
+                
+                    
                 df_res.append(res_d)
         
     # for df_info in df_infos:

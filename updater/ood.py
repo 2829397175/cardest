@@ -353,8 +353,9 @@ class OOD_DDup_detection(OOD_dection):
             root_path= 'models/retrain/'if alpha==1 else 'models/distilled/'
             if not os.path.exists(root_path):
                 os.makedirs(root_path)
-            PATH = os.path.join(root_path,'/{}-{:.1f}MB-{}-seed{}-alpha{}-beta{}'.format(
-                train_data.name, mb, self.model.name(),seed,alpha,beta))
+
+            PATH = os.path.join(root_path,'/{}-mixup{}-{:.1f}MB-{}-seed{}-alpha{}-beta{}'.format(
+                train_data.name,train_data.mixup, mb, self.model.name(),seed,alpha,beta))
             early_stopping = EarlyStopping(PATH,2)
         opt = self.get_model_opt(new_model)
         alpha = torch.nn.Parameter(torch.tensor(alpha),requires_grad=True)
@@ -401,7 +402,7 @@ class OOD_DDup_detection(OOD_dection):
                 break #跳出迭代，结束训练
             
         if (save_model or save_log):
-            path=early_stopping.save_checkpoint(val_losses,new_model,epoch,save_model)
+            path=early_stopping.save_checkpoint(val_nats,new_model,epoch,save_model)
         
         losses=np.array(losses)
         df_train['loss']=losses[:,0]
@@ -761,7 +762,7 @@ class OOD_DDup_detection(OOD_dection):
                                         new_model,
                                         epochs=epochs,
                                         alpha=args.alpha,
-                                        beta=0.2,
+                                        beta=args.beta,
                                         val_data=val_data,
                                         val_bits=val_bits,
                                         save_model=save_model,

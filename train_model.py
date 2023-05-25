@@ -1,6 +1,7 @@
 """Model training."""
 import argparse
 import os
+from sys import path_hooks
 import time
 from tkinter import N
 
@@ -481,6 +482,7 @@ def TrainTask(seed=0):
             PATH = 'models/{}-{:.1f}MB-model{:.3f}-data{:.3f}-{}-{}epochs-seed{}-order{}{}.pt'.format(   
             train_data.name, mb, model.model_bits, table_bits, model.name(),
             args.epochs, seed, '_'.join(map(str, fixed_ordering)), annot)
+    PATH_pt=PATH
     if args.pretrain is not None:
             PATH_pt = os.path.join(args.pretrain,PATH[7:])
     os.makedirs(os.path.dirname(PATH_pt), exist_ok=True)

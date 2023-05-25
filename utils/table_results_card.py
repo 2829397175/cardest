@@ -40,12 +40,13 @@ dataset='dmv'
 # ]
 # dataset='adult'
 
-# df_names=[
-#    "/home/jixy/naru/results/results_cup-1.8MB-model91.219-data16.542-flash-blocks2-embed_dim128-expansion_factor2.0-group_size64-posEmb-50epochs-seed0_num200.csv",
-#    "/home/jixy/naru/results/results_cup-1.8MB-model91.219-data16.542-flash-blocks2-embed_dim128-expansion_factor2.0-group_size64-posEmb-50epochs-seed0.csv",
-#    "/home/jixy/naru/results/results_cup-1.7MB-model100.193-data16.542-transformer-blocks2-model128-ff128-heads8-use_flash_attnFalse-posEmb-gelu-20epochs-seed0.csv"
-# ]
-# dataset='cup'
+df_names=[
+   "/home/jixy/naru/results/results_cup-1.8MB-model91.219-data16.542-flash-blocks2-embed_dim128-expansion_factor2.0-group_size64-posEmb-50epochs-seed0_num200.csv",
+   "/home/jixy/naru/results/results_cup-1.8MB-model91.219-data16.542-flash-blocks2-embed_dim128-expansion_factor2.0-group_size64-posEmb-50epochs-seed0.csv",
+   "/home/jixy/naru/results/results_cup-1.7MB-model100.193-data16.542-transformer-blocks2-model128-ff128-heads8-use_flash_attnFalse-posEmb-gelu-20epochs-seed0.csv",
+   "/home/jixy/naru/results/results_Cup98-4.3MB-model338.530-data16.542-made-resmade-hidden128_128_128_128_128-emb32-directIo-binaryInone_hotOut-inputNoEmbIfLeq-20epochs-seed0.csv"
+]
+dataset='cup'
 
 
 

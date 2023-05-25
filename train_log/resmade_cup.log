@@ -1,0 +1,649 @@
+Device cuda
+Loading csv... done, took 1.1s
+Parsing... done, took 0.3s
+Entropy of Cup98([Column(473, distribution_size=2), Column(5, distribution_size=3), Column(9, distribution_size=3), Column(10, distribution_size=3), Column(11, distribution_size=3), Column(12, distribution_size=3), Column(52, distribution_size=3), Column(55, distribution_size=3), Column(56, distribution_size=3), Column(57, distribution_size=3), Column(58, distribution_size=3), Column(59, distribution_size=3), Column(60, distribution_size=3), Column(61, distribution_size=3), Column(62, distribution_size=3), Column(63, distribution_size=3), Column(64, distribution_size=3), Column(65, distribution_size=3), Column(66, distribution_size=3), Column(67, distribution_size=3), Column(68, distribution_size=3), Column(69, distribution_size=3), Column(70, distribution_size=3), Column(71, distribution_size=3), Column(72, distribution_size=3), Column(74, distribution_size=3), Column(6, distribution_size=4), Column(17, distribution_size=4), Column(18, distribution_size=4), Column(361, distribution_size=3), Column(19, distribution_size=5), Column(20, distribution_size=5), Column(21, distribution_size=5), Column(22, distribution_size=5), Column(42, distribution_size=5), Column(73, distribution_size=5), Column(470, distribution_size=3), Column(472, distribution_size=3), Column(475, distribution_size=5), Column(477, distribution_size=5), Column(50, distribution_size=6), Column(476, distribution_size=6), Column(478, distribution_size=6), Column(318, distribution_size=44), Column(25, distribution_size=8), Column(51, distribution_size=9), Column(54, distribution_size=9), Column(408, distribution_size=6), Column(474, distribution_size=5), Column(358, distribution_size=7), Column(384, distribution_size=15), Column(14, distribution_size=18), Column(317, distribution_size=15), Column(326, distribution_size=18), Column(350, distribution_size=17), Column(161, distribution_size=18), Column(234, distribution_size=19), Column(148, distribution_size=15), Column(324, distribution_size=20), Column(13, distribution_size=29), Column(147, distribution_size=15), Column(88, distribution_size=22), Column(299, distribution_size=20), Column(316, distribution_size=27), Column(397, distribution_size=35), Column(410, distribution_size=20), Column(288, distribution_size=26), Column(233, distribution_size=28), Column(258, distribution_size=28), Column(183, distribution_size=26), Column(325, distribution_size=27), Column(387, distribution_size=42), Column(182, distribution_size=28), Column(307, distribution_size=28), Column(357, distribution_size=23), Column(314, distribution_size=32), Column(322, distribution_size=34), Column(92, distribution_size=34), Column(304, distribution_size=37), Column(323, distribution_size=31), Column(210, distribution_size=32), Column(93, distribution_size=35), Column(464, distribution_size=25), Column(94, distribution_size=44), Column(255, distribution_size=36), Column(271, distribution_size=35), Column(15, distribution_size=54), Column(219, distribution_size=37), Column(259, distribution_size=41), Column(3, distribution_size=58), Column(294, distribution_size=37), Column(359, distribution_size=38), Column(96, distribution_size=46), Column(209, distribution_size=37), Column(336, distribution_size=33), Column(265, distribution_size=45), Column(319, distribution_size=43), Column(360, distribution_size=40), Column(272, distribution_size=44), Column(277, distribution_size=42)]): 16.5418 bits
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 95413 entries, 0 to 95412
+Data columns (total 100 columns):
+ #   Column  Non-Null Count  Dtype 
+---  ------  --------------  ----- 
+ 0   473     95413 non-null  object
+ 1   5       95413 non-null  object
+ 2   9       95413 non-null  object
+ 3   10      95413 non-null  object
+ 4   11      95413 non-null  object
+ 5   12      95413 non-null  object
+ 6   52      95413 non-null  object
+ 7   55      95413 non-null  object
+ 8   56      95413 non-null  object
+ 9   57      95413 non-null  object
+ 10  58      95413 non-null  object
+ 11  59      95413 non-null  object
+ 12  60      95413 non-null  object
+ 13  61      95413 non-null  object
+ 14  62      95413 non-null  object
+ 15  63      95413 non-null  object
+ 16  64      95413 non-null  object
+ 17  65      95413 non-null  object
+ 18  66      95413 non-null  object
+ 19  67      95413 non-null  object
+ 20  68      95413 non-null  object
+ 21  69      95413 non-null  object
+ 22  70      95413 non-null  object
+ 23  71      95413 non-null  object
+ 24  72      95413 non-null  object
+ 25  74      95413 non-null  object
+ 26  6       95413 non-null  object
+ 27  17      95413 non-null  object
+ 28  18      95413 non-null  object
+ 29  361     95413 non-null  int64 
+ 30  19      95413 non-null  object
+ 31  20      95413 non-null  object
+ 32  21      95413 non-null  object
+ 33  22      95413 non-null  object
+ 34  42      95413 non-null  object
+ 35  73      95413 non-null  object
+ 36  470     95413 non-null  int64 
+ 37  472     95413 non-null  int64 
+ 38  475     95413 non-null  object
+ 39  477     95413 non-null  object
+ 40  50      95413 non-null  object
+ 41  476     95413 non-null  object
+ 42  478     95413 non-null  object
+ 43  318     95413 non-null  int64 
+ 44  25      95413 non-null  object
+ 45  51      95413 non-null  object
+ 46  54      95413 non-null  object
+ 47  408     95413 non-null  int64 
+ 48  474     95413 non-null  int64 
+ 49  358     95413 non-null  int64 
+ 50  384     95413 non-null  object
+ 51  14      95413 non-null  object
+ 52  317     95413 non-null  int64 
+ 53  326     95413 non-null  int64 
+ 54  350     95413 non-null  int64 
+ 55  161     95413 non-null  int64 
+ 56  234     95413 non-null  int64 
+ 57  148     95413 non-null  int64 
+ 58  324     95413 non-null  int64 
+ 59  13      95413 non-null  object
+ 60  147     95413 non-null  int64 
+ 61  88      95413 non-null  int64 
+ 62  299     95413 non-null  int64 
+ 63  316     95413 non-null  int64 
+ 64  397     95413 non-null  object
+ 65  410     95413 non-null  int64 
+ 66  288     95413 non-null  int64 
+ 67  233     95413 non-null  int64 
+ 68  258     95413 non-null  int64 
+ 69  183     95413 non-null  int64 
+ 70  325     95413 non-null  int64 
+ 71  387     95413 non-null  object
+ 72  182     95413 non-null  int64 
+ 73  307     95413 non-null  int64 
+ 74  357     95413 non-null  int64 
+ 75  314     95413 non-null  int64 
+ 76  322     95413 non-null  int64 
+ 77  92      95413 non-null  int64 
+ 78  304     95413 non-null  int64 
+ 79  323     95413 non-null  int64 
+ 80  210     95413 non-null  int64 
+ 81  93      95413 non-null  int64 
+ 82  464     95413 non-null  int64 
+ 83  94      95413 non-null  int64 
+ 84  255     95413 non-null  int64 
+ 85  271     95413 non-null  int64 
+ 86  15      95413 non-null  object
+ 87  219     95413 non-null  int64 
+ 88  259     95413 non-null  int64 
+ 89  3       95413 non-null  object
+ 90  294     95413 non-null  int64 
+ 91  359     95413 non-null  int64 
+ 92  96      95413 non-null  int64 
+ 93  209     95413 non-null  int64 
+ 94  336     95413 non-null  int64 
+ 95  265     95413 non-null  int64 
+ 96  319     95413 non-null  int64 
+ 97  360     95413 non-null  int64 
+ 98  272     95413 non-null  int64 
+ 99  277     95413 non-null  int64 
+dtypes: int64(50), object(50)
+memory usage: 72.8+ MB
+None
+fixed_ordering None seed 0 natural_ordering True
+encoded_bins (output) [2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 5, 5, 5, 5, 5, 5, 3, 3, 5, 5, 6, 6, 6, 44, 8, 9, 9, 6, 5, 7, 15, 18, 15, 18, 17, 18, 19, 15, 20, 29, 15, 22, 20, 27, 35, 20, 26, 28, 28, 26, 27, 42, 28, 28, 23, 32, 34, 34, 37, 31, 32, 35, 25, 44, 36, 35, 54, 37, 41, 58, 37, 38, 46, 37, 33, 45, 43, 40, 44, 42]
+encoded_bins (input) [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 3, 6, 3, 4, 4, 3, 3, 3, 4, 5, 4, 5, 5, 5, 5, 4, 5, 5, 4, 5, 5, 5, 6, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 6, 6, 5, 5, 6, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+Number of model parameters: 1790345 (~= 6.8MB)
+MADE(
+  (net): Sequential(
+    (0): MaskedLinear(in_features=391, out_features=256, bias=True)
+    (1): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=256, out_features=256, bias=True)
+        (1): MaskedLinear(in_features=256, out_features=256, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (2): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=256, out_features=256, bias=True)
+        (1): MaskedLinear(in_features=256, out_features=256, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (3): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=256, out_features=256, bias=True)
+        (1): MaskedLinear(in_features=256, out_features=256, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (4): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=256, out_features=256, bias=True)
+        (1): MaskedLinear(in_features=256, out_features=256, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (5): MaskedLinear(in_features=256, out_features=1793, bias=True)
+  )
+  (direct_io_layer): MaskedLinear(in_features=391, out_features=1793, bias=True)
+)
+Applying InitWeight()
+Discretizing table... done, took 0.3s
+Epoch 0 Iter 0, train entropy gap 326.2269 bits (loss 342.769, data 16.542) 
+epoch 0 train loss 237.5673 nats / 342.7372 bits
+time since start: 1.6 secs
+Epoch 1 Iter 0, train entropy gap 325.9369 bits (loss 342.479, data 16.542) 
+epoch 1 train loss 237.3719 nats / 342.4552 bits
+time since start: 2.4 secs
+Epoch 2 Iter 0, train entropy gap 325.6445 bits (loss 342.186, data 16.542) 
+epoch 2 train loss 237.1766 nats / 342.1735 bits
+time since start: 3.3 secs
+Epoch 3 Iter 0, train entropy gap 325.5378 bits (loss 342.080, data 16.542) 
+epoch 3 train loss 236.9799 nats / 341.8898 bits
+time since start: 4.2 secs
+Epoch 4 Iter 0, train entropy gap 325.2041 bits (loss 341.746, data 16.542) 
+epoch 4 train loss 236.7848 nats / 341.6082 bits
+time since start: 5.1 secs
+Epoch 5 Iter 0, train entropy gap 324.8571 bits (loss 341.399, data 16.542) 
+epoch 5 train loss 236.5904 nats / 341.3279 bits
+time since start: 6.0 secs
+Epoch 6 Iter 0, train entropy gap 324.6204 bits (loss 341.162, data 16.542) 
+epoch 6 train loss 236.3946 nats / 341.0453 bits
+time since start: 6.9 secs
+Epoch 7 Iter 0, train entropy gap 324.2761 bits (loss 340.818, data 16.542) 
+epoch 7 train loss 236.1999 nats / 340.7644 bits
+time since start: 7.8 secs
+Epoch 8 Iter 0, train entropy gap 324.0285 bits (loss 340.570, data 16.542) 
+epoch 8 train loss 236.0047 nats / 340.4828 bits
+time since start: 8.7 secs
+Epoch 9 Iter 0, train entropy gap 323.6276 bits (loss 340.169, data 16.542) 
+epoch 9 train loss 235.8089 nats / 340.2003 bits
+time since start: 9.6 secs
+Epoch 10 Iter 0, train entropy gap 323.4609 bits (loss 340.003, data 16.542) 
+epoch 10 train loss 235.6128 nats / 339.9174 bits
+time since start: 10.5 secs
+Epoch 11 Iter 0, train entropy gap 323.2046 bits (loss 339.746, data 16.542) 
+epoch 11 train loss 235.4180 nats / 339.6363 bits
+time since start: 11.4 secs
+Epoch 12 Iter 0, train entropy gap 322.9644 bits (loss 339.506, data 16.542) 
+epoch 12 train loss 235.2209 nats / 339.3520 bits
+time since start: 12.3 secs
+Epoch 13 Iter 0, train entropy gap 322.6394 bits (loss 339.181, data 16.542) 
+epoch 13 train loss 235.0250 nats / 339.0694 bits
+time since start: 13.2 secs
+Epoch 14 Iter 0, train entropy gap 322.3173 bits (loss 338.859, data 16.542) 
+epoch 14 train loss 234.8293 nats / 338.7870 bits
+time since start: 14.1 secs
+Epoch 15 Iter 0, train entropy gap 322.0374 bits (loss 338.579, data 16.542) 
+epoch 15 train loss 234.6325 nats / 338.5032 bits
+time since start: 15.0 secs
+Epoch 16 Iter 0, train entropy gap 321.8130 bits (loss 338.355, data 16.542) 
+epoch 16 train loss 234.4359 nats / 338.2195 bits
+time since start: 15.9 secs
+Epoch 17 Iter 0, train entropy gap 321.4903 bits (loss 338.032, data 16.542) 
+epoch 17 train loss 234.2383 nats / 337.9344 bits
+time since start: 16.7 secs
+Epoch 18 Iter 0, train entropy gap 321.1781 bits (loss 337.720, data 16.542) 
+epoch 18 train loss 234.0406 nats / 337.6492 bits
+time since start: 17.6 secs
+Epoch 19 Iter 0, train entropy gap 320.9309 bits (loss 337.473, data 16.542) 
+epoch 19 train loss 233.8433 nats / 337.3646 bits
+time since start: 18.5 secs
+Training done; evaluating likelihood on full data:
+Epoch None Iter 0, test loss 233.7685 nats / 337.2566 bits
+Device cuda
+Loading csv... done, took 1.1s
+Parsing... done, took 0.3s
+Entropy of Cup98([Column(473, distribution_size=2), Column(5, distribution_size=3), Column(9, distribution_size=3), Column(10, distribution_size=3), Column(11, distribution_size=3), Column(12, distribution_size=3), Column(52, distribution_size=3), Column(55, distribution_size=3), Column(56, distribution_size=3), Column(57, distribution_size=3), Column(58, distribution_size=3), Column(59, distribution_size=3), Column(60, distribution_size=3), Column(61, distribution_size=3), Column(62, distribution_size=3), Column(63, distribution_size=3), Column(64, distribution_size=3), Column(65, distribution_size=3), Column(66, distribution_size=3), Column(67, distribution_size=3), Column(68, distribution_size=3), Column(69, distribution_size=3), Column(70, distribution_size=3), Column(71, distribution_size=3), Column(72, distribution_size=3), Column(74, distribution_size=3), Column(6, distribution_size=4), Column(17, distribution_size=4), Column(18, distribution_size=4), Column(361, distribution_size=3), Column(19, distribution_size=5), Column(20, distribution_size=5), Column(21, distribution_size=5), Column(22, distribution_size=5), Column(42, distribution_size=5), Column(73, distribution_size=5), Column(470, distribution_size=3), Column(472, distribution_size=3), Column(475, distribution_size=5), Column(477, distribution_size=5), Column(50, distribution_size=6), Column(476, distribution_size=6), Column(478, distribution_size=6), Column(318, distribution_size=44), Column(25, distribution_size=8), Column(51, distribution_size=9), Column(54, distribution_size=9), Column(408, distribution_size=6), Column(474, distribution_size=5), Column(358, distribution_size=7), Column(384, distribution_size=15), Column(14, distribution_size=18), Column(317, distribution_size=15), Column(326, distribution_size=18), Column(350, distribution_size=17), Column(161, distribution_size=18), Column(234, distribution_size=19), Column(148, distribution_size=15), Column(324, distribution_size=20), Column(13, distribution_size=29), Column(147, distribution_size=15), Column(88, distribution_size=22), Column(299, distribution_size=20), Column(316, distribution_size=27), Column(397, distribution_size=35), Column(410, distribution_size=20), Column(288, distribution_size=26), Column(233, distribution_size=28), Column(258, distribution_size=28), Column(183, distribution_size=26), Column(325, distribution_size=27), Column(387, distribution_size=42), Column(182, distribution_size=28), Column(307, distribution_size=28), Column(357, distribution_size=23), Column(314, distribution_size=32), Column(322, distribution_size=34), Column(92, distribution_size=34), Column(304, distribution_size=37), Column(323, distribution_size=31), Column(210, distribution_size=32), Column(93, distribution_size=35), Column(464, distribution_size=25), Column(94, distribution_size=44), Column(255, distribution_size=36), Column(271, distribution_size=35), Column(15, distribution_size=54), Column(219, distribution_size=37), Column(259, distribution_size=41), Column(3, distribution_size=58), Column(294, distribution_size=37), Column(359, distribution_size=38), Column(96, distribution_size=46), Column(209, distribution_size=37), Column(336, distribution_size=33), Column(265, distribution_size=45), Column(319, distribution_size=43), Column(360, distribution_size=40), Column(272, distribution_size=44), Column(277, distribution_size=42)]): 16.5418 bits
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 95413 entries, 0 to 95412
+Data columns (total 100 columns):
+ #   Column  Non-Null Count  Dtype 
+---  ------  --------------  ----- 
+ 0   473     95413 non-null  object
+ 1   5       95413 non-null  object
+ 2   9       95413 non-null  object
+ 3   10      95413 non-null  object
+ 4   11      95413 non-null  object
+ 5   12      95413 non-null  object
+ 6   52      95413 non-null  object
+ 7   55      95413 non-null  object
+ 8   56      95413 non-null  object
+ 9   57      95413 non-null  object
+ 10  58      95413 non-null  object
+ 11  59      95413 non-null  object
+ 12  60      95413 non-null  object
+ 13  61      95413 non-null  object
+ 14  62      95413 non-null  object
+ 15  63      95413 non-null  object
+ 16  64      95413 non-null  object
+ 17  65      95413 non-null  object
+ 18  66      95413 non-null  object
+ 19  67      95413 non-null  object
+ 20  68      95413 non-null  object
+ 21  69      95413 non-null  object
+ 22  70      95413 non-null  object
+ 23  71      95413 non-null  object
+ 24  72      95413 non-null  object
+ 25  74      95413 non-null  object
+ 26  6       95413 non-null  object
+ 27  17      95413 non-null  object
+ 28  18      95413 non-null  object
+ 29  361     95413 non-null  int64 
+ 30  19      95413 non-null  object
+ 31  20      95413 non-null  object
+ 32  21      95413 non-null  object
+ 33  22      95413 non-null  object
+ 34  42      95413 non-null  object
+ 35  73      95413 non-null  object
+ 36  470     95413 non-null  int64 
+ 37  472     95413 non-null  int64 
+ 38  475     95413 non-null  object
+ 39  477     95413 non-null  object
+ 40  50      95413 non-null  object
+ 41  476     95413 non-null  object
+ 42  478     95413 non-null  object
+ 43  318     95413 non-null  int64 
+ 44  25      95413 non-null  object
+ 45  51      95413 non-null  object
+ 46  54      95413 non-null  object
+ 47  408     95413 non-null  int64 
+ 48  474     95413 non-null  int64 
+ 49  358     95413 non-null  int64 
+ 50  384     95413 non-null  object
+ 51  14      95413 non-null  object
+ 52  317     95413 non-null  int64 
+ 53  326     95413 non-null  int64 
+ 54  350     95413 non-null  int64 
+ 55  161     95413 non-null  int64 
+ 56  234     95413 non-null  int64 
+ 57  148     95413 non-null  int64 
+ 58  324     95413 non-null  int64 
+ 59  13      95413 non-null  object
+ 60  147     95413 non-null  int64 
+ 61  88      95413 non-null  int64 
+ 62  299     95413 non-null  int64 
+ 63  316     95413 non-null  int64 
+ 64  397     95413 non-null  object
+ 65  410     95413 non-null  int64 
+ 66  288     95413 non-null  int64 
+ 67  233     95413 non-null  int64 
+ 68  258     95413 non-null  int64 
+ 69  183     95413 non-null  int64 
+ 70  325     95413 non-null  int64 
+ 71  387     95413 non-null  object
+ 72  182     95413 non-null  int64 
+ 73  307     95413 non-null  int64 
+ 74  357     95413 non-null  int64 
+ 75  314     95413 non-null  int64 
+ 76  322     95413 non-null  int64 
+ 77  92      95413 non-null  int64 
+ 78  304     95413 non-null  int64 
+ 79  323     95413 non-null  int64 
+ 80  210     95413 non-null  int64 
+ 81  93      95413 non-null  int64 
+ 82  464     95413 non-null  int64 
+ 83  94      95413 non-null  int64 
+ 84  255     95413 non-null  int64 
+ 85  271     95413 non-null  int64 
+ 86  15      95413 non-null  object
+ 87  219     95413 non-null  int64 
+ 88  259     95413 non-null  int64 
+ 89  3       95413 non-null  object
+ 90  294     95413 non-null  int64 
+ 91  359     95413 non-null  int64 
+ 92  96      95413 non-null  int64 
+ 93  209     95413 non-null  int64 
+ 94  336     95413 non-null  int64 
+ 95  265     95413 non-null  int64 
+ 96  319     95413 non-null  int64 
+ 97  360     95413 non-null  int64 
+ 98  272     95413 non-null  int64 
+ 99  277     95413 non-null  int64 
+dtypes: int64(50), object(50)
+memory usage: 72.8+ MB
+None
+fixed_ordering None seed 0 natural_ordering True
+encoded_bins (output) [2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 5, 5, 5, 5, 5, 5, 3, 3, 5, 5, 6, 6, 6, 44, 8, 9, 9, 6, 5, 7, 15, 18, 15, 18, 17, 18, 19, 15, 20, 29, 15, 22, 20, 27, 35, 20, 26, 28, 28, 26, 27, 42, 28, 28, 23, 32, 34, 34, 37, 31, 32, 35, 25, 44, 36, 35, 54, 37, 41, 58, 37, 38, 46, 37, 33, 45, 43, 40, 44, 42]
+encoded_bins (input) [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 3, 6, 3, 4, 4, 3, 3, 3, 4, 5, 4, 5, 5, 5, 5, 4, 5, 5, 4, 5, 5, 5, 6, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 6, 6, 5, 5, 6, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+Number of model parameters: 1790345 (~= 6.8MB)
+MADE(
+  (net): Sequential(
+    (0): MaskedLinear(in_features=391, out_features=256, bias=True)
+    (1): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=256, out_features=256, bias=True)
+        (1): MaskedLinear(in_features=256, out_features=256, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (2): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=256, out_features=256, bias=True)
+        (1): MaskedLinear(in_features=256, out_features=256, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (3): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=256, out_features=256, bias=True)
+        (1): MaskedLinear(in_features=256, out_features=256, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (4): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=256, out_features=256, bias=True)
+        (1): MaskedLinear(in_features=256, out_features=256, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (5): MaskedLinear(in_features=256, out_features=1793, bias=True)
+  )
+  (direct_io_layer): MaskedLinear(in_features=391, out_features=1793, bias=True)
+)
+Applying InitWeight()
+Discretizing table... done, took 0.3s
+Epoch 0 Iter 0, train entropy gap 326.2269 bits (loss 342.769, data 16.542) 
+epoch 0 train loss 237.5673 nats / 342.7372 bits
+time since start: 1.6 secs
+Epoch 1 Iter 0, train entropy gap 325.9369 bits (loss 342.479, data 16.542) 
+epoch 1 train loss 237.3719 nats / 342.4552 bits
+time since start: 2.5 secs
+Epoch 2 Iter 0, train entropy gap 325.6445 bits (loss 342.186, data 16.542) 
+epoch 2 train loss 237.1766 nats / 342.1735 bits
+time since start: 3.3 secs
+Epoch 3 Iter 0, train entropy gap 325.5378 bits (loss 342.080, data 16.542) 
+epoch 3 train loss 236.9799 nats / 341.8898 bits
+time since start: 4.2 secs
+Epoch 4 Iter 0, train entropy gap 325.2041 bits (loss 341.746, data 16.542) 
+epoch 4 train loss 236.7848 nats / 341.6082 bits
+time since start: 5.1 secs
+Epoch 5 Iter 0, train entropy gap 324.8571 bits (loss 341.399, data 16.542) 
+epoch 5 train loss 236.5904 nats / 341.3279 bits
+time since start: 6.0 secs
+Epoch 6 Iter 0, train entropy gap 324.6204 bits (loss 341.162, data 16.542) 
+epoch 6 train loss 236.3946 nats / 341.0453 bits
+time since start: 6.9 secs
+Epoch 7 Iter 0, train entropy gap 324.2761 bits (loss 340.818, data 16.542) 
+epoch 7 train loss 236.1999 nats / 340.7644 bits
+time since start: 7.8 secs
+Epoch 8 Iter 0, train entropy gap 324.0285 bits (loss 340.570, data 16.542) 
+epoch 8 train loss 236.0047 nats / 340.4828 bits
+time since start: 8.6 secs
+Epoch 9 Iter 0, train entropy gap 323.6276 bits (loss 340.169, data 16.542) 
+epoch 9 train loss 235.8089 nats / 340.2003 bits
+time since start: 9.5 secs
+Epoch 10 Iter 0, train entropy gap 323.4609 bits (loss 340.003, data 16.542) 
+epoch 10 train loss 235.6128 nats / 339.9174 bits
+time since start: 10.4 secs
+Epoch 11 Iter 0, train entropy gap 323.2046 bits (loss 339.746, data 16.542) 
+epoch 11 train loss 235.4180 nats / 339.6363 bits
+time since start: 11.3 secs
+Epoch 12 Iter 0, train entropy gap 322.9644 bits (loss 339.506, data 16.542) 
+epoch 12 train loss 235.2209 nats / 339.3520 bits
+time since start: 12.2 secs
+Epoch 13 Iter 0, train entropy gap 322.6394 bits (loss 339.181, data 16.542) 
+epoch 13 train loss 235.0250 nats / 339.0694 bits
+time since start: 13.1 secs
+Epoch 14 Iter 0, train entropy gap 322.3173 bits (loss 338.859, data 16.542) 
+epoch 14 train loss 234.8293 nats / 338.7870 bits
+time since start: 13.9 secs
+Epoch 15 Iter 0, train entropy gap 322.0374 bits (loss 338.579, data 16.542) 
+epoch 15 train loss 234.6325 nats / 338.5032 bits
+time since start: 14.8 secs
+Epoch 16 Iter 0, train entropy gap 321.8130 bits (loss 338.355, data 16.542) 
+epoch 16 train loss 234.4359 nats / 338.2195 bits
+time since start: 15.7 secs
+Epoch 17 Iter 0, train entropy gap 321.4903 bits (loss 338.032, data 16.542) 
+epoch 17 train loss 234.2383 nats / 337.9344 bits
+time since start: 16.6 secs
+Epoch 18 Iter 0, train entropy gap 321.1781 bits (loss 337.720, data 16.542) 
+epoch 18 train loss 234.0406 nats / 337.6492 bits
+time since start: 17.5 secs
+Epoch 19 Iter 0, train entropy gap 320.9309 bits (loss 337.473, data 16.542) 
+epoch 19 train loss 233.8433 nats / 337.3646 bits
+time since start: 18.4 secs
+Training done; evaluating likelihood on full data:
+Epoch None Iter 0, test loss 233.7685 nats / 337.2566 bits
+Saved to:
+models/Cup98-6.8MB-model337.174-data16.542-made-resmade-hidden256_256_256_256_256-emb32-directIo-binaryInone_hotOut-inputNoEmbIfLeq-20epochs-seed0.pt
+Device cuda
+Loading csv... done, took 1.1s
+Parsing... done, took 0.3s
+Entropy of Cup98([Column(473, distribution_size=2), Column(5, distribution_size=3), Column(9, distribution_size=3), Column(10, distribution_size=3), Column(11, distribution_size=3), Column(12, distribution_size=3), Column(52, distribution_size=3), Column(55, distribution_size=3), Column(56, distribution_size=3), Column(57, distribution_size=3), Column(58, distribution_size=3), Column(59, distribution_size=3), Column(60, distribution_size=3), Column(61, distribution_size=3), Column(62, distribution_size=3), Column(63, distribution_size=3), Column(64, distribution_size=3), Column(65, distribution_size=3), Column(66, distribution_size=3), Column(67, distribution_size=3), Column(68, distribution_size=3), Column(69, distribution_size=3), Column(70, distribution_size=3), Column(71, distribution_size=3), Column(72, distribution_size=3), Column(74, distribution_size=3), Column(6, distribution_size=4), Column(17, distribution_size=4), Column(18, distribution_size=4), Column(361, distribution_size=3), Column(19, distribution_size=5), Column(20, distribution_size=5), Column(21, distribution_size=5), Column(22, distribution_size=5), Column(42, distribution_size=5), Column(73, distribution_size=5), Column(470, distribution_size=3), Column(472, distribution_size=3), Column(475, distribution_size=5), Column(477, distribution_size=5), Column(50, distribution_size=6), Column(476, distribution_size=6), Column(478, distribution_size=6), Column(318, distribution_size=44), Column(25, distribution_size=8), Column(51, distribution_size=9), Column(54, distribution_size=9), Column(408, distribution_size=6), Column(474, distribution_size=5), Column(358, distribution_size=7), Column(384, distribution_size=15), Column(14, distribution_size=18), Column(317, distribution_size=15), Column(326, distribution_size=18), Column(350, distribution_size=17), Column(161, distribution_size=18), Column(234, distribution_size=19), Column(148, distribution_size=15), Column(324, distribution_size=20), Column(13, distribution_size=29), Column(147, distribution_size=15), Column(88, distribution_size=22), Column(299, distribution_size=20), Column(316, distribution_size=27), Column(397, distribution_size=35), Column(410, distribution_size=20), Column(288, distribution_size=26), Column(233, distribution_size=28), Column(258, distribution_size=28), Column(183, distribution_size=26), Column(325, distribution_size=27), Column(387, distribution_size=42), Column(182, distribution_size=28), Column(307, distribution_size=28), Column(357, distribution_size=23), Column(314, distribution_size=32), Column(322, distribution_size=34), Column(92, distribution_size=34), Column(304, distribution_size=37), Column(323, distribution_size=31), Column(210, distribution_size=32), Column(93, distribution_size=35), Column(464, distribution_size=25), Column(94, distribution_size=44), Column(255, distribution_size=36), Column(271, distribution_size=35), Column(15, distribution_size=54), Column(219, distribution_size=37), Column(259, distribution_size=41), Column(3, distribution_size=58), Column(294, distribution_size=37), Column(359, distribution_size=38), Column(96, distribution_size=46), Column(209, distribution_size=37), Column(336, distribution_size=33), Column(265, distribution_size=45), Column(319, distribution_size=43), Column(360, distribution_size=40), Column(272, distribution_size=44), Column(277, distribution_size=42)]): 16.5418 bits
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 95413 entries, 0 to 95412
+Data columns (total 100 columns):
+ #   Column  Non-Null Count  Dtype 
+---  ------  --------------  ----- 
+ 0   473     95413 non-null  object
+ 1   5       95413 non-null  object
+ 2   9       95413 non-null  object
+ 3   10      95413 non-null  object
+ 4   11      95413 non-null  object
+ 5   12      95413 non-null  object
+ 6   52      95413 non-null  object
+ 7   55      95413 non-null  object
+ 8   56      95413 non-null  object
+ 9   57      95413 non-null  object
+ 10  58      95413 non-null  object
+ 11  59      95413 non-null  object
+ 12  60      95413 non-null  object
+ 13  61      95413 non-null  object
+ 14  62      95413 non-null  object
+ 15  63      95413 non-null  object
+ 16  64      95413 non-null  object
+ 17  65      95413 non-null  object
+ 18  66      95413 non-null  object
+ 19  67      95413 non-null  object
+ 20  68      95413 non-null  object
+ 21  69      95413 non-null  object
+ 22  70      95413 non-null  object
+ 23  71      95413 non-null  object
+ 24  72      95413 non-null  object
+ 25  74      95413 non-null  object
+ 26  6       95413 non-null  object
+ 27  17      95413 non-null  object
+ 28  18      95413 non-null  object
+ 29  361     95413 non-null  int64 
+ 30  19      95413 non-null  object
+ 31  20      95413 non-null  object
+ 32  21      95413 non-null  object
+ 33  22      95413 non-null  object
+ 34  42      95413 non-null  object
+ 35  73      95413 non-null  object
+ 36  470     95413 non-null  int64 
+ 37  472     95413 non-null  int64 
+ 38  475     95413 non-null  object
+ 39  477     95413 non-null  object
+ 40  50      95413 non-null  object
+ 41  476     95413 non-null  object
+ 42  478     95413 non-null  object
+ 43  318     95413 non-null  int64 
+ 44  25      95413 non-null  object
+ 45  51      95413 non-null  object
+ 46  54      95413 non-null  object
+ 47  408     95413 non-null  int64 
+ 48  474     95413 non-null  int64 
+ 49  358     95413 non-null  int64 
+ 50  384     95413 non-null  object
+ 51  14      95413 non-null  object
+ 52  317     95413 non-null  int64 
+ 53  326     95413 non-null  int64 
+ 54  350     95413 non-null  int64 
+ 55  161     95413 non-null  int64 
+ 56  234     95413 non-null  int64 
+ 57  148     95413 non-null  int64 
+ 58  324     95413 non-null  int64 
+ 59  13      95413 non-null  object
+ 60  147     95413 non-null  int64 
+ 61  88      95413 non-null  int64 
+ 62  299     95413 non-null  int64 
+ 63  316     95413 non-null  int64 
+ 64  397     95413 non-null  object
+ 65  410     95413 non-null  int64 
+ 66  288     95413 non-null  int64 
+ 67  233     95413 non-null  int64 
+ 68  258     95413 non-null  int64 
+ 69  183     95413 non-null  int64 
+ 70  325     95413 non-null  int64 
+ 71  387     95413 non-null  object
+ 72  182     95413 non-null  int64 
+ 73  307     95413 non-null  int64 
+ 74  357     95413 non-null  int64 
+ 75  314     95413 non-null  int64 
+ 76  322     95413 non-null  int64 
+ 77  92      95413 non-null  int64 
+ 78  304     95413 non-null  int64 
+ 79  323     95413 non-null  int64 
+ 80  210     95413 non-null  int64 
+ 81  93      95413 non-null  int64 
+ 82  464     95413 non-null  int64 
+ 83  94      95413 non-null  int64 
+ 84  255     95413 non-null  int64 
+ 85  271     95413 non-null  int64 
+ 86  15      95413 non-null  object
+ 87  219     95413 non-null  int64 
+ 88  259     95413 non-null  int64 
+ 89  3       95413 non-null  object
+ 90  294     95413 non-null  int64 
+ 91  359     95413 non-null  int64 
+ 92  96      95413 non-null  int64 
+ 93  209     95413 non-null  int64 
+ 94  336     95413 non-null  int64 
+ 95  265     95413 non-null  int64 
+ 96  319     95413 non-null  int64 
+ 97  360     95413 non-null  int64 
+ 98  272     95413 non-null  int64 
+ 99  277     95413 non-null  int64 
+dtypes: int64(50), object(50)
+memory usage: 72.8+ MB
+None
+fixed_ordering None seed 0 natural_ordering True
+encoded_bins (output) [2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 5, 5, 5, 5, 5, 5, 3, 3, 5, 5, 6, 6, 6, 44, 8, 9, 9, 6, 5, 7, 15, 18, 15, 18, 17, 18, 19, 15, 20, 29, 15, 22, 20, 27, 35, 20, 26, 28, 28, 26, 27, 42, 28, 28, 23, 32, 34, 34, 37, 31, 32, 35, 25, 44, 36, 35, 54, 37, 41, 58, 37, 38, 46, 37, 33, 45, 43, 40, 44, 42]
+encoded_bins (input) [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 3, 6, 3, 4, 4, 3, 3, 3, 4, 5, 4, 5, 5, 5, 5, 4, 5, 5, 4, 5, 5, 5, 6, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 6, 6, 6, 5, 5, 6, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+Number of model parameters: 1116425 (~= 4.3MB)
+MADE(
+  (net): Sequential(
+    (0): MaskedLinear(in_features=391, out_features=128, bias=True)
+    (1): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=128, out_features=128, bias=True)
+        (1): MaskedLinear(in_features=128, out_features=128, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (2): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=128, out_features=128, bias=True)
+        (1): MaskedLinear(in_features=128, out_features=128, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (3): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=128, out_features=128, bias=True)
+        (1): MaskedLinear(in_features=128, out_features=128, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (4): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=128, out_features=128, bias=True)
+        (1): MaskedLinear(in_features=128, out_features=128, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (5): MaskedLinear(in_features=128, out_features=1793, bias=True)
+  )
+  (direct_io_layer): MaskedLinear(in_features=391, out_features=1793, bias=True)
+)
+Applying InitWeight()
+Discretizing table... done, took 0.3s
+Epoch 0 Iter 0, train entropy gap 326.3346 bits (loss 342.876, data 16.542) 
+epoch 0 train loss 237.6198 nats / 342.8129 bits
+time since start: 1.6 secs
+Epoch 1 Iter 0, train entropy gap 326.1027 bits (loss 342.645, data 16.542) 
+epoch 1 train loss 237.4688 nats / 342.5950 bits
+time since start: 2.4 secs
+Epoch 2 Iter 0, train entropy gap 325.8595 bits (loss 342.401, data 16.542) 
+epoch 2 train loss 237.3167 nats / 342.3756 bits
+time since start: 3.3 secs
+Epoch 3 Iter 0, train entropy gap 325.7309 bits (loss 342.273, data 16.542) 
+epoch 3 train loss 237.1661 nats / 342.1583 bits
+time since start: 4.2 secs
+Epoch 4 Iter 0, train entropy gap 325.3740 bits (loss 341.916, data 16.542) 
+epoch 4 train loss 237.0140 nats / 341.9389 bits
+time since start: 5.1 secs
+Epoch 5 Iter 0, train entropy gap 325.3294 bits (loss 341.871, data 16.542) 
+epoch 5 train loss 236.8633 nats / 341.7214 bits
+time since start: 6.0 secs
+Epoch 6 Iter 0, train entropy gap 325.0824 bits (loss 341.624, data 16.542) 
+epoch 6 train loss 236.7117 nats / 341.5028 bits
+time since start: 6.9 secs
+Epoch 7 Iter 0, train entropy gap 324.8497 bits (loss 341.392, data 16.542) 
+epoch 7 train loss 236.5608 nats / 341.2851 bits
+time since start: 7.8 secs
+Epoch 8 Iter 0, train entropy gap 324.6362 bits (loss 341.178, data 16.542) 
+epoch 8 train loss 236.4098 nats / 341.0673 bits
+time since start: 8.7 secs
+Epoch 9 Iter 0, train entropy gap 324.3288 bits (loss 340.871, data 16.542) 
+epoch 9 train loss 236.2584 nats / 340.8489 bits
+time since start: 9.6 secs
+Epoch 10 Iter 0, train entropy gap 324.1785 bits (loss 340.720, data 16.542) 
+epoch 10 train loss 236.1083 nats / 340.6323 bits
+time since start: 10.5 secs
+Epoch 11 Iter 0, train entropy gap 323.9845 bits (loss 340.526, data 16.542) 
+epoch 11 train loss 235.9572 nats / 340.4143 bits
+time since start: 11.4 secs
+Epoch 12 Iter 0, train entropy gap 323.6915 bits (loss 340.233, data 16.542) 
+epoch 12 train loss 235.8064 nats / 340.1967 bits
+time since start: 12.3 secs
+Epoch 13 Iter 0, train entropy gap 323.4944 bits (loss 340.036, data 16.542) 
+epoch 13 train loss 235.6566 nats / 339.9806 bits
+time since start: 13.2 secs
+Epoch 14 Iter 0, train entropy gap 323.3250 bits (loss 339.867, data 16.542) 
+epoch 14 train loss 235.5048 nats / 339.7616 bits
+time since start: 14.0 secs
+Epoch 15 Iter 0, train entropy gap 323.1019 bits (loss 339.644, data 16.542) 
+epoch 15 train loss 235.3543 nats / 339.5445 bits
+time since start: 14.9 secs
+Epoch 16 Iter 0, train entropy gap 322.9275 bits (loss 339.469, data 16.542) 
+epoch 16 train loss 235.2031 nats / 339.3264 bits
+time since start: 15.8 secs
+Epoch 17 Iter 0, train entropy gap 322.6634 bits (loss 339.205, data 16.542) 
+epoch 17 train loss 235.0532 nats / 339.1102 bits
+time since start: 16.7 secs
+Epoch 18 Iter 0, train entropy gap 322.4140 bits (loss 338.956, data 16.542) 
+epoch 18 train loss 234.9022 nats / 338.8923 bits
+time since start: 17.6 secs
+Epoch 19 Iter 0, train entropy gap 322.1649 bits (loss 338.707, data 16.542) 
+epoch 19 train loss 234.7511 nats / 338.6742 bits
+time since start: 18.5 secs
+Training done; evaluating likelihood on full data:
+Epoch None Iter 0, test loss 234.7280 nats / 338.6409 bits
+Saved to:
+models/Cup98-4.3MB-model338.530-data16.542-made-resmade-hidden128_128_128_128_128-emb32-directIo-binaryInone_hotOut-inputNoEmbIfLeq-20epochs-seed0.pt

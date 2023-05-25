@@ -79,3 +79,6 @@ script=/home/jixy/naru/eval_model.py
 # model_path=cup-1.8MB-model91.219-data16.542-flash-blocks2-embed_dim128-expansion_factor2.0-group_size64-posEmb-50epochs-seed0.pt
 # python $script --model_path "$model_path"  --FLASH --flash_dim 128 --group_size 64 --blocks=2 --dataset=cup --num-queries 200 --run-sampling --run-maxdiff
 
+model_path=Cup98-4.3MB-model338.530-data16.542-made-resmade-hidden128_128_128_128_128-emb32-directIo-binaryInone_hotOut-inputNoEmbIfLeq-20epochs-seed0.pt
+python $script --model_path "$model_path" --dataset=cup \
+--residual --layers=5 --fc-hiddens=128 --direct-io --num-queries 200

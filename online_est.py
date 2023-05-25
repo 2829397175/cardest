@@ -21,11 +21,11 @@ class DB_cardest():
                  table,
                  updater=OOD_DDup_detection,
                  args=None):
-        self.updater = updater(old_sample_num=400,
-                             old_sample_size=10,
-                             new_sample_size=10,
+        self.updater = updater(old_sample_num=2000,
+                             old_sample_size=30,
+                             new_sample_size=30,
                              update_step_threshold=5,
-                             queue_size=400)
+                             queue_size=2000)
         self.model = self.load_model(model_path,table,args)
         
         
@@ -71,7 +71,7 @@ class DB_cardest():
             return results
         results.to_csv(path, index=False)
                
-    def run_ester(self, table, args=None,save_err=False):
+    def run_ester(self, table, args=None,save_err=False,train_data=None):
         import estimators as estimators_lib
         estimators=[estimators_lib.ProgressiveSampling(self.model,
                                             table,
@@ -105,7 +105,11 @@ class DB_cardest():
             else:
                 root_dir+="distill"
             
-            model_path='{}-{}'.format(table.name,self.model.name())
+            model_path='{}-{}-mixupTrue-alpha{}-beta{}-train_data{}-'.format(table.name,
+                                                                             self.model.name(),
+                                                                             args.alpha,
+                                                                             args.beta,
+                                                                             train_data)
             err_path=os.path.join(root_dir,"results_{}.csv".format(model_path))
             if os.path.exists(err_path):
                 err_path=err_path[:-4]+"_num{}.csv".format(args.num_queries)    
@@ -514,6 +518,12 @@ if __name__=="__main__":
     help='loss parameter.')
     
     parser.add_argument(
+    '--beta',
+    type=float,
+    default=0.2,
+    help='distill loss parameter.')
+    
+    parser.add_argument(
     '--finetune',
     action='store_true',
     help='Run finetune experiment.')
@@ -555,20 +565,20 @@ if __name__=="__main__":
     
 
     
-    def gridsearch(db_est:DB_cardest):     
+    def gridsearch(db_est:DB_cardest,insert_data):     
         epochs = [20]
-        start_lossw=np.arange(0.8,0.91,0.01)
+        start_lossw=np.arange(0.75,0.9,0.05)
         import pandas as pd
         from time import time
         df_params=pd.DataFrame()
         model_bits_min=10000
         best_param={}
-        data_types=['new_data']
+        data_types=['insert_data']
         for data_type in data_types:
             for epoch_nums in epochs:
                 for start_lossw_ in start_lossw:
                     db_est_temp=copy.deepcopy(db_est)
-                    print("training starts for param",{'start_lossw':start_lossw_,
+                    print("training starts for param",{'alpha':start_lossw_,
                                                   'epoch':epoch_nums,
                                                   'data_type':data_type})
 
@@ -576,7 +586,7 @@ if __name__=="__main__":
                     model_bits,df_distill=db_est_temp.updater.search_param(
                                                            new_table=new_table,
                                                            new_tablebits=3.322,
-                                                           train_data=new_data,
+                                                           train_data=in_data,
                                                            new_data=new_data,
                                                            epochs=epoch_nums,
                                                            start_lossw=start_lossw_)
@@ -601,8 +611,8 @@ if __name__=="__main__":
     import copy
     db_est_ori=DB_cardest(model_path,table,args=args)
     new_table,model, ood, df_distill= db_est_ori.update(old_table=table,insert_table=table_insert,save_model=False,save_log=True,update_epoches=20,args=args)
-    db_est_ori.run_ester(new_table,args,save_err=True)
-    db_est_ori.run_ester(table,args,save_err=True)
+    # db_est_ori.run_ester(new_table,args,save_err=True)
+    db_est_ori.run_ester(table,args,save_err=True,train_data=new_table.name)
     # db_est_ori.run_ester(table_insert,args,save_err=True)
     #gridsearch(db_est_ori)
     

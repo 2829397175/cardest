@@ -1,17 +1,18 @@
 
+from tkinter import font
 import matplotlib.pyplot as plt
 import pandas as pd
 # params
 
-# # dmv-tiny
-# df_names=[
-#     "/home/jixy/naru/train_log/dmv-tiny-0.6MB-model10.856-data6.629-made-resmade-hidden128_128_128_128_128-emb32-nodirectIo-binaryInone_hotOut-inputNoEmbIfLeq-20epochs-seed0.csv",
-#     # "/home/jixy/naru/train_log/dmv-tiny-0.3MB-model5.467-data6.629-transformer-blocks2-model64-ff128-heads4-use_flash_attnTrue-posEmb-gelu-20epochs-seed0.csv",
-#     "/home/jixy/naru/train_log/dmv-tiny-0.5MB-model6.804-data6.629-flash-blocks1-embed_dim128-expansion_factor2.0-group_size2-posEmb-20epochs-seed0.csv",
-#     "/home/jixy/naru/train_log/dmv-tiny-0.8MB-model14.547-data6.629-transformer-blocks2-model128-ff128-heads32-use_flash_attnFalse-posEmb-gelu-2epochs-seed0.csv"
-# ]
-# dataset='dmv-tiny'
-# dataset_entropy=6.629
+# dmv-tiny
+df_names=[
+    "/home/jixy/naru/train_log/dmv-tiny-0.6MB-model10.856-data6.629-made-resmade-hidden128_128_128_128_128-emb32-nodirectIo-binaryInone_hotOut-inputNoEmbIfLeq-20epochs-seed0.csv",
+    # "/home/jixy/naru/train_log/dmv-tiny-0.3MB-model5.467-data6.629-transformer-blocks2-model64-ff128-heads4-use_flash_attnTrue-posEmb-gelu-20epochs-seed0.csv",
+    "/home/jixy/naru/train_log/dmv-tiny-0.5MB-model6.804-data6.629-flash-blocks1-embed_dim128-expansion_factor2.0-group_size2-posEmb-20epochs-seed0.csv",
+    "/home/jixy/naru/train_log/dmv-tiny-0.8MB-model14.547-data6.629-transformer-blocks2-model128-ff128-heads32-use_flash_attnFalse-posEmb-gelu-2epochs-seed0.csv"
+]
+dataset='dmv-tiny'
+dataset_entropy=6.629
 
 # # dmv
 # df_names=[
@@ -33,17 +34,18 @@ import pandas as pd
 # dataset='cup98'
 # dataset_entropy=16.542
 
-# # adult
-df_names=[
-"/home/jixy/naru/train_log/adult-0.8MB-model22.269-data15.349-made-resmade-hidden128_128_128_128_128-emb32-nodirectIo-binaryInone_hotOut-inputNoEmbIfLeq-20epochs-seed0.csv",
-"/home/jixy/naru/train_log/adult-1.2MB-model21.331-data15.349-flash-blocks2-embed_dim128-expansion_factor2.0-group_size2-posEmb-20epochs-seed0.csv",
-# "/home/jixy/naru/train_log/adult-1.3MB-model27.096-data15.349-transformer-blocks2-model128-ff256-heads8-use_flash_attnTrue-posEmb-gelu-20epochs-seed0.csv",
-# "/home/jixy/naru/train_log/adult-1.3MB-model27.096-data15.349-transformer-blocks2-model128-ff256-heads8-use_flash_attnTrue-posEmb-gelu-20epochs-seed0.csv",
-"/home/jixy/naru/train_log/adult-0.2MB-model22.439-data15.349-transformer-blocks2-model32-ff128-heads4-use_flash_attnFalse-posEmb-gelu-20epochs-seed0.csv"
-]
+# # # adult
+# df_names=[
+# "/home/jixy/naru/train_log/adult-0.8MB-model22.269-data15.349-made-resmade-hidden128_128_128_128_128-emb32-nodirectIo-binaryInone_hotOut-inputNoEmbIfLeq-20epochs-seed0.csv",
+# "/home/jixy/naru/train_log/adult-1.2MB-model21.331-data15.349-flash-blocks2-embed_dim128-expansion_factor2.0-group_size2-posEmb-20epochs-seed0.csv",
+# # "/home/jixy/naru/train_log/adult-1.3MB-model27.096-data15.349-transformer-blocks2-model128-ff256-heads8-use_flash_attnTrue-posEmb-gelu-20epochs-seed0.csv",
+# # "/home/jixy/naru/train_log/adult-1.3MB-model27.096-data15.349-transformer-blocks2-model128-ff256-heads8-use_flash_attnTrue-posEmb-gelu-20epochs-seed0.csv",
 
-dataset='census(adult)'
-dataset_entropy=15.349
+# "/home/jixy/naru/train_log/adult-0.2MB-model22.439-data15.349-transformer-blocks2-model32-ff128-heads4-use_flash_attnFalse-posEmb-gelu-20epochs-seed0.csv"
+# ]
+
+# dataset='census(adult)'
+# dataset_entropy=15.349
 
 def judge_type(name):
     if ("transformer" in name):
@@ -72,7 +74,7 @@ for df_name in df_names:
     plt.plot(epochs,data,color=color,label = model_type)           
     
 
-plt.ylabel('entropy gap')
-plt.xlabel('epoch')
+plt.ylabel('entropy gap',fontsize=16)
+plt.xlabel('epoch',fontsize=16)
 plt.legend(fontsize=16)        #个性化图例（颜色、形状等）
 plt.savefig("./pics/{}_train_loss.png".format(dataset)) #保存图片 路径：/imgPath/
